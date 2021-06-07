@@ -1,0 +1,102 @@
+version: '3'
+
+networks:
+  ros:
+    driver: bridge
+
+services:
+  ros-master:
+    image: ros:melodic-ros-core
+    command: stdbuf -o L roscore
+    ports:
+      - "11311:11311"
+    networks:
+      - ros
+    restart: always
+
+  realsense:
+    image: ros_realsense
+    build:
+      context: .
+      dockerfile: Dockerfile_realsense 
+    depends_on:
+      - ros-master
+    environment:
+      - "UDEV=1"
+      - "ROS_MASTER_URI=http://ros-master:11311"
+    privileged: true
+    devices:
+      - "/dev:/dev"
+    command: >
+      bash -c "
+      stdbuf -o L roslaunch realsense2_camera rs_camera.launch camera:=camera1 serial_no:=036322250763 filters:=pointcloud depth_width:=320 depth_height:=240 &
+        stdbuf -o L roslaunch realsense2_camera rs_camera.launch camera:=camera2 serial_no:=038122250356 filters:=pointcloud depth_width:=320 depth_height:=240 &
+        stdbuf -o L roslaunch realsense2_camera rs_camera.launch camera:=camera3 serial_no:=f0245826 filters:=pointcloud depth_width:=320 depth_height:=240 &
+        stdbuf -o L roslaunch realsense2_camera rs_camera.launch camera:=camera4 serial_no:=f0245993 filters:=pointcloud depth_width:=320 depth_height:=240 
+      "
+    networks:
+      - ros
+    restart: always
+
+  rosbridge:
+    image: ros_rosbridge
+    build:
+      context: .
+      dockerfile: Dockerfile_rosbridge
+    depends_on:
+       - ros-master
+    environment:
+      - "ROS_MASTER_URI=http://ros-master:11311"
+      - "ROS_HOSTNAME=rosbridge"
+    command: stdbuf -o L roslaunch rosbridge_server rosbridge_websocket.launch
+    ports:
+      - "9090:9090"
+    networks:
+      - ros
+    restart: always
+
+  tcp-endpoint:
+    image: ros_tcp_endpoint
+    build:
+      context: .
+      dockerfile: Dockerfile_TCPEndpoint
+    depends_on:
+       - ros-master
+    environment:
+      - "ROS_MASTER_URI=http://ros-master:11311"
+      - "ROS_IP=0.0.0.0"
+    command: >
+      bash -c "rosparam set /ROS_IP 0.0.0.0 && 
+        stdbuf -o L rosrun robotics_demo server_endpoint.py"
+    ports:
+      - "10000:10000"
+      - "5005:5005"
+    networks:
+      - ros
+    restart: always
+
+
+      #  viz:
+      #    image: osrf/ros:kinetic-desktop-full
+      #    container_name: ros_visualizer
+      #    depends_on:
+      #      - ros-master
+      #    networks:
+      #      - ros
+      #    environment:
+      #      - "ROS_MASTER_URI=http://ros-master:11311"
+      #      - "ROS_HOSTNAME=ros_visualizer"
+      #      - "DISPLAY"
+      #      - "QT_X11_NO_MITSHM=1" #fix some QT bugs
+      #    #share your user to the container in order to access your x11
+      #    user: 1000:1000 #adapt as needed!
+      #    volumes:
+      #      #share your x11 socket and permissions to the container
+      #      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      #      - /etc/group:/etc/group:ro
+      #      - /etc/passwd:/etc/passwd:ro
+      #      - /etc/shadow:/etc/shadow:ro
+      #      - /etc/sudoers:/etc/sudoers:ro
+      #      - /etc/sudoers.d:/etc/sudoers.d:ro
+      #      - /home/wchoi:/home/wchoi:rw #share your home with write permissions
+      #    command: rqt
