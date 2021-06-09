@@ -42,10 +42,8 @@ RUN . /opt/ros/$ROS_DISTRO/setup.sh && \
 
 # source entrypoint setup
 ENV OVERLAY_WS $OVERLAY_WS
-ADD ./server_endpoint.py src/robotics_demo/scripts/
+ADD ./server_endpoint.py ./
+ADD ./wait-for-cameras.sh ./
 RUN sed --in-place --expression \
       '$isource "$OVERLAY_WS/devel/setup.bash"' \
       /ros_entrypoint.sh
-
-# run launch file
-

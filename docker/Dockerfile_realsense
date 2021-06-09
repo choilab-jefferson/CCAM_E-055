@@ -1,4 +1,5 @@
 FROM ros:melodic-ros-core
 RUN apt-get update && \ 
-    apt-get -qy install ros-melodic-realsense2-camera ros-melodic-compressed-image-transport
+    apt-get -qy install ros-melodic-realsense2-camera ros-melodic-compressed-image-transport ros-melodic-compressed-depth-image-transport
 RUN rm -rf /var/lib/apt/lists/*
+ADD ./run-cameras.sh ./
