@@ -32,22 +32,24 @@ print("""{
         "going out",
         "g230"
     ],
-    "annotations": {""")
-files = glob.glob("Florence_3d_actions/*.avi")+glob.glob("ccam_actions/*.mp4")
+    "annotations": {""", end="")
+files = glob.glob("../Florence_3d_actions/*.avi")+glob.glob("../ccam_actions/*.mp4")
 for f in files:
   fname = osp.basename(f)
-  if f[0] == 'F':
+  if f.find('Florence') >= 0:
     ids = list(map(int, re.findall('\d+', fname)))
     cid = ids[3] - 1
   else:
     names = fname.split("_")
-    if names[-1] == "comingin.mp4":
+    if names[-1].find("comingin")>=0:
       cid = 9
-    elif names[-1] == "goingout.mp4":
+    elif names[-1].find("goingout")>=0:
       cid = 10
+    elif names[-1].find("out_of_space")>=0:
+      cid = -1
     else:
       cid = classes.index(names[0])
-  print(f'        "{fname}": {{\n          "category_id": {cid}\n        }},')
-print("""\b\b
+  print(f'\n        "{fname}": {{\n          "category_id": {cid}\n        }}', end=",")
+print("""\b 
     }
 }""")

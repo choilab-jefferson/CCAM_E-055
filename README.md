@@ -15,6 +15,16 @@ Unity
 ## Scripts
 scripts
 
+Data preparation for mmpose and mmskeletion
+```bash
+# split original video to action videolets
+python scripts/split_video.py
+
+# generates json for mmskeleton
+python scripts/json_generation.py
+
+```
+
 
 ## Test codes
 - test/realsense_ros.py: cv_bridge interface 
