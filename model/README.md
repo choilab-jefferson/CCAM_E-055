@@ -1,36 +1,8 @@
-# Multi-view Human Action Recognition
+# Human Action Recognition using mmskeleton
+- Pose estimation: R-CNN + HRNet-32
+- Action recognition: Spatio-Tempoal Graph Convolutional Network (ST-GCN)
 
 ## Docker
-[docker](docker)
-
-```bash
-cd docker
-docker-compose up --build 
-```
-
-## Unity
-[Unity](Unity)
-- Unity project for a mixed reality environment
-
-
-## Scripts
-[scripts](scripts)
-
-- Data preparation for mmpose and mmskeletion
-    1. split original video to action videolets
-    ```bash
-    python scripts/split_video.py
-    ```
-
-    2. generates json for mmskeleton
-    ```bash
-    # this will generate model/florence_ccam.json
-    python scripts/json_generation.py
-
-    ```
-
-## Action Recognition Model
-[model](model)
 1. Build a docker image for mmskeleton
     ```bash
     cd model
@@ -41,6 +13,8 @@ docker-compose up --build
     docker run --gpus all -it -v $HOME:/root mmskl
     # TODO: add volume for the project repository and data
     ```
+
+## Video to Skeleton
 3. Generate skeleton dataset
     ```bash
     # in the docker container
@@ -49,6 +23,8 @@ docker-compose up --build
     mmskl build_dataset_ccam.yaml
     # './data/dataset_{dataset name}/'
     ```
+
+## Train and Test Models
 4. Train models
     ```bash
     # the same path in the docker container above
@@ -64,13 +40,5 @@ docker-compose up --build
     mmskl test_florence.xml
     mmskl test_ccam.xml
     ```
-
-
-## Test codes
-[test](test)
-
-- test/realsense_ros.py: cv_bridge interface 
-- test/Unity_ROS: For ROS TCP connection test
-
 
 Wookjin Choi <wchoi@vsu.edu>

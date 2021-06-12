@@ -17,7 +17,7 @@ classes = [
            "GoingOut",
            "G230",
            ]
-with open("florence_ccam.json", "w") as f_out:
+with open("model/florence_ccam.json", "w") as f_out:
   print("""{
       "categories": [
           "wave",
