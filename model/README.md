@@ -3,7 +3,11 @@
 - Action recognition: Spatio-Tempoal Graph Convolutional Network (ST-GCN)
 
 ## Docker
-1. Build a docker image for mmskeleton
+> **_Note:_** You have to reconfigure the default runtime by adding the following to /etc/docker/daemon.json:  
+"default-runtime": "nvidia"
+
+1. Build a docker image for mmskeleton  
+    *nvidia runtime is required to build*
     ```bash
     cd model
     docker build -t mmskl .
