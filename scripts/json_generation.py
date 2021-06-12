@@ -43,18 +43,19 @@ with open("florence_ccam.json", "w") as f_out:
       cid = ids[3] - 1
     else:
       names = fname.split("_")
-      if names[-1].find("act")>=0 or names[-1].find("start")>=0:
+      if fname.find("act")>=0 or fname.find("start")>=0:
         cid = classes.index(names[0])
-      elif names[-1].find("transition1")>=0 and names[0] == "SitDownStandUp":
+      elif fname.find("transition1")>=0 and names[0] == "SitDownStandUp":
         cid = classes.index(names[0])+1
-      elif names[-1].find("comingin")>=0:
+      elif fname.find("comingin")>=0:
         cid = 9
-      elif names[-1].find("goingout")>=0:
+      elif fname.find("goingout")>=0:
         cid = 10
-      elif names[-1].find("steady")>=0:
+      elif fname.find("steady")>=0:
         cid = 6
       else:
-        cid = -1
+        continue
+        #cid = -1
     if f == files[-1]:
       endline = "\n"
     print(f'        "{fname}": {{\n          "category_id": {cid}\n        }}', end=endline, file=f_out)
