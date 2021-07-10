@@ -4,5 +4,26 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Emgu.CV/Demo/MainMenu.unity
+    guid: 80004ecadb25abc45a827aceaad5ebb1
+  - enabled: 1
+    path: Assets/Emgu.CV/Demo/CameraScene.unity
+    guid: 8e1a05565cefa8346a1139e1e1cff8af
+  - enabled: 1
+    path: Assets/Emgu.CV/Demo/FaceDetectionScene.unity
+    guid: 97aa790b27d6ada478db0f70bef10b3c
+  - enabled: 1
+    path: Assets/Emgu.CV/Demo/FeatureMatchingScene.unity
+    guid: a06ce5bb254e2724f86cc183b41e8df3
+  - enabled: 1
+    path: Assets/Emgu.CV/Demo/HelloWorldScene.unity
+    guid: 23aaecd254a8ab441af99fdb557ccfe0
+  - enabled: 1
+    path: Assets/Emgu.CV/Demo/OcrScene.unity
+    guid: 0db90528523c23e409f067801232779b
+  - enabled: 1
+    path: Assets/Emgu.CV/Demo/StitchScene.unity
+    guid: a3abee5153f4c4069b625d4022d87350
   m_configObjects: {}

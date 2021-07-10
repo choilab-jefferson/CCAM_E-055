@@ -1,0 +1,8 @@
+{
+    "serial": "036322250763",
+    "color_format": "RS2_FORMAT_RGB8",
+    "color_resolution": "0,480",
+    "depth_format": "RS2_FORMAT_Z16",
+    "depth_resolution": "0,480",
+    "fps": "30"
+ }
