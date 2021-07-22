@@ -80,6 +80,10 @@ if __name__ == "__main__":
     parser.add_argument("--playback_rosbag",
                         action='store_true',
                         help="Play recorded realsense.bag file")
+    parser.add_argument(
+        "--view_imgs",
+        action='store_true',
+        help="Showing color and depth images")
     args = parser.parse_args()
 
     if sum(o is not False for o in vars(args).values()) != 2:
@@ -113,13 +117,13 @@ if __name__ == "__main__":
     if args.record_imgs or args.record_rosbag:
         #config_1.enable_device('f0245826')
         config_1.enable_device('036322250763')
-        config_1.enable_stream(rs.stream.depth, 0, 480, rs.format.z16, 30)
-        config_1.enable_stream(rs.stream.color, 0, 480, rs.format.bgr8, 30)
+        config_1.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 30)
+        config_1.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
 
         #config_2.enable_device('f0245993')
         config_2.enable_device('038122250356')
-        config_2.enable_stream(rs.stream.depth, 0, 480, rs.format.z16, 30)
-        config_2.enable_stream(rs.stream.color, 0, 480, rs.format.bgr8, 30)
+        config_2.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 30)
+        config_2.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
         if args.record_rosbag:
             config_1.enable_record_to_file(path_bag)
             config_2.enable_record_to_file(path_bag)
@@ -156,7 +160,7 @@ if __name__ == "__main__":
     # Streaming loop
     frame_count = 0
     try:
-        while True:
+        while frame_count < 100:
             # Get frameset of color and depth
             frames_1 = pipeline_1.wait_for_frames()
 
@@ -193,7 +197,7 @@ if __name__ == "__main__":
                         color_frame_1)
                     save_intrinsic_as_json(
                         join(args.output_folder, "camera_intrinsic_2.json"),
-                        color_frame_1)
+                        color_frame_2)
                 cv2.imwrite("%s/C1_%06d.png" % \
                         (path_depth, frame_count), depth_image_1)
                 cv2.imwrite("%s/C1_%06d.jpg" % \
@@ -205,33 +209,34 @@ if __name__ == "__main__":
                 print("Saved color + depth image %06d" % frame_count)
                 frame_count += 1
 
-            # Remove background - Set pixels further than clipping_distance to grey
-            grey_color = 153
-            #depth image is 1 channel, color is 3 channels
-            depth_image_3d_1 = np.dstack((depth_image_1, depth_image_1, depth_image_1))
-            bg_removed_1 = np.where((depth_image_3d_1 > clipping_distance_1) | \
-                    (depth_image_3d_1 <= 0), grey_color, color_image_1)
-            
-            depth_image_3d_2 = np.dstack((depth_image_2, depth_image_2, depth_image_2))
-            bg_removed_2 = np.where((depth_image_3d_2 > clipping_distance_2) | \
-                    (depth_image_3d_2 <= 0), grey_color, color_image_2)
+            if args.view_imgs:
+                # Remove background - Set pixels further than clipping_distance to grey
+                grey_color = 153
+                #depth image is 1 channel, color is 3 channels
+                depth_image_3d_1 = np.dstack((depth_image_1, depth_image_1, depth_image_1))
+                bg_removed_1 = np.where((depth_image_3d_1 > clipping_distance_1) | \
+                        (depth_image_3d_1 <= 0), grey_color, color_image_1)
+                
+                depth_image_3d_2 = np.dstack((depth_image_2, depth_image_2, depth_image_2))
+                bg_removed_2 = np.where((depth_image_3d_2 > clipping_distance_2) | \
+                        (depth_image_3d_2 <= 0), grey_color, color_image_2)
 
 
-            # Render images
-            depth_colormap_1 = cv2.applyColorMap(
-                cv2.convertScaleAbs(depth_image_1, alpha=0.09), cv2.COLORMAP_JET)
-            depth_colormap_2 = cv2.applyColorMap(
-                cv2.convertScaleAbs(depth_image_2, alpha=0.09), cv2.COLORMAP_JET)
-            images = np.vstack((np.hstack((bg_removed_1, depth_colormap_1)),
-                               np.hstack((bg_removed_2, depth_colormap_2))))
-            cv2.namedWindow('Recorder Realsense', cv2.WINDOW_AUTOSIZE)
-            cv2.imshow('Recorder Realsense', images)
-            key = cv2.waitKey(1)
+                # Render images
+                depth_colormap_1 = cv2.applyColorMap(
+                    cv2.convertScaleAbs(depth_image_1, alpha=0.09), cv2.COLORMAP_JET)
+                depth_colormap_2 = cv2.applyColorMap(
+                    cv2.convertScaleAbs(depth_image_2, alpha=0.09), cv2.COLORMAP_JET)
+                images = np.vstack((np.hstack((bg_removed_1, depth_colormap_1)),
+                                   np.hstack((bg_removed_2, depth_colormap_2))))
+                cv2.namedWindow('Recorder Realsense', cv2.WINDOW_AUTOSIZE)
+                cv2.imshow('Recorder Realsense', images)
+                key = cv2.waitKey(1)
 
-            # if 'esc' button pressed, escape loop and exit program
-            if key == 27:
-                cv2.destroyAllWindows()
-                break
+                # if 'esc' button pressed, escape loop and exit program
+                if key == 27:
+                    cv2.destroyAllWindows()
+                    break
     finally:
         pipeline_1.stop()
         pipeline_2.stop()
