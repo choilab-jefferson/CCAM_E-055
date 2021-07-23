@@ -12,7 +12,7 @@ import shutil
 from os import makedirs
 from os.path import isfile, join, exists, split, normpath
 import open3d as o3d
-from initialize_config import initialize_config
+from reconstruction.initialize_config import initialize_config
 from utility.file import check_folder_structure, get_rgbd_file_lists
 
 

@@ -161,6 +161,7 @@ class PipelineModel:
                     wait=True,
                     align_depth_to_color=True)
 
+            #####################################################################
             mutex.acquire()
             if self.flag_save_pcd:
                 self.save_pcd()
@@ -177,6 +178,7 @@ class PipelineModel:
                 pcd_errors += 1
             finally:
                 mutex.release()
+            #####################################################################
 
             if self.pcd_frame.is_empty():
                 log.warning(f"No valid depth data in frame {frame_id})")

@@ -75,8 +75,8 @@ def get_point_cloud(pipeline, pcd, depth_scale, flip_transform):
 def draw_registration_result(source, target, transformation):
     source_temp = copy.deepcopy(source)
     target_temp = copy.deepcopy(target)
-    source_temp.paint_uniform_color([1, 0.706, 0])
-    target_temp.paint_uniform_color([0, 0.651, 0.929])
+    #source_temp.paint_uniform_color([1, 0.706, 0])
+    #target_temp.paint_uniform_color([0, 0.651, 0.929])
     source_temp.transform(transformation)
     o3d.visualization.draw_geometries([source_temp, target_temp])
 
@@ -173,7 +173,7 @@ if __name__ == "__main__":
 
     # We will not display the background of objects more than
     #  clipping_distance_in_meters meters away
-    clipping_distance_in_meters = 2  # 3 meter
+    clipping_distance_in_meters = 4  # 4 meter
     clipping_distance_1 = clipping_distance_in_meters / depth_scale_1
     clipping_distance_2 = clipping_distance_in_meters / depth_scale_2
     # print(depth_scale)
@@ -205,7 +205,7 @@ if __name__ == "__main__":
                 continue
             
             if frame_count == 0:
-                voxel_size = 0.05  # means 5cm for this dataset
+                voxel_size = 0.02  # means 2cm for this dataset
                 source, target, source_down, target_down, source_fpfh, target_fpfh = prepare_dataset(pcd_2, pcd_1, voxel_size)
 
                 result_ransac = execute_global_registration(source_down, target_down,
@@ -213,12 +213,15 @@ if __name__ == "__main__":
                                                 voxel_size)
                 print(result_ransac)
                 draw_registration_result(source_down, target_down, result_ransac.transformation)
+                source.transform(result_ransac.transformation)
+                flip_transform_2 = np.dot(result_ransac.transformation, np.array(flip_transform_2))
+                draw_registration_result(source, target, np.identity(4))
 
-                result_icp = refine_registration(source, target, source_fpfh, target_fpfh, voxel_size)
+                result_icp = refine_registration(source, target, source_fpfh, target_fpfh, voxel_size*2)
                 print(result_icp)
                 draw_registration_result(source, target, result_icp.transformation)
                 
-                flip_transform_2 = np.dot(result_icp.transformation, np.array(flip_transform_2))
+                #flip_transform_2 = np.dot(result_icp.transformation, flip_transform_2)
                 vis.create_window()
                 vis.add_geometry(pcd_1)
                 vis.add_geometry(pcd_2)
