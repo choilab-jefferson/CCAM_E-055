@@ -59,3 +59,23 @@ def optimize_posegraph_for_refined_scene(path_dataset, config):
             max_correspondence_distance = config["voxel_size"] * 1.4,
             preference_loop_closure = \
             config["preference_loop_closure_registration"])
+
+
+def optimize_posegraph_for_scene_multiview(path_dataset, config):
+    pose_graph_name = join(path_dataset, config["template_global_posegraph_multiview"])
+    pose_graph_optimized_name = join(
+        path_dataset, config["template_global_posegraph_multiview_optimized"])
+    run_posegraph_optimization(pose_graph_name, pose_graph_optimized_name,
+            max_correspondence_distance = config["voxel_size"] * 1.4,
+            preference_loop_closure = \
+            config["preference_loop_closure_registration"])
+
+
+def optimize_posegraph_for_refined_scene_multiview(path_dataset, config):
+    pose_graph_name = join(path_dataset, config["template_refined_posegraph_multiview"])
+    pose_graph_optimized_name = join(
+        path_dataset, config["template_refined_posegraph_multiview_optimized"])
+    run_posegraph_optimization(pose_graph_name, pose_graph_optimized_name,
+            max_correspondence_distance = config["voxel_size"] * 1.4,
+            preference_loop_closure = \
+            config["preference_loop_closure_registration"])

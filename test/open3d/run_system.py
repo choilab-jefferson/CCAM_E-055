@@ -40,6 +40,10 @@ if __name__ == "__main__":
         help="Step 6) (optional) integrate fragements using slac to make final "
         "pointcloud / mesh.",
         action="store_true")
+    parser.add_argument(
+        "--register_multiview",
+        help="Step 7) register multivew fragments to detect loop closure.",
+        action="store_true")
     parser.add_argument("--debug_mode",
                         help="turn on debug mode.",
                         action="store_true")
@@ -54,6 +58,7 @@ if __name__ == "__main__":
 
     if not args.make and \
             not args.register and \
+            not args.register_multiview and \
             not args.refine and \
             not args.integrate and \
             not args.slac and \
@@ -82,7 +87,7 @@ if __name__ == "__main__":
     for key, val in config.items():
         print("%40s : %s" % (key, str(val)))
 
-    times = [0, 0, 0, 0, 0, 0]
+    times = [0, 0, 0, 0, 0, 0, 0]
     if args.make:
         start_time = time.time()
         from reconstruction import make_fragments
@@ -113,6 +118,11 @@ if __name__ == "__main__":
         from reconstruction import slac_integrate
         slac_integrate.run(config)
         times[5] = time.time() - start_time
+    if args.register_multiview:
+        start_time = time.time()
+        from reconstruction import register_multiview
+        register_multiview.run(config)
+        times[6] = time.time() - start_time
 
     print("====================================")
     print("Elapsed time (in h:m:s)")
@@ -123,5 +133,6 @@ if __name__ == "__main__":
     print("- Integrate frames    %s" % datetime.timedelta(seconds=times[3]))
     print("- SLAC                %s" % datetime.timedelta(seconds=times[4]))
     print("- SLAC Integrate      %s" % datetime.timedelta(seconds=times[5]))
+    print("- Register multiview  %s" % datetime.timedelta(seconds=times[6]))
     print("- Total               %s" % datetime.timedelta(seconds=sum(times)))
     sys.stdout.flush()
