@@ -24,5 +24,6 @@ if __name__ == "__main__":
         os.system(f"python3 multiview_simulation_dataset.py {config}")
 
         # reconstruct scene and register multiview to the scene
+        os.system(f"python3 run_system.py --all --device=cuda:0 {config}")
         os.system(f"python3 run_system.py --all --device=cuda:0 {config.replace('.json','_multiview.json')}")
     

@@ -64,7 +64,7 @@ if __name__ == "__main__":
     for color_file, depth_file in zip(color_files_scene, depth_files_scene):
         color_file_output, depth_file_output = (
             color_file.replace(config["path_dataset"], path_output).replace(
-                "image", "color").replace("rgb", "color"),
+                "/image", "/color").replace("/rgb", "/color"),
             depth_file.replace(config["path_dataset"], path_output)
         )
         shutil.copy(color_file, color_file_output)
@@ -100,7 +100,7 @@ if __name__ == "__main__":
         for color_file, depth_file in zip(color_files_multiview_fragment, depth_files_multiview_fragment):
             color_file_output, depth_file_output = (
                 color_file.replace(config["path_dataset"], path_output_multiview).replace(
-                    "image", "color").replace("rgb", "color"),
+                    "/image", "/color").replace("/rgb", "/color"),
                 depth_file.replace(
                     config["path_dataset"], path_output_multiview)
             )
