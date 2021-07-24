@@ -17,6 +17,9 @@ from utility.file import check_folder_structure
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Reconstruction system")
     parser.add_argument("config", help="path to the config file")
+    parser.add_argument("--all",
+                        help="Step 1-7",
+                        action="store_true")
     parser.add_argument("--make",
                         help="Step 1) make fragments from RGBD sequence.",
                         action="store_true")
@@ -56,7 +59,8 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    if not args.make and \
+    if not args.all and \
+            not args.make and \
             not args.register and \
             not args.register_multiview and \
             not args.refine and \
@@ -88,37 +92,37 @@ if __name__ == "__main__":
         print("%40s : %s" % (key, str(val)))
 
     times = [0, 0, 0, 0, 0, 0, 0]
-    if args.make:
+    if args.all or args.make:
         start_time = time.time()
         from reconstruction import make_fragments
         make_fragments.run(config)
         times[0] = time.time() - start_time
-    if args.register:
+    if args.all or args.register:
         start_time = time.time()
         from reconstruction import register_fragments
         register_fragments.run(config)
         times[1] = time.time() - start_time
-    if args.refine:
+    if args.all or args.refine:
         start_time = time.time()
         from reconstruction import refine_registration
         refine_registration.run(config)
         times[2] = time.time() - start_time
-    if args.integrate:
+    if args.all or args.integrate:
         start_time = time.time()
         from reconstruction import integrate_scene
         integrate_scene.run(config)
         times[3] = time.time() - start_time
-    if args.slac:
+    if args.all or args.slac:
         start_time = time.time()
         from reconstruction import slac
         slac.run(config)
         times[4] = time.time() - start_time
-    if args.slac_integrate:
+    if args.all or args.slac_integrate:
         start_time = time.time()
         from reconstruction import slac_integrate
         slac_integrate.run(config)
         times[5] = time.time() - start_time
-    if args.register_multiview:
+    if args.all or args.register_multiview:
         start_time = time.time()
         from reconstruction import register_multiview
         register_multiview.run(config)
