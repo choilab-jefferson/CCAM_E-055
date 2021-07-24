@@ -67,8 +67,24 @@ def initialize_config(config):
                       "scene/refined_registration.json")
     set_default_value(config, "template_refined_posegraph_optimized",
                       "scene/refined_registration_optimized.json")
+    set_default_value(config, "template_fragment_posegraph_multiview",
+                      "multiview%d/fragments/fragment_%03d.json")
+    set_default_value(config, "template_fragment_posegraph_multiview_optimized",
+                      "multiview%d/fragments/fragment_optimized_%03d.json")
+    set_default_value(config, "template_fragment_pointcloud_multiview",
+                      "multiview%d/fragments/fragment_%03d.ply")
+    set_default_value(config, "template_global_posegraph_multiview",
+                      "scene/global_registration_multiview.json")
+    set_default_value(config, "template_global_posegraph_multiview_optimized",
+                      "scene/global_registration_multiview_optimized.json")
+    set_default_value(config, "template_refined_posegraph_multiview",
+                      "scene/refined_registration_multiview.json")
+    set_default_value(config, "template_refined_posegraph_multiview_optimized",
+                      "scene/refined_registration_multiview_optimized.json")
     set_default_value(config, "template_global_mesh", "scene/integrated.ply")
+    set_default_value(config, "template_global_mesh_multiview", "scene/integrated_multiview.ply")
     set_default_value(config, "template_global_traj", "scene/trajectory.log")
+    set_default_value(config, "template_global_traj_multiview", "scene/trajectory_multiview.log")
 
     if config["path_dataset"].endswith(".bag"):
         assert os.path.isfile(config["path_dataset"]), (
