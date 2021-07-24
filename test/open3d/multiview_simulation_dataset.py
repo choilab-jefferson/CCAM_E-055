@@ -74,7 +74,7 @@ if __name__ == "__main__":
     with open(args.config) as json_file:
         config_scene = json.load(json_file)
         config_scene['path_dataset'] = path_output
-        with open(f'{config_prefix}_multiview_scene.json', 'w') as json_file_output:
+        with open(f'{config_prefix}_multiview.json', 'w') as json_file_output:
             json.dump(config_scene, json_file_output)
     sys.stdout.flush()
 
@@ -107,10 +107,4 @@ if __name__ == "__main__":
             shutil.copy(color_file, color_file_output)
             shutil.copy(depth_file, depth_file_output)
 
-        # copy config
-        with open(args.config) as json_file:
-            config_multiview = json.load(json_file)
-            config_multiview['path_dataset'] = path_output_multiview
-            with open(f'{config_prefix}_multiview{view}.json', 'w') as json_file_output:
-                json.dump(config_multiview, json_file_output)
         sys.stdout.flush()
