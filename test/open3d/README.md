@@ -31,5 +31,5 @@ python3 main_gui.py
 # multiview simulation data generation
 python3 multiview_simulation_dataset.py config_o3d/stanford/lounge.json 
 # run all the steps for 3D reconstruction and multi-view mapping
-python3 run_system.py --make --register --refine --integrate --register_multiview config_o3d/redwood_objects/sofa_multiview_scene.json
+python3 run_system.py --make --register --refine --integrate --register_multiview config_o3d/stanford/lounge_multiview_scene.json
 ```
