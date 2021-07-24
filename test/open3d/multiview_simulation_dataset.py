@@ -81,14 +81,14 @@ if __name__ == "__main__":
     # copy multiview fragments
     n_frames = len(color_files_multiview)
     n_frames_div8 = int(n_frames / 8)
-    n_frames_frag_div10 = int(config["n_frames_per_fragment"]/10)
+    n_frames_frag_div4 = int(config["n_frames_per_fragment"]/4)
     for view in range(0, 4):
         s = view * 2 + 1
         color_files_multiview_fragment, depth_files_multiview_fragment = (
             color_files_multiview[s*n_frames_div8:s *
-                                  n_frames_div8+n_frames_frag_div10],
+                                  n_frames_div8+n_frames_frag_div4],
             depth_files_multiview[s*n_frames_div8:s *
-                                  n_frames_div8+n_frames_frag_div10]
+                                  n_frames_div8+n_frames_frag_div4]
         )
         # / required to replace path
         path_output_multiview = join(path_output, f"multiview{view}/")
