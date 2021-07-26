@@ -64,7 +64,7 @@ if __name__ == "__main__":
     for color_file, depth_file in zip(color_files_scene, depth_files_scene):
         color_file_output, depth_file_output = (
             color_file.replace(config["path_dataset"], path_output).replace(
-                "image", "color").replace("rgb", "color"),
+                "/image", "/color").replace("/rgb", "/color"),
             depth_file.replace(config["path_dataset"], path_output)
         )
         shutil.copy(color_file, color_file_output)
@@ -74,21 +74,21 @@ if __name__ == "__main__":
     with open(args.config) as json_file:
         config_scene = json.load(json_file)
         config_scene['path_dataset'] = path_output
-        with open(f'{config_prefix}_multiview_scene.json', 'w') as json_file_output:
+        with open(f'{config_prefix}_multiview.json', 'w') as json_file_output:
             json.dump(config_scene, json_file_output)
     sys.stdout.flush()
 
     # copy multiview fragments
     n_frames = len(color_files_multiview)
     n_frames_div8 = int(n_frames / 8)
-    n_frames_frag_div10 = int(config["n_frames_per_fragment"]/10)
+    n_frames_frag_div4 = int(config["n_frames_per_fragment"]/4)
     for view in range(0, 4):
         s = view * 2 + 1
         color_files_multiview_fragment, depth_files_multiview_fragment = (
             color_files_multiview[s*n_frames_div8:s *
-                                  n_frames_div8+n_frames_frag_div10],
+                                  n_frames_div8+n_frames_frag_div4],
             depth_files_multiview[s*n_frames_div8:s *
-                                  n_frames_div8+n_frames_frag_div10]
+                                  n_frames_div8+n_frames_frag_div4]
         )
         # / required to replace path
         path_output_multiview = join(path_output, f"multiview{view}/")
@@ -100,17 +100,11 @@ if __name__ == "__main__":
         for color_file, depth_file in zip(color_files_multiview_fragment, depth_files_multiview_fragment):
             color_file_output, depth_file_output = (
                 color_file.replace(config["path_dataset"], path_output_multiview).replace(
-                    "image", "color").replace("rgb", "color"),
+                    "/image", "/color").replace("/rgb", "/color"),
                 depth_file.replace(
                     config["path_dataset"], path_output_multiview)
             )
             shutil.copy(color_file, color_file_output)
             shutil.copy(depth_file, depth_file_output)
 
-        # copy config
-        with open(args.config) as json_file:
-            config_multiview = json.load(json_file)
-            config_multiview['path_dataset'] = path_output_multiview
-            with open(f'{config_prefix}_multiview{view}.json', 'w') as json_file_output:
-                json.dump(config_multiview, json_file_output)
         sys.stdout.flush()
