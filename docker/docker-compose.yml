@@ -27,7 +27,7 @@ services:
     privileged: true
     devices:
       - "/dev:/dev"
-    command: stdbuf -o L ./run-cameras.sh
+    command: stdbuf -o L ./ros_publish_rgbd.py
     networks:
       - ros
     restart: always

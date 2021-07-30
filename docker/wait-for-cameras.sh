@@ -2,7 +2,7 @@
 # wait-for-cameras.sh
 
 set -e
-for i in {1..4}
+for i in {0..3}
 do
     sleep 5
     until rostopic info /camera$i/color/camera_info; do

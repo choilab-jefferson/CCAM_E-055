@@ -26,7 +26,7 @@ import rospy
 
 # Ros Messages
 from std_msgs.msg import String
-from sensor_msgs.msg import CompressedImage
+from sensor_msgs.msg import CompressedImage, PointCloud2
 
 from threading import Thread
 
@@ -72,13 +72,16 @@ class ActionClassification(Thread):
         self.n_cam = n
         self.color = [None for _ in range(self.n_cam)]
         self.depth = [None for _ in range(self.n_cam)]
+        self.point_cloud = [None for _ in range(self.n_cam)]
         self.n_colorframe = [0 for _ in range(self.n_cam)]
         self.n_depthframe = [0 for _ in range(self.n_cam)]
+        self.n_point_cloud = [0 for _ in range(self.n_cam)]
 
         # subscribed topics
         self.subscribers = [{
-            "color": rospy.Subscriber(f"/output/color{i}/compressed", CompressedImage, self.callback_color, callback_args=i, queue_size=2),
-            "depth": rospy.Subscriber(f"/output/depth{i}/compressed", CompressedImage, self.callback_depth, callback_args=i, queue_size=2),
+            "color": rospy.Subscriber(f"/camera{i}/color/compressed", CompressedImage, self.callback_color, callback_args=i, queue_size=2),
+            "depth": rospy.Subscriber(f"/camera{i}/depth/compressed", CompressedImage, self.callback_depth, callback_args=i, queue_size=2),
+            "point_cloud": rospy.Subscriber(f"/camera{i}/depth/points", PointCloud2, self.callback_point_cloud, callback_args=i, queue_size=2),
         } for i in range(self.n_cam)]
 
         if False:
@@ -95,6 +98,10 @@ class ActionClassification(Thread):
         # remove header from raw data
         self.depth[cam_id] = np.frombuffer(ros_data.data, np.uint8)
         self.n_depthframe[cam_id] += 1
+    
+    def callback_point_cloud(self, ros_data, cam_id):
+        self.point_cloud[cam_id] = ros_data
+        self.n_point_cloud[cam_id] += 1
 
     def callback_imshow(self, event):
         #print('Timer called at ' + str(event.current_real))
