@@ -1,166 +1,120 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Threading;
 using Unity.Robotics.ROSTCPConnector;
-using RosPointCloud = RosMessageTypes.Sensor.MPointCloud2;
-using RosPointField = RosMessageTypes.Sensor.MPointField;
-using Intel.RealSense;
+using ROSPointCloud2 = RosMessageTypes.Sensor.MPointCloud2;
 
-public class PointCloudSubscriber : RsFrameProvider
+public class PointCloudSubscriber : MonoBehaviour
 {
-    public ImageSubscriber colorImageSubscriber;
-    public ImageSubscriber depthImageSubscriber;
+    private byte[] byteArray;
+    private bool isMessageReceived = false;
+    bool readyToProcessMessage = true;
+    private int size;
 
-    /// <summary>
-    /// The parallelism mode of the module
-    /// </summary>
-    public enum ProcessMode
+    private Vector3[] pcl;
+    private Color[] pcl_color;
+
+    int width;
+    int height;
+    int row_step;
+    int point_step;
+
+    // ROS Connector
+    private ROSConnection ros;
+
+    public string topicName;
+
+    void Start()
     {
-        Multithread,
-        UnityThread,
+        ros = ROSConnection.instance;
+        ros.Subscribe<ROSPointCloud2>(topicName, ReceiveMessage);
+        Debug.Log("PCD: " + topicName);
     }
 
-    // public static RsDevice Instance { get; private set; }
-
-    /// <summary>
-    /// Threading mode of operation, Multithread or UnityThread
-    /// </summary>
-    [Tooltip("Threading mode of operation, Multithreads or Unitythread")]
-    public ProcessMode processMode;
-
-    // public bool Streaming { get; private set; }
-
-    /// <summary>
-    /// Notifies upon streaming start
-    /// </summary>
-    public override event Action<PipelineProfile> OnStart;
-
-    /// <summary>
-    /// Notifies when streaming has stopped
-    /// </summary>
-    public override event Action OnStop;
-
-    /// <summary>
-    /// Fired when a new frame is available
-    /// </summary>
-    public override event Action<Frame> OnNewSample;
-
-    private Thread worker;
-    private readonly AutoResetEvent stopEvent = new AutoResetEvent(false);
-
-    void OnEnable()
+    private void Update()
     {
-        if (processMode == ProcessMode.Multithread)
+
+        if (isMessageReceived)
         {
-            stopEvent.Reset();
-            worker = new Thread(WaitForFrames);
-            worker.IsBackground = true;
-            worker.Start();
+            PointCloudRendering();
+            isMessageReceived = false;
         }
 
-        StartCoroutine(WaitAndStart());
+
     }
 
-    IEnumerator WaitAndStart()
+    void ReceiveMessage(ROSPointCloud2 message)
     {
-        yield return new WaitForEndOfFrame();
-        Streaming = true;
-        if (OnStart != null)
-            OnStart(ActiveProfile);
+        size = message.data.GetLength(0);
+
+        byteArray = new byte[size];
+        byteArray = message.data;
+
+
+        width = (int)message.width;
+        height = (int)message.height;
+        row_step = (int)message.row_step;
+        point_step = (int)message.point_step;
+
+        size = size / point_step;
+        isMessageReceived = true;
     }
 
-    void OnDisable()
+    //点群の座標を変換
+    void PointCloudRendering()
     {
-        OnNewSample = null;
-        // OnNewSampleSet = null;
+        pcl = new Vector3[size];
+        pcl_color = new Color[size];
 
-        if (worker != null)
+        int x_posi;
+        int y_posi;
+        int z_posi;
+        int b_posi;
+        int g_posi;
+        int r_posi;
+
+        float x;
+        float y;
+        float z;
+        float r;
+        float g;
+        float b;
+
+        //この部分でbyte型をfloatに変換         
+        for (int n = 0; n < size; n++)
         {
-            stopEvent.Set();
-            worker.Join();
-        }
+            x_posi = n * point_step + 0;
+            y_posi = n * point_step + 4;
+            z_posi = n * point_step + 8;
+            b_posi = n * point_step + 12;
+            g_posi = n * point_step + 16;
+            r_posi = n * point_step + 20;
 
-        if (Streaming && OnStop != null)
-            OnStop();
+            x = BitConverter.ToSingle(byteArray, x_posi);
+            y = BitConverter.ToSingle(byteArray, y_posi);
+            z = BitConverter.ToSingle(byteArray, z_posi);
+            b = BitConverter.ToSingle(byteArray, b_posi);
+            g = BitConverter.ToSingle(byteArray, g_posi);
+            r = BitConverter.ToSingle(byteArray, r_posi);
 
-        if (ActiveProfile != null)
-        {
-            ActiveProfile.Dispose();
-            ActiveProfile = null;
-        }
 
-        Streaming = false;
-    }
+            pcl[n] = new Vector3(x, z, y);
+            pcl_color[n] = new Color(r, g, b);
 
-    void OnDestroy()
-    {
-        // OnStart = null;
-        OnStop = null;
-
-        if (ActiveProfile != null)
-        {
-            ActiveProfile.Dispose();
-            ActiveProfile = null;
-        }
-    }
-
-    private void RaiseSampleEvent(Frame frame)
-    {
-        var onNewSample = OnNewSample;
-        if (onNewSample != null)
-        {
-            onNewSample(frame);
         }
     }
 
-    /// <summary>
-    /// Worker Thread for multithreaded operations
-    /// </summary>
-    private void WaitForFrames()
+    public Vector3[] GetPCL()
     {
-        while (!stopEvent.WaitOne(0))
-        {
-            //Debug.Log("PCS: WaitForFrames");
-            //FrameSet frames;
-            //using (var frames = m_pipeline.WaitForFrames())
-            //using(frames)
-            //    RaiseSampleEvent(frames);
-        }
+        return pcl;
     }
 
-    void Update()
+    public Color[] GetPCLColor()
     {
-        if (!Streaming)
-            return;
-
-        if (processMode != ProcessMode.UnityThread)
-            return;
-
-        //Debug.Log("PCS: Update");
-
-        //FrameSet frames;
-        //        public bool PollForFrames(out FrameSet result)
-        // {
-        //     object error;
-        //     IntPtr fs;
-        //     if (NativeMethods.rs2_pipeline_poll_for_frames(Handle, out fs, out error) > 0)
-        //     {
-        //         result = FrameSet.Create(fs);
-        //         return true;
-        //     }
-
-        //     result = null;
-        //     return false;
-        // }
-
-        //if (m_pipeline.PollForFrames(out frames))
-        //{
-        //    using (frames)
-        //        RaiseSampleEvent(frames);
-        //}
+        return pcl_color;
     }
 }
+

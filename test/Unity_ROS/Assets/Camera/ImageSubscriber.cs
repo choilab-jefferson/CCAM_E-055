@@ -23,7 +23,6 @@ public class ImageSubscriber : MonoBehaviour
     {
         Jpeg,
         PNG,
-        CompressedDepth,
     }
     private PixelFormat pixelFormat;
     private ImageFormat imageFormat;
@@ -59,9 +58,9 @@ public class ImageSubscriber : MonoBehaviour
         {
             imageFormat = ImageFormat.Jpeg;
         }
-        else
+        else if(format == "png")
         {
-            imageFormat = ImageFormat.CompressedDepth;
+            imageFormat = ImageFormat.PNG;
         }
         
         imageData = imageMsg.data;
@@ -78,8 +77,7 @@ public class ImageSubscriber : MonoBehaviour
 
     private void ProcessMessage()
     {
-        if(imageFormat == ImageFormat.Jpeg)
-            texture2D.LoadImage(imageData);
+        texture2D.LoadImage(imageData);
         texture2D.Apply();
         meshRenderer.material.SetTexture("_MainTex", texture2D);
         isMessageReceived = false;
