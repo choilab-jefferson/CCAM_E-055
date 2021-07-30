@@ -72,19 +72,19 @@ class ActionClassification(Thread):
         self.n_cam = n
         self.color = [None for _ in range(self.n_cam)]
         self.depth = [None for _ in range(self.n_cam)]
-        self.point_cloud = [None for _ in range(self.n_cam)]
+        self.pointcloud = [None for _ in range(self.n_cam)]
         self.n_colorframe = [0 for _ in range(self.n_cam)]
         self.n_depthframe = [0 for _ in range(self.n_cam)]
-        self.n_point_cloud = [0 for _ in range(self.n_cam)]
+        self.n_pointcloud = [0 for _ in range(self.n_cam)]
 
         # subscribed topics
         self.subscribers = [{
             "color": rospy.Subscriber(f"/camera{i}/color/compressed", CompressedImage, self.callback_color, callback_args=i, queue_size=2),
             "depth": rospy.Subscriber(f"/camera{i}/depth/compressed", CompressedImage, self.callback_depth, callback_args=i, queue_size=2),
-            "point_cloud": rospy.Subscriber(f"/camera{i}/depth/points", PointCloud2, self.callback_point_cloud, callback_args=i, queue_size=2),
+            "pointcloud": rospy.Subscriber(f"/camera{i}/depth/points", PointCloud2, self.callback_pointcloud, callback_args=i, queue_size=2),
         } for i in range(self.n_cam)]
 
-        if False:
+        if True:
             rospy.Timer(rospy.Duration(0.033), self.callback_imshow)
             self.images = [None for _ in range(self.n_cam)]
 
@@ -95,13 +95,13 @@ class ActionClassification(Thread):
 
     def callback_depth(self, ros_data, cam_id):
         #print("depth", ros_data.format.split(";"))
-        # remove header from raw data
         self.depth[cam_id] = np.frombuffer(ros_data.data, np.uint8)
         self.n_depthframe[cam_id] += 1
     
-    def callback_point_cloud(self, ros_data, cam_id):
-        self.point_cloud[cam_id] = ros_data
-        self.n_point_cloud[cam_id] += 1
+    def callback_pointcloud(self, ros_data, cam_id):
+        #print("pointcloud")
+        self.pointcloud[cam_id] = ros_data
+        self.n_pointcloud[cam_id] += 1
 
     def callback_imshow(self, event):
         #print('Timer called at ' + str(event.current_real))
@@ -136,9 +136,9 @@ class ActionClassification(Thread):
                         color, depth, _ = process_rgbd(color_, depth_, n_colorframe, n_depthframe, cam_id)
                         n_frame[cam_id] += 1
 
-                    #depth_colormap = cv2.applyColorMap(
-                    #    cv2.convertScaleAbs(cv2.resize(depth, (320,240)), alpha=0.09), cv2.COLORMAP_JET)
-                    #self.images[cam_id] = np.vstack((cv2.resize(color, (320,240)), depth_colormap))
+                    depth_colormap = cv2.applyColorMap(
+                       cv2.convertScaleAbs(cv2.resize(depth, (320,240)), alpha=0.09), cv2.COLORMAP_JET)
+                    self.images[cam_id] = np.vstack((cv2.resize(color, (320,240)), depth_colormap))
 
             if time.time() - t1 > 1:
                 for cam_id in range(self.n_cam):

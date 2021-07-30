@@ -1,0 +1,13 @@
+{
+    "MonoBehaviour": {
+        "m_Enabled": true,
+        "m_EditorHideFlags": 0,
+        "m_Name": "",
+        "m_EditorClassIdentifier": "Unity.Scripting.Python.Editor:UnityEditor.Scripting.Python:PythonSettings",
+        "m_pythonInterpreter": "/home/wchoi/.pyenv/versions/miniconda-latest/envs/open3d_2.7/bin/python",
+        "m_pythonTimeoutMs": 1000,
+        "m_sitePackages": [
+            "/home/wchoi/.pyenv/versions/miniconda-latest/envs/open3d_2.7/lib/python2.7/site-packages"
+        ]
+    }
+}

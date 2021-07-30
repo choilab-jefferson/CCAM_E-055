@@ -1,4 +1,4 @@
-#if UNITY_STANDALONE
+﻿#if UNITY_STANDALONE
 #define IMPORT_GLENABLE
 #endif
 
@@ -12,7 +12,16 @@ public class enableOpenGL : MonoBehaviour
     const UInt32 GL_VERTEX_PROGRAM_POINT_SIZE = 0x8642;
     const UInt32 GL_POINT_SMOOTH = 0x0B10;
 
-    const string LibGLPath = "/usr/lib/libGL.so";
+    const string LibGLPath =
+#if UNITY_STANDALONE_WIN
+         "opengl32.dll";
+#elif UNITY_STANDALONE_OSX
+         "/System/Library/Frameworks/OpenGL.framework/OpenGL";
+#elif UNITY_STANDALONE_LINUX
+         "/usr/lib/libGL.so";    // Untested on Linux, this may not be correct
+#else
+         null;   // OpenGL ES platforms don't require this feature
+#endif
 
 #if IMPORT_GLENABLE
     [DllImport(LibGLPath)]

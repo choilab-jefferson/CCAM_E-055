@@ -52,10 +52,8 @@ def camera_pipeline(cam_sn, width, height, fps):
     # Getting the depth sensor's depth scale (see rs-align example for explanation)
     depth_scale = depth_sensor.get_depth_scale()
 
-    color_profile = rs.video_stream_profile(
-        profile.get_stream(rs.stream.color))
-    depth_profile = rs.video_stream_profile(
-        profile.get_stream(rs.stream.depth))
+    color_profile = rs.video_stream_profile(profile.get_stream(rs.stream.color))
+    depth_profile = rs.video_stream_profile(profile.get_stream(rs.stream.depth))
     color_intrinsics = color_profile.get_intrinsics()
     depth_intrinsics = depth_profile.get_intrinsics()
 
@@ -92,7 +90,7 @@ def get_rgbd(pipeline, align):
     return color_image, depth_image
 
 
-def get_point_cloud(depth_scale, intrinsics_, color_image_, depth_image_):
+def get_pointcloud(depth_scale, intrinsics_, color_image_, depth_image_):
     intrinsics = o3d.camera.PinholeCameraIntrinsic(intrinsics_.width, intrinsics_.height,
                                                    intrinsics_.fx, intrinsics_.fy,
                                                    intrinsics_.ppx, intrinsics_.ppy)
@@ -111,8 +109,9 @@ def get_point_cloud(depth_scale, intrinsics_, color_image_, depth_image_):
         convert_rgb_to_intensity=False)
     pcd = o3d.geometry.PointCloud.create_from_rgbd_image(
         rgbd_image, intrinsics)
+    uni_down_pcd = pcd.uniform_down_sample(3)
 
-    return pcd
+    return uni_down_pcd
 
 
 def publish_camera_info(pub, color_info, depth_info):
@@ -156,25 +155,25 @@ def publish_frames(pub, color_image, depth_image):
     pub["depth"].publish(depth_msg)
 
 
-def publish_point_cloud(pub, point_cloud):
-    points = np.asarray(point_cloud.points)
-    colors = np.asarray(point_cloud.colors)
+def publish_pointcloud(pub, pointcloud):
+    points = np.asarray(pointcloud.points)
+    colors = np.asarray(pointcloud.colors)
     arr = np.c_[points, colors].astype(np.float32)
     arr = np.atleast_2d(arr)
 
-    point_cloud_msg = PointCloud2()
-    point_cloud_msg.header.stamp = rospy.Time.now()
-    point_cloud_msg.header.frame_id = "map"
-    point_cloud_msg.height = 1
-    point_cloud_msg.width = arr.shape[0]
-    point_cloud_msg.fields = FIELDS_XYZBGR
-    point_cloud_msg.is_bigendian = False 
-    point_cloud_msg.point_step = arr.dtype.itemsize*arr.shape[1]
-    point_cloud_msg.row_step = point_cloud_msg.point_step*arr.shape[0]
-    point_cloud_msg.is_dense = False
-    point_cloud_msg.data = arr.tobytes()
+    pointcloud_msg = PointCloud2()
+    pointcloud_msg.header.stamp = rospy.Time.now()
+    pointcloud_msg.header.frame_id = "map"
+    pointcloud_msg.height = 1
+    pointcloud_msg.width = arr.shape[0]
+    pointcloud_msg.fields = FIELDS_XYZBGR
+    pointcloud_msg.is_bigendian = False 
+    pointcloud_msg.point_step = arr.dtype.itemsize*arr.shape[1]
+    pointcloud_msg.row_step = pointcloud_msg.point_step*arr.shape[0]
+    pointcloud_msg.is_dense = False
+    pointcloud_msg.data = arr.tobytes()
 
-    pub["points"].publish(point_cloud_msg)
+    pub["points"].publish(pointcloud_msg)
 
 
 if __name__ == "__main__":
@@ -182,7 +181,7 @@ if __name__ == "__main__":
     cams = []
     for i, device in enumerate(ctx.devices):
         cam_sn = device.get_info(rs.camera_info.serial_number)
-        cams.append(camera_pipeline(cam_sn, 640, 480, 30))
+        cams.append(camera_pipeline(cam_sn, 640, 480, 15))
     print(cams)
 
     cams = (
@@ -215,26 +214,26 @@ if __name__ == "__main__":
         while not rospy.is_shutdown():
             if False:
                 for cam, pub in zip(cams, publishers):
-                    color_info, depth_info = cam["color_intrinsics"], cam["color_intrinsics"]
-                    color_image, depth_image = get_rgbd(cam["pipeline"], align)
-                    point_cloud = get_point_cloud(
+                    color_info, depth_info = cam["color_intrinsics"], cam["depth_intrinsics"]
+                    color_image, depth_image, depth_info = get_rgbd(cam["pipeline"], align)
+                    pointcloud = get_pointcloud(
                         cam["depth_scale"], cam["color_intrinsics"], color_image, depth_image)
                     publish_camera_info(pub, color_info, depth_info)
                     publish_frames(pub, color_image, depth_image)
-                    publish_point_cloud(pub, point_cloud)
+                    publish_pointcloud(pub, pointcloud)
             else:
                 for i, cam in enumerate(cams[0:2]):
-                    color_info, depth_info = cam["color_intrinsics"], cam["color_intrinsics"]
                     color_image, depth_image = get_rgbd(cam["pipeline"], align)
-                    point_cloud = get_point_cloud(
+                    color_info, depth_info = cam["color_intrinsics"], cam["depth_intrinsics"]
+                    pointcloud = get_pointcloud(
                         cam["depth_scale"], cam["color_intrinsics"], color_image, depth_image)
                     publish_camera_info(publishers[i], color_info, depth_info)
                     publish_camera_info(
                         publishers[i+2], color_info, depth_info)
                     publish_frames(publishers[i], color_image, depth_image)
                     publish_frames(publishers[i+2], color_image, depth_image)
-                    publish_point_cloud(publishers[i], point_cloud)
-                    publish_point_cloud(publishers[i+2], point_cloud)
+                    publish_pointcloud(publishers[i], pointcloud)
+                    publish_pointcloud(publishers[i+2], pointcloud)
     finally:
         # Stop streaming
         for cam in cams:

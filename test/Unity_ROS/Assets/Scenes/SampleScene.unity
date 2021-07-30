@@ -123,17 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &89642415 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4577613952016164894, guid: bda082f83c4188ccfa0e1c3074d454f5, type: 3}
-  m_PrefabInstance: {fileID: 4577613952629143991}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 336c5c3ca4a0f8f27b3e5b8f95a7ad3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &209335577
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -145,9 +134,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Image2
       objectReference: {fileID: 0}
+    - target: {fileID: 6080655645561780614, guid: 4f85d26e0b5ea4bafbb128c953abf2dd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6080655645561780615, guid: 4f85d26e0b5ea4bafbb128c953abf2dd, type: 3}
       propertyPath: topicName
-      value: /camera2/color/image_raw/compressed
+      value: /camera1/color/compressed
       objectReference: {fileID: 0}
     - target: {fileID: 6080655645561780728, guid: 4f85d26e0b5ea4bafbb128c953abf2dd, type: 3}
       propertyPath: m_RootOrder
@@ -195,67 +188,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f85d26e0b5ea4bafbb128c953abf2dd, type: 3}
---- !u!1001 &244664920
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1308323762867094, guid: a2bade7ff40ff92409855b062870dccd, type: 3}
-      propertyPath: m_Name
-      value: PointCloud
-      objectReference: {fileID: 0}
-    - target: {fileID: 4093320342193112, guid: a2bade7ff40ff92409855b062870dccd, type: 3}
-      propertyPath: m_RootOrder
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4093320342193112, guid: a2bade7ff40ff92409855b062870dccd, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4093320342193112, guid: a2bade7ff40ff92409855b062870dccd, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4093320342193112, guid: a2bade7ff40ff92409855b062870dccd, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4093320342193112, guid: a2bade7ff40ff92409855b062870dccd, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4093320342193112, guid: a2bade7ff40ff92409855b062870dccd, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4093320342193112, guid: a2bade7ff40ff92409855b062870dccd, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4093320342193112, guid: a2bade7ff40ff92409855b062870dccd, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4093320342193112, guid: a2bade7ff40ff92409855b062870dccd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4093320342193112, guid: a2bade7ff40ff92409855b062870dccd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4093320342193112, guid: a2bade7ff40ff92409855b062870dccd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114148710568042142, guid: a2bade7ff40ff92409855b062870dccd, type: 3}
-      propertyPath: Source
-      value: 
-      objectReference: {fileID: 89642415}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a2bade7ff40ff92409855b062870dccd, type: 3}
 --- !u!23 &275001031 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 771452948, guid: 4f85d26e0b5ea4bafbb128c953abf2dd, type: 3}
@@ -270,15 +202,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4443033544262668175, guid: bda082f83c4188ccfa0e1c3074d454f5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4443033544262668175, guid: bda082f83c4188ccfa0e1c3074d454f5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4443033544262668175, guid: bda082f83c4188ccfa0e1c3074d454f5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 4577613952016164893, guid: bda082f83c4188ccfa0e1c3074d454f5, type: 3}
       propertyPath: m_RootOrder
@@ -334,7 +266,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4577613952016164894, guid: bda082f83c4188ccfa0e1c3074d454f5, type: 3}
       propertyPath: topicName
-      value: /camera2/depth/color/points
+      value: /camera1/depth/points
       objectReference: {fileID: 0}
     - target: {fileID: 4577613952016164894, guid: bda082f83c4188ccfa0e1c3074d454f5, type: 3}
       propertyPath: colorImageSubscriber
@@ -350,7 +282,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4577613952016164895, guid: bda082f83c4188ccfa0e1c3074d454f5, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6111786594310889224, guid: bda082f83c4188ccfa0e1c3074d454f5, type: 3}
       propertyPath: m_Enabled
@@ -390,9 +322,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Depth4
       objectReference: {fileID: 0}
+    - target: {fileID: 6080655645561780614, guid: 4f85d26e0b5ea4bafbb128c953abf2dd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6080655645561780615, guid: 4f85d26e0b5ea4bafbb128c953abf2dd, type: 3}
       propertyPath: topicName
-      value: /camera4/aligned_depth_to_color/image_raw/compressed
+      value: /camera3/depth/compressed
       objectReference: {fileID: 0}
     - target: {fileID: 6080655645561780615, guid: 4f85d26e0b5ea4bafbb128c953abf2dd, type: 3}
       propertyPath: meshRenderer
@@ -562,9 +498,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Depth1
       objectReference: {fileID: 0}
+    - target: {fileID: 6080655645561780614, guid: 4f85d26e0b5ea4bafbb128c953abf2dd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6080655645561780615, guid: 4f85d26e0b5ea4bafbb128c953abf2dd, type: 3}
       propertyPath: topicName
-      value: /camera1/aligned_depth_to_color/image_raw/compressed
+      value: /camera0/depth/compressed
       objectReference: {fileID: 0}
     - target: {fileID: 6080655645561780615, guid: 4f85d26e0b5ea4bafbb128c953abf2dd, type: 3}
       propertyPath: meshRenderer
@@ -695,7 +635,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15, y: 5, z: -15}
+  m_LocalPosition: {x: 0, y: 0, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -834,11 +774,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6080655645561780614, guid: 4f85d26e0b5ea4bafbb128c953abf2dd, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6080655645561780615, guid: 4f85d26e0b5ea4bafbb128c953abf2dd, type: 3}
       propertyPath: topicName
-      value: /camera3/color/image_raw/compressed
+      value: /camera2/color/compressed
       objectReference: {fileID: 0}
     - target: {fileID: 6080655645561780615, guid: 4f85d26e0b5ea4bafbb128c953abf2dd, type: 3}
       propertyPath: meshRenderer
@@ -983,7 +923,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4577613952016164894, guid: bda082f83c4188ccfa0e1c3074d454f5, type: 3}
       propertyPath: topicName
-      value: /camera3/depth/color/points
+      value: /camera2/depth/points
       objectReference: {fileID: 0}
     - target: {fileID: 4577613952016164895, guid: bda082f83c4188ccfa0e1c3074d454f5, type: 3}
       propertyPath: m_Name
@@ -1082,7 +1022,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4577613952016164894, guid: bda082f83c4188ccfa0e1c3074d454f5, type: 3}
       propertyPath: topicName
-      value: /camera4/depth/color/points
+      value: /camera3/depth/points
       objectReference: {fileID: 0}
     - target: {fileID: 4577613952016164895, guid: bda082f83c4188ccfa0e1c3074d454f5, type: 3}
       propertyPath: m_Name
@@ -1134,9 +1074,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Depth2
       objectReference: {fileID: 0}
+    - target: {fileID: 6080655645561780614, guid: 4f85d26e0b5ea4bafbb128c953abf2dd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6080655645561780615, guid: 4f85d26e0b5ea4bafbb128c953abf2dd, type: 3}
       propertyPath: topicName
-      value: /camera2/aligned_depth_to_color/image_raw/compressed
+      value: /camera1/depth/compressed
       objectReference: {fileID: 0}
     - target: {fileID: 6080655645561780615, guid: 4f85d26e0b5ea4bafbb128c953abf2dd, type: 3}
       propertyPath: meshRenderer
@@ -1208,9 +1152,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Image1
       objectReference: {fileID: 0}
+    - target: {fileID: 6080655645561780614, guid: 4f85d26e0b5ea4bafbb128c953abf2dd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6080655645561780615, guid: 4f85d26e0b5ea4bafbb128c953abf2dd, type: 3}
       propertyPath: topicName
-      value: /camera1/color/image_raw/compressed
+      value: /camera0/color/compressed
       objectReference: {fileID: 0}
     - target: {fileID: 6080655645561780728, guid: 4f85d26e0b5ea4bafbb128c953abf2dd, type: 3}
       propertyPath: m_RootOrder
@@ -1275,11 +1223,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6080655645561780614, guid: 4f85d26e0b5ea4bafbb128c953abf2dd, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6080655645561780615, guid: 4f85d26e0b5ea4bafbb128c953abf2dd, type: 3}
       propertyPath: topicName
-      value: /camera4/color/image_raw/compressed
+      value: /camera3/color/compressed
       objectReference: {fileID: 0}
     - target: {fileID: 6080655645561780615, guid: 4f85d26e0b5ea4bafbb128c953abf2dd, type: 3}
       propertyPath: meshRenderer
@@ -1346,9 +1294,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Depth3
       objectReference: {fileID: 0}
+    - target: {fileID: 6080655645561780614, guid: 4f85d26e0b5ea4bafbb128c953abf2dd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6080655645561780615, guid: 4f85d26e0b5ea4bafbb128c953abf2dd, type: 3}
       propertyPath: topicName
-      value: /camera3/aligned_depth_to_color/image_raw/compressed
+      value: /camera2/depth/compressed
       objectReference: {fileID: 0}
     - target: {fileID: 6080655645561780615, guid: 4f85d26e0b5ea4bafbb128c953abf2dd, type: 3}
       propertyPath: meshRenderer
@@ -1424,11 +1376,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4443033544262668175, guid: bda082f83c4188ccfa0e1c3074d454f5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4443033544262668175, guid: bda082f83c4188ccfa0e1c3074d454f5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 4577613952016164893, guid: bda082f83c4188ccfa0e1c3074d454f5, type: 3}
       propertyPath: m_RootOrder
@@ -1481,6 +1433,10 @@ PrefabInstance:
     - target: {fileID: 4577613952016164894, guid: bda082f83c4188ccfa0e1c3074d454f5, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4577613952016164894, guid: bda082f83c4188ccfa0e1c3074d454f5, type: 3}
+      propertyPath: topicName
+      value: /camera0/depth/points
       objectReference: {fileID: 0}
     - target: {fileID: 4577613952016164894, guid: bda082f83c4188ccfa0e1c3074d454f5, type: 3}
       propertyPath: colorImageSubscriber

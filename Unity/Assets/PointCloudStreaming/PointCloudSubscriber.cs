@@ -71,14 +71,13 @@ namespace RosSharp.RosBridgeClient
             int x_posi;
             int y_posi;
             int z_posi;
+            int b_posi;
+            int g_posi;
+            int r_posi;
 
             float x;
             float y;
             float z;
-
-            int rgb_posi;
-            int rgb_max = 255;
-
             float r;
             float g;
             float b;
@@ -89,25 +88,20 @@ namespace RosSharp.RosBridgeClient
                 x_posi = n * point_step + 0;
                 y_posi = n * point_step + 4;
                 z_posi = n * point_step + 8;
+                b_posi = n * point_step + 12;
+                g_posi = n * point_step + 16;
+                r_posi = n * point_step + 20;
 
                 x = BitConverter.ToSingle(byteArray, x_posi);
                 y = BitConverter.ToSingle(byteArray, y_posi);
                 z = BitConverter.ToSingle(byteArray, z_posi);
+                b = BitConverter.ToSingle(byteArray, b_posi);
+                g = BitConverter.ToSingle(byteArray, g_posi);
+                r = BitConverter.ToSingle(byteArray, r_posi);
 
-
-                rgb_posi = n * point_step + 16;
-
-                b = byteArray[rgb_posi + 0];
-                g = byteArray[rgb_posi + 1];
-                r = byteArray[rgb_posi + 2];
-
-                r = r / rgb_max;
-                g = g / rgb_max;
-                b = b / rgb_max;
 
                 pcl[n] = new Vector3(x, z, y);
                 pcl_color[n] = new Color(r, g, b);
-
 
             }
         }

@@ -54,22 +54,22 @@ services:
     restart: always
 
         
-    # rosbridge:
-    #   image: ros_rosbridge
-    #   build:
-    #     context: .
-    #     dockerfile: Dockerfile_rosbridge
-    #   depends_on:
-    #      - ros-master
-    #   environment:
-    #     - "ROS_MASTER_URI=http://ros-master:11311"
-    #     - "ROS_HOSTNAME=rosbridge"
-    #   command: stdbuf -o L roslaunch rosbridge_server rosbridge_websocket.launch
-    #   ports:
-    #     - "9090:9090"
-    #   networks:
-    #     - ros
-    #   restart: always
+  rosbridge:
+    image: ros_rosbridge
+    build:
+      context: .
+      dockerfile: Dockerfile_rosbridge
+    depends_on:
+      - ros-master
+    environment:
+      - "ROS_MASTER_URI=http://ros-master:11311"
+      - "ROS_HOSTNAME=rosbridge"
+    command: stdbuf -o L roslaunch rosbridge_server rosbridge_websocket.launch
+    ports:
+      - "9090:9090"
+    networks:
+      - ros
+    restart: always
 
     # viz:
     #   image: osrf/ros:kinetic-desktop-full
