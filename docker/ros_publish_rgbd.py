@@ -133,7 +133,7 @@ def publish_camera_info(pub, color_info, depth_info):
     depth_info_msg.K[0] = depth_info.fx
     depth_info_msg.K[4] = depth_info.fy
     depth_info_msg.D = depth_info.coeffs
-    depth_info_msg.distortion_model = 'plumb_bob'
+    depth_info_msg.distortion_model = 'plumb_bob' # maybe not because it is an inverse 
 
     pub["cinfo"].publish(color_info_msg)
     pub["dinfo"].publish(depth_info_msg)
@@ -181,16 +181,21 @@ if __name__ == "__main__":
     cams = []
     for i, device in enumerate(ctx.devices):
         cam_sn = device.get_info(rs.camera_info.serial_number)
-        cams.append(camera_pipeline(cam_sn, 640, 480, 15))
-    print(cams)
+        cams.append(camera_pipeline(cam_sn, 640, 480, 30))
 
-    cams = (
-        cams[0], cams[1], cams[0], cams[1]
-        #camera_pipeline('036322250763', 640, 480, 30),
-        #camera_pipeline('038122250356', 640, 480, 30),
-        #camera_pipeline('f0245993', 0, 480, 30)
-        #camera_pipeline('f0245826', 0, 480, 30)
-    )
+    # simulate 4 camera streams
+    cams = cams * 4
+    cams = cams[0:5]
+    for i, cam in enumerate(cams):
+        cam["cam_id"] = i
+        print(cam)
+
+    # cams = (
+    #     camera_pipeline('036322250763', 640, 480, 30),
+    #     camera_pipeline('038122250356', 640, 480, 30),
+    #     camera_pipeline('f0245993', 0, 480, 30)
+    #     camera_pipeline('f0245826', 0, 480, 30)
+    # )
 
     publishers = [{
         "color": rospy.Publisher(f"/camera{i}/color/compressed", CompressedImage, queue_size=2),
@@ -212,28 +217,14 @@ if __name__ == "__main__":
     frame_count = 0
     try:
         while not rospy.is_shutdown():
-            if False:
-                for cam, pub in zip(cams, publishers):
-                    color_info, depth_info = cam["color_intrinsics"], cam["depth_intrinsics"]
-                    color_image, depth_image, depth_info = get_rgbd(cam["pipeline"], align)
-                    pointcloud = get_pointcloud(
-                        cam["depth_scale"], cam["color_intrinsics"], color_image, depth_image)
-                    publish_camera_info(pub, color_info, depth_info)
-                    publish_frames(pub, color_image, depth_image)
-                    publish_pointcloud(pub, pointcloud)
-            else:
-                for i, cam in enumerate(cams[0:2]):
-                    color_image, depth_image = get_rgbd(cam["pipeline"], align)
-                    color_info, depth_info = cam["color_intrinsics"], cam["depth_intrinsics"]
-                    pointcloud = get_pointcloud(
-                        cam["depth_scale"], cam["color_intrinsics"], color_image, depth_image)
-                    publish_camera_info(publishers[i], color_info, depth_info)
-                    publish_camera_info(
-                        publishers[i+2], color_info, depth_info)
-                    publish_frames(publishers[i], color_image, depth_image)
-                    publish_frames(publishers[i+2], color_image, depth_image)
-                    publish_pointcloud(publishers[i], pointcloud)
-                    publish_pointcloud(publishers[i+2], pointcloud)
+            for cam, pub in zip(cams, publishers):
+                color_info, depth_info = cam["color_intrinsics"], cam["depth_intrinsics"]
+                color_image, depth_image = get_rgbd(cam["pipeline"], align)
+                pointcloud = get_pointcloud(
+                    cam["depth_scale"], cam["color_intrinsics"], color_image, depth_image)
+                publish_camera_info(pub, color_info, depth_info)
+                publish_frames(pub, color_image, depth_image)
+                publish_pointcloud(pub, pointcloud)
     finally:
         # Stop streaming
         for cam in cams:
