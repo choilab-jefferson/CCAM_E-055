@@ -9,6 +9,7 @@ import argparse
 import sys
 import time
 import random
+from mmcv import Config
 
 from collections import deque
 from multiprocessing.pool import Pool, ThreadPool
@@ -37,37 +38,23 @@ action_pub = rospy.Publisher(
 pose_pub = rospy.Publisher("/output/pose", String, queue_size=10)
 human_pub = rospy.Publisher(
     "/output/human", String, queue_size=10)
+from action_recognition import ActionRecognitionPipeline
 
 
-def human_detection(color, n_colorframe):
-    #print("human", n_colorframe)
-    #human_pub.publish(f"human, {n_colorframe}")
-    return 0
-
-def pose_estimation(color, depth, locs, n_colorframe, n_depthframe):
-    #print("pose", n_colorframe, n_depthframe)
-    #pose_pub.publish(f"pose, {n_colorframe}, {n_depthframe}")
-    return 0
-
-def action_classification(poses, n_colorframe):
-    #print("action", n_colorframe)
-    #action_pub.publish(f"action, {n_colorframe}")
-    return 0
-
-def process_rgbd(color_, depth_, n_colorframe, n_depthframe, cam_id):
+def process_rgbd(pipeline, color_, depth_, n_colorframe, n_depthframe, cam_id):
     color = cv2.imdecode(color_, cv2.IMREAD_COLOR)
     depth = cv2.imdecode(depth_, cv2.IMREAD_UNCHANGED)
     #print(f"cam{cam_id} frame: color-{n_colorframe}, depth-{n_depthframe}, {rospy.get_time()-t2:0.3f} secs")
     #print(hex(id(color_)), color.shape, hex(id(depth_)), depth.shape)
 
-    locs = human_detection(color, n_colorframe)
-    poses = pose_estimation(color, depth, locs, n_colorframe, n_depthframe)
-    action_classification(poses, n_colorframe)
+    if cam_id == 0:
+        pipeline.put_frame((color, depth))
+        pipeline.get_result()
 
     return color, depth, cam_id
 
 class ActionClassification(Thread):
-    def __init__(self, n):
+    def __init__(self, n, cfg):
         Thread.__init__(self)
         self.n_cam = n
         self.color = [None for _ in range(self.n_cam)]
@@ -83,6 +70,8 @@ class ActionClassification(Thread):
             "depth": rospy.Subscriber(f"/camera{i}/depth/compressed", CompressedImage, self.callback_depth, callback_args=i, queue_size=2),
             "pointcloud": rospy.Subscriber(f"/camera{i}/depth/points", PointCloud2, self.callback_pointcloud, callback_args=i, queue_size=2),
         } for i in range(self.n_cam)]
+
+        self.pipeline = ActionRecognitionPipeline(cfg)
 
         if True:
             rospy.Timer(rospy.Duration(0.033), self.callback_imshow)
@@ -114,7 +103,6 @@ class ActionClassification(Thread):
 
     def run(self):
         t1 = rospy.get_time()
-        n_no_frame = [0 for _ in range(self.n_cam)]
         n_frame = [0 for _ in range(self.n_cam)]
         while not rospy.is_shutdown():
             # # Consume the queue.
@@ -133,7 +121,7 @@ class ActionClassification(Thread):
                         task = pool.apply_async(process_rgbd, (color_, depth_, n_colorframe, n_depthframe, cam_id))
                         pending_task.append(task)
                     else:
-                        color, depth, _ = process_rgbd(color_, depth_, n_colorframe, n_depthframe, cam_id)
+                        color, depth, _ = process_rgbd(self.pipeline, color_, depth_, n_colorframe, n_depthframe, cam_id)
                         n_frame[cam_id] += 1
 
                     depth_colormap = cv2.applyColorMap(
@@ -157,8 +145,10 @@ if __name__ == "__main__":
     # pool = ThreadPool(processes=4)
     # pending_task = deque()
 
+    cfg = Config.fromfile("../config/action_recognition.yaml")
+
     rospy.init_node('Human_Action_Classification', anonymous=True)
-    ac = ActionClassification(4)
+    ac = ActionClassification(4, cfg.cfg)
 
     ac.start()
     rospy.spin()
