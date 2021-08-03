@@ -6,6 +6,7 @@
 import os
 import sys
 import json
+import time
 import mmcv
 import numpy as np
 import ntpath
@@ -43,6 +44,13 @@ categories = [
     "coming in",
     "going out",
     "g230"]
+
+
+def time_synchronized():
+    # pytorch-accurate time
+    if torch.cuda.is_available():
+        torch.cuda.synchronize()
+    return time.time()
 
 
 def init_action_recognizer(cfg, device=None):
@@ -123,16 +131,15 @@ def inference_action_recognizer(action_recognizer, poses):
     return output
 
 
-def worker(inputs, results, gpu, cfg):
+def pose_worker(inputs, poses, gpu, cfg):
     worker_id = current_process()._identity[0] - 1
-    global pose_estimators, action_recognizers
+    global pose_estimators
     if worker_id not in pose_estimators:
         pose_estimators[worker_id] = init_pose_estimator(
             cfg.detection_cfg, cfg.estimation_cfg, device=gpu)
-    if worker_id not in action_recognizers:
-        action_recognizers[worker_id] = init_action_recognizer(cfg, device=gpu)
-    print("worker is on")
-    poses = Manager().Queue(30)
+    print("pose worker is on")
+    t1 = time_synchronized()
+    n_frame = 0
     while True:
         idx, image = inputs.get()
 
@@ -145,6 +152,24 @@ def worker(inputs, results, gpu, cfg):
         res_pose['frame_index'] = idx
 
         poses.put(res_pose)
+        n_frame += 1
+        
+        if(time_synchronized() - t1 > 1):
+            print(f"-- Pose FPS: {n_frame/(time_synchronized() - t1):0.2f}")
+            n_frame = 0
+            t1 = time_synchronized()
+
+
+def action_worker(poses, results, gpu, cfg):
+    worker_id = current_process()._identity[0] - 1
+    global action_recognizers
+    if worker_id not in action_recognizers:
+        action_recognizers[worker_id] = init_action_recognizer(cfg, device=gpu)
+    print("action worker is on")
+    t1 = time_synchronized()
+    while True:
+        # if image is None: # TODO: add signal to stop
+        #     return
         if poses.qsize() > 16:
             print(poses.qsize())
             res_poses = [poses.get() for _ in range(poses.qsize())]
@@ -152,8 +177,9 @@ def worker(inputs, results, gpu, cfg):
                 action_recognizers[worker_id], res_poses)
             if res_action is not None:
                 results.put(res_action)
-            [inputs.get() for _ in range(inputs.qsize())]
-            print(poses.qsize())
+                print(f"Action Recognition takes {(time_synchronized() - t1):0.2f} secs")
+                t1 = time_synchronized()
+
 
 
 class ActionRecognitionPipeline():
@@ -179,14 +205,20 @@ class ActionRecognitionPipeline():
         self.recognition_cfg = cfg.recognition_cfg
         self.video_categories = video_categories
         self.inputs = Manager().Queue(video_max_length)
+        self.poses = Manager().Queue(video_max_length/4)
         self.results = Manager().Queue(video_max_length)
         self.num_worker = cfg.gpus * cfg.worker_per_gpu
 
         self.procs = []
         for i in range(self.num_worker):
             p = Process(
-                target=worker,
-                args=(self.inputs, self.results, i % self.gpus, cfg))
+                target=pose_worker,
+                args=(self.inputs, self.poses, i % self.gpus, cfg))
+            self.procs.append(p)
+            p.start()
+            p = Process(
+                target=action_worker,
+                args=(self.poses, self.results, i % self.gpus, cfg))
             self.procs.append(p)
             p.start()
 

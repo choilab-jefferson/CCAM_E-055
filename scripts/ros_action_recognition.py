@@ -41,21 +41,21 @@ human_pub = rospy.Publisher(
 from action_recognition import ActionRecognitionPipeline
 
 
-def process_rgbd(pipeline, color_, depth_, n_colorframe, n_depthframe, cam_id):
+def process_rgbd(pipeline, color_, depth_, cam_id):
     color = cv2.imdecode(color_, cv2.IMREAD_COLOR)
     depth = cv2.imdecode(depth_, cv2.IMREAD_UNCHANGED)
-    #print(f"cam{cam_id} frame: color-{n_colorframe}, depth-{n_depthframe}, {rospy.get_time()-t2:0.3f} secs")
-    #print(hex(id(color_)), color.shape, hex(id(depth_)), depth.shape)
 
     if cam_id == 0:
         pipeline.put_frame((color, depth))
-        pipeline.get_result()
+        pipeline.get_result() # TODO: need an interface to send it to ROS
 
     return color, depth, cam_id
 
 class ActionClassification(Thread):
     def __init__(self, n, cfg):
         Thread.__init__(self)
+        self.show_images = False
+        self.multi_thread = False
         self.n_cam = n
         self.color = [None for _ in range(self.n_cam)]
         self.depth = [None for _ in range(self.n_cam)]
@@ -63,6 +63,12 @@ class ActionClassification(Thread):
         self.n_colorframe = [0 for _ in range(self.n_cam)]
         self.n_depthframe = [0 for _ in range(self.n_cam)]
         self.n_pointcloud = [0 for _ in range(self.n_cam)]
+
+        if self.multi_thread:
+            #self.pool = Pool(processes=4)
+            self.pool = ThreadPool(processes=4)
+            self.pending_task = deque()
+
 
         # subscribed topics
         self.subscribers = [{
@@ -73,7 +79,7 @@ class ActionClassification(Thread):
 
         self.pipeline = ActionRecognitionPipeline(cfg)
 
-        if True:
+        if self.show_images:
             rospy.Timer(rospy.Duration(0.033), self.callback_imshow)
             self.images = [None for _ in range(self.n_cam)]
 
@@ -105,28 +111,34 @@ class ActionClassification(Thread):
         t1 = rospy.get_time()
         n_frame = [0 for _ in range(self.n_cam)]
         while not rospy.is_shutdown():
-            # # Consume the queue.
-            # while len(pending_task) > 0 and pending_task[0].ready():
-            #     color, depth, cam_id = pending_task.popleft().get()
-            #     n_frame[cam_id] += 1
+            if self.multi_thread:
+                # Consume the queue.
+                while len(self.pending_task) > 0 and self.pending_task[0].ready():
+                    color, depth, cam_id = self.pending_task.popleft().get()
+                    n_frame[cam_id] += 1
+
+                    if self.show_images:
+                        depth_colormap = cv2.applyColorMap(
+                        cv2.convertScaleAbs(cv2.resize(depth, (320,240)), alpha=0.09), cv2.COLORMAP_JET)
+                        self.images[cam_id] = np.vstack((cv2.resize(color, (320,240)), depth_colormap))
 
             for cam_id in range(self.n_cam):
                 if self.color[cam_id] is None or self.depth[cam_id] is None:
                     pass
                 else:
                     color_, depth_ = self.color[cam_id], self.depth[cam_id]
-                    n_colorframe, n_depthframe = self.n_colorframe[cam_id], self.n_depthframe[cam_id]
                     self.color[cam_id], self.depth[cam_id] = None, None
-                    if False: # multi thread
-                        task = pool.apply_async(process_rgbd, (color_, depth_, n_colorframe, n_depthframe, cam_id))
-                        pending_task.append(task)
+                    if self.multi_thread: # multi thread
+                        task = self.pool.apply_async(process_rgbd, (self.pipeline, color_, depth_, cam_id))
+                        self.pending_task.append(task)
                     else:
-                        color, depth, _ = process_rgbd(self.pipeline, color_, depth_, n_colorframe, n_depthframe, cam_id)
+                        color, depth, _ = process_rgbd(self.pipeline, color_, depth_, cam_id)
                         n_frame[cam_id] += 1
 
-                    depth_colormap = cv2.applyColorMap(
-                       cv2.convertScaleAbs(cv2.resize(depth, (320,240)), alpha=0.09), cv2.COLORMAP_JET)
-                    self.images[cam_id] = np.vstack((cv2.resize(color, (320,240)), depth_colormap))
+                        if self.show_images:
+                            depth_colormap = cv2.applyColorMap(
+                            cv2.convertScaleAbs(cv2.resize(depth, (320,240)), alpha=0.09), cv2.COLORMAP_JET)
+                            self.images[cam_id] = np.vstack((cv2.resize(color, (320,240)), depth_colormap))
 
             if time.time() - t1 > 1:
                 for cam_id in range(self.n_cam):
@@ -140,10 +152,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Human Action Classification pipeline")
     args = parser.parse_args()
-
-    # #pool = Pool(processes=4)
-    # pool = ThreadPool(processes=4)
-    # pending_task = deque()
 
     cfg = Config.fromfile("../config/action_recognition.yaml")
 
