@@ -4,27 +4,15 @@
 # Wookjin Choi <wchoi@vsu.edu>
 # 08/02/2021
 import os
-import sys
 import json
 import time
-import mmcv
 import numpy as np
-import ntpath
 import torch
 import torch.multiprocessing as mp
-import argparse
-import logging
-from collections import OrderedDict
-import mmskeleton
-from mmskeleton.utils import call_obj, set_attr, get_attr, import_obj, load_checkpoint, cache_checkpoint
+from mmskeleton.utils import call_obj, load_checkpoint, cache_checkpoint
 from mmskeleton.apis.estimation import init_pose_estimator, inference_pose_estimator
-from mmskeleton.datasets import skeleton
-from mmcv.runner import Runner
-from mmcv import Config, ProgressBar
-from mmcv.parallel import MMDataParallel
-from mmcv.utils import ProgressBar
 from multiprocessing import current_process, Process, Manager
-from mmskeleton.processor.recognition import topk_accuracy
+from collections import deque
 
 if mp.get_start_method(allow_none=True) is None:
     mp.set_start_method('spawn')
@@ -132,53 +120,76 @@ def inference_action_recognizer(action_recognizer, poses):
 
 
 def pose_worker(inputs, poses, gpu, cfg):
-    worker_id = current_process()._identity[0] - 1
-    global pose_estimators
-    if worker_id not in pose_estimators:
-        pose_estimators[worker_id] = init_pose_estimator(
-            cfg.detection_cfg, cfg.estimation_cfg, device=gpu)
-    print("pose worker is on")
-    t1 = time_synchronized()
-    n_frame = 0
-    while True:
-        idx, image = inputs.get()
+    try:
+        worker_id = current_process()._identity[0] - 1
+        global pose_estimators
+        if worker_id not in pose_estimators:
+            pose_estimators[worker_id] = init_pose_estimator(
+                cfg.detection_cfg, cfg.estimation_cfg, device=gpu)
+        print("pose worker is on")
+        t1 = time_synchronized()
+        n_frame = 0    
+        while True:
+            idx, image = inputs.get()
 
-        # end signal
-        if image is None:
-            return
+            # end signal
+            if image is None:
+                return
 
-        res_pose = inference_pose_estimator(
-            pose_estimators[worker_id], image[0])
-        res_pose['frame_index'] = idx
+            res_pose = inference_pose_estimator(
+                    pose_estimators[worker_id], image[0])
+            res_pose['frame_index'] = idx
 
-        poses.put(res_pose)
-        n_frame += 1
-        
-        if(time_synchronized() - t1 > 1):
-            print(f"-- Pose FPS: {n_frame/(time_synchronized() - t1):0.2f}")
-            n_frame = 0
-            t1 = time_synchronized()
+            poses.put(res_pose)
+            n_frame += 1
+            
+            if(time_synchronized() - t1 > 1 and n_frame > 0):
+                print(f"-- Pose FPS: {n_frame/(time_synchronized() - t1):0.2f}")
+                n_frame = 0
+                t1 = time_synchronized()
+    except KeyboardInterrupt:
+        print("Shutting down pose worker")
+    finally:
+        print("pose worker is off")
 
 
 def action_worker(poses, results, gpu, cfg):
-    worker_id = current_process()._identity[0] - 1
-    global action_recognizers
-    if worker_id not in action_recognizers:
-        action_recognizers[worker_id] = init_action_recognizer(cfg, device=gpu)
-    print("action worker is on")
-    t1 = time_synchronized()
-    while True:
-        # if image is None: # TODO: add signal to stop
-        #     return
-        if poses.qsize() > 16:
-            print(poses.qsize())
-            res_poses = [poses.get() for _ in range(poses.qsize())]
-            res_action = inference_action_recognizer(
-                action_recognizers[worker_id], res_poses)
-            if res_action is not None:
-                results.put(res_action)
-                print(f"Action Recognition takes {(time_synchronized() - t1):0.2f} secs")
+    try:
+        worker_id = current_process()._identity[0] - 1
+        global action_recognizers
+        if worker_id not in action_recognizers:
+            action_recognizers[worker_id] = init_action_recognizer(cfg, device=gpu)
+        print("action worker is on")
+        t1 = time_synchronized()
+        pose_queue = deque(maxlen=17)
+        n_frame = 0
+        while True:
+            pose = poses.get()
+            if pose is None:
+                return
+            pose_queue.append(pose)
+
+            cur_windows = []
+            if len(pose_queue) ==  17:
+                cur_windows = list(pose_queue)
+                pose_queue.popleft()
+                try:
+                    res_action = inference_action_recognizer(
+                        action_recognizers[worker_id], cur_windows)
+                    if res_action is not None:
+                        results.put(res_action)
+                        n_frame += 1
+                except KeyboardInterrupt:
+                    return
+            
+            if time_synchronized() - t1 > 1 and n_frame > 0:
+                print(f"-- Action FPS: {n_frame/(time_synchronized() - t1):0.2f}")
+                n_frame = 0
                 t1 = time_synchronized()
+    except KeyboardInterrupt:
+        print("Shutting down action worker")
+    finally:
+        print("action worker is off")
 
 
 
@@ -211,16 +222,12 @@ class ActionRecognitionPipeline():
 
         self.procs = []
         for i in range(self.num_worker):
-            p = Process(
-                target=pose_worker,
-                args=(self.inputs, self.poses, i % self.gpus, cfg))
-            self.procs.append(p)
-            p.start()
-            p = Process(
-                target=action_worker,
-                args=(self.poses, self.results, i % self.gpus, cfg))
-            self.procs.append(p)
-            p.start()
+            p_pose = Process(target=pose_worker, args=(self.inputs, self.poses, i % self.gpus, cfg))
+            p_action = Process(target=action_worker, args=(self.poses, self.results, i % self.gpus, cfg))
+            self.procs.append((p_pose, p_action))
+            p_pose.start()
+            p_action.start()
+            
 
     def get_result(self):
         t = None
@@ -240,14 +247,21 @@ class ActionRecognitionPipeline():
 
     def stop(self):
         # send end signals
-        for p in self.procs:
+        [self.inputs.popleft() for _ in range(self.inputs.qsize())]
+        [self.poses.popleft() for _ in range(self.poses.qsize())]
+        for _ in self.procs:
             self.inputs.put((-1, None))
+            self.poses.put(None)
         # wait to finish
-        for p in self.procs:
-            p.join()
+        for p_pose, p_action in self.procs:
+            p_pose.join()
+            p_action.join()
 
     def put_frame(self, frame):
-        self.inputs.put((self.frame_index, frame))
-        self.frame_index += 1
-        if self.frame_index > 16:
-            self.frame_index = 0
+        try:
+            self.inputs.put((self.frame_index, frame), False)
+            self.frame_index += 1
+            if self.frame_index > 16:
+                self.frame_index = 0
+        except:
+            pass

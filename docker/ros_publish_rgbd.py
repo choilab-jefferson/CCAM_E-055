@@ -7,6 +7,7 @@
 import pyrealsense2 as rs
 import numpy as np
 from enum import IntEnum
+from threading import Thread
 import cv2
 
 import roslib
@@ -24,7 +25,8 @@ FIELDS_XYZBGR = [
     PointField(name='r', offset=20, datatype=PointField.FLOAT32, count=1),
 ]
 
-class Preset(IntEnum):
+
+class D400_Preset(IntEnum):
     Custom = 0
     Default = 1
     Hand = 2
@@ -33,27 +35,47 @@ class Preset(IntEnum):
     MediumDensity = 5
 
 
+class L500_Preset(IntEnum):
+    Custom = 0
+    NoAmbientLight = 1
+    LowAmbientLight = 2
+    MaxRange = 3
+    ShortRange = 4
+
+
 def camera_pipeline(cam_sn, width, height, fps):
     # Configure depth and color streams from Camera
     pipeline = rs.pipeline()
     config = rs.config()
 
     config.enable_device(cam_sn)
-    config.enable_stream(rs.stream.depth, width, height, rs.format.z16, fps)
     config.enable_stream(rs.stream.color, width, height, rs.format.bgr8, fps)
+    config.enable_stream(rs.stream.depth, width, height, rs.format.z16, fps)
 
     # Start streaming
-    profile = pipeline.start(config)
+    try:
+        profile = pipeline.start(config)
+    except:
+        config.enable_stream(rs.stream.depth, 0, 0, rs.format.z16, fps)
+        profile = pipeline.start(config)
     depth_sensor = profile.get_device().first_depth_sensor()
 
     # Using preset HighAccuracy for recording
-    depth_sensor.set_option(rs.option.visual_preset, Preset.HighAccuracy)
+    depth_sensor.set_option(rs.option.visual_preset, D400_Preset.HighAccuracy)
 
     # Getting the depth sensor's depth scale (see rs-align example for explanation)
     depth_scale = depth_sensor.get_depth_scale()
 
-    color_profile = rs.video_stream_profile(profile.get_stream(rs.stream.color))
-    depth_profile = rs.video_stream_profile(profile.get_stream(rs.stream.depth))
+    # Create an align object
+    # rs.align allows us to perform alignment of depth frames to others frames
+    # The "align_to" is the stream type to which we plan to align depth frames.
+    align_to = rs.stream.color
+    align = rs.align(align_to)
+
+    color_profile = rs.video_stream_profile(
+        profile.get_stream(rs.stream.color))
+    depth_profile = rs.video_stream_profile(
+        profile.get_stream(rs.stream.depth))
     color_intrinsics = color_profile.get_intrinsics()
     depth_intrinsics = depth_profile.get_intrinsics()
 
@@ -62,6 +84,7 @@ def camera_pipeline(cam_sn, width, height, fps):
         "pipeline": pipeline,
         "config": config,
         "profile": profile,
+        "align": align,
         "depth_scale": depth_scale,
         "depth_intrinsics": depth_intrinsics,
         "color_intrinsics": color_intrinsics,
@@ -76,8 +99,8 @@ def get_rgbd(pipeline, align):
     aligned_frames = align.process(frames)
 
     # Get aligned frames
-    depth_frame = aligned_frames.get_depth_frame()
     color_frame = aligned_frames.get_color_frame()
+    depth_frame = aligned_frames.get_depth_frame()
 
     # Validate that both frames are valid
     if not depth_frame or not color_frame:
@@ -91,9 +114,8 @@ def get_rgbd(pipeline, align):
 
 
 def get_pointcloud(depth_scale, intrinsics_, color_image_, depth_image_):
-    intrinsics = o3d.camera.PinholeCameraIntrinsic(intrinsics_.width, intrinsics_.height,
-                                                   intrinsics_.fx, intrinsics_.fy,
-                                                   intrinsics_.ppx, intrinsics_.ppy)
+    intrinsics = o3d.camera.PinholeCameraIntrinsic(
+        intrinsics_.width, intrinsics_.height, intrinsics_.fx, intrinsics_.fy, intrinsics_.ppx, intrinsics_.ppy)
 
     # We will not display the background of objects more than
     #  clipping_distance_in_meters meters away
@@ -133,7 +155,8 @@ def publish_camera_info(pub, color_info, depth_info):
     depth_info_msg.K[0] = depth_info.fx
     depth_info_msg.K[4] = depth_info.fy
     depth_info_msg.D = depth_info.coeffs
-    depth_info_msg.distortion_model = 'plumb_bob' # maybe not because it is an inverse 
+    # maybe not because it is an inverse
+    depth_info_msg.distortion_model = 'plumb_bob'
 
     pub["cinfo"].publish(color_info_msg)
     pub["dinfo"].publish(depth_info_msg)
@@ -167,7 +190,7 @@ def publish_pointcloud(pub, pointcloud):
     pointcloud_msg.height = 1
     pointcloud_msg.width = arr.shape[0]
     pointcloud_msg.fields = FIELDS_XYZBGR
-    pointcloud_msg.is_bigendian = False 
+    pointcloud_msg.is_bigendian = False
     pointcloud_msg.point_step = arr.dtype.itemsize*arr.shape[1]
     pointcloud_msg.row_step = pointcloud_msg.point_step*arr.shape[0]
     pointcloud_msg.is_dense = False
@@ -176,56 +199,72 @@ def publish_pointcloud(pub, pointcloud):
     pub["points"].publish(pointcloud_msg)
 
 
+def process_camera(cam_id):
+    cam_sn = cams[cam_id]["cam_sn"]
+    print(cam_sn)
+    if cam_id >= len(cams_):
+        while "pipeline" not in cams[cam_id-len(cams_)]:
+            print(cam_sn, "no pipeline", id(cams))
+            rospy.sleep(1)
+        cam = cams[cam_id-len(cams_)].copy()
+    else:
+        try:
+            cam = camera_pipeline(cam_sn, 640, 480, 30)
+        except:
+            cam = camera_pipeline(cam_sn, 960, 540, 30)
+    cam["cam_id"] = cam_id
+    cams[cam_id] = cam
+    print(cam)
+    
+    pub = dict(
+        color = rospy.Publisher(f"/camera{cam_id}/color/compressed", CompressedImage, queue_size=2),
+        depth = rospy.Publisher(f"/camera{cam_id}/depth/compressed", CompressedImage, queue_size=2),
+        cinfo = rospy.Publisher(f"/camera{cam_id}/color/camera_info", CameraInfo, queue_size=2),
+        dinfo = rospy.Publisher(f"/camera{cam_id}/depth/camera_info", CameraInfo, queue_size=2),
+        points = rospy.Publisher(f"/camera{cam_id}/depth/points", PointCloud2, queue_size=2),
+    )
+
+    n_frame = 0
+    t1 = rospy.get_time()
+    while not rospy.is_shutdown():
+        color_info, depth_info = cam["color_intrinsics"], cam["depth_intrinsics"]
+        publish_camera_info(pub, color_info, depth_info)
+        color_image, depth_image = get_rgbd(cam["pipeline"], cam["align"])
+        publish_frames(pub, color_image, depth_image)
+        pointcloud = get_pointcloud(
+            cam["depth_scale"], cam["color_intrinsics"], color_image, depth_image)
+        publish_pointcloud(pub, pointcloud)
+        n_frame += 1
+        if rospy.get_time() - t1 > 1 and n_frame > 0:
+            print(f"cam{cam_id} FPS: {n_frame/(rospy.get_time() - t1):0.2f}")
+            n_frame = 0
+            t1 = rospy.get_time()
+
+
 if __name__ == "__main__":
     ctx = rs.context()
-    cams = []
-    for i, device in enumerate(ctx.devices):
+    cams_ = []
+    for cam_id, device in enumerate(ctx.devices):
         cam_sn = device.get_info(rs.camera_info.serial_number)
-        cams.append(camera_pipeline(cam_sn, 640, 480, 30))
+        cams_.append(dict(cam_id=cam_id, cam_sn=cam_sn))
 
     # simulate 4 camera streams
-    cams = cams * 4
-    cams = cams[0:5]
-    for i, cam in enumerate(cams):
-        cam["cam_id"] = i
-        print(cam)
-
-    # cams = (
-    #     camera_pipeline('036322250763', 640, 480, 30),
-    #     camera_pipeline('038122250356', 640, 480, 30),
-    #     camera_pipeline('f0245993', 0, 480, 30)
-    #     camera_pipeline('f0245826', 0, 480, 30)
-    # )
-
-    publishers = [{
-        "color": rospy.Publisher(f"/camera{i}/color/compressed", CompressedImage, queue_size=2),
-        "depth": rospy.Publisher(f"/camera{i}/depth/compressed", CompressedImage, queue_size=2),
-        "cinfo": rospy.Publisher(f"/camera{i}/color/camera_info", CameraInfo, queue_size=2),
-        "dinfo": rospy.Publisher(f"/camera{i}/depth/camera_info", CameraInfo, queue_size=2),
-        "points": rospy.Publisher(f"/camera{i}/depth/points", PointCloud2, queue_size=2),
-    } for i in range(len(cams))]
-
-    # Create an align object
-    # rs.align allows us to perform alignment of depth frames to others frames
-    # The "align_to" is the stream type to which we plan to align depth frames.
-    align_to = rs.stream.color
-    align = rs.align(align_to)
+    cams = cams_ * 4
+    cams = cams[0:4]
 
     rospy.init_node('rs_cameras', anonymous=True)
 
     # Streaming loop
-    frame_count = 0
     try:
-        while not rospy.is_shutdown():
-            for cam, pub in zip(cams, publishers):
-                color_info, depth_info = cam["color_intrinsics"], cam["depth_intrinsics"]
-                color_image, depth_image = get_rgbd(cam["pipeline"], align)
-                pointcloud = get_pointcloud(
-                    cam["depth_scale"], cam["color_intrinsics"], color_image, depth_image)
-                publish_camera_info(pub, color_info, depth_info)
-                publish_frames(pub, color_image, depth_image)
-                publish_pointcloud(pub, pointcloud)
+        procs = []
+        for cam_id, cam in enumerate(cams):
+            p = Thread(target=process_camera, args=(cam_id,))
+            p.start()
+            procs.append(p)
+        for p in procs:
+            p.join()
+
     finally:
         # Stop streaming
-        for cam in cams:
-            cam['pipeline'].stop()
+        for cam in cams_:
+            cams[cam["cam_id"]]["pipeline"].stop()
