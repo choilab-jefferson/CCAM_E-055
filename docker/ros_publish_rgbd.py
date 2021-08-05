@@ -252,7 +252,7 @@ if __name__ == "__main__":
     cams = cams_ * 4
     cams = cams[0:4]
 
-    rospy.init_node('rs_cameras', anonymous=True)
+    rospy.init_node('rs_cameras', anonymous=True, xmlrpc_port=45100, tcpros_port=45101)
 
     # Streaming loop
     try:

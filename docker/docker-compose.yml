@@ -7,9 +7,9 @@ networks:
 services:
   ros-master:
     image: ros:melodic-ros-core
-    command: stdbuf -o L roscore
     ports:
       - "11311:11311"
+    command: stdbuf -o L roscore
     networks:
       - ros
     restart: always
@@ -24,10 +24,14 @@ services:
     environment:
       - "UDEV=1"
       - "ROS_MASTER_URI=http://ros-master:11311"
+      - "ROS_IP=172.17.0.1"
     privileged: true
     devices:
       - "/dev:/dev"
     command: stdbuf -o L ./ros_publish_rgbd.py
+    ports:
+      - "45100:45100"
+      - "45101:45101"
     networks:
       - ros
     restart: always
@@ -42,7 +46,6 @@ services:
        - realsense
     environment:
       - "ROS_MASTER_URI=http://ros-master:11311"
-      - "ROS_IP=0.0.0.0"
     command: >
       bash -c "rosparam set /ROS_IP 0.0.0.0 && 
         stdbuf -o L ./wait-for-cameras.sh python server_endpoint.py"
@@ -53,7 +56,6 @@ services:
       - ros
     restart: always
 
-        
   rosbridge:
     image: ros_rosbridge
     build:
@@ -70,6 +72,22 @@ services:
     networks:
       - ros
     restart: always
+  
+
+  # ros_mmskl:
+  #   image: ros_mmskl
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile_mmskl
+  #   depends_on:
+  #     - ros-master
+  #   environment:
+  #     - "ROS_MASTER_URI=http://ros-master:11311"
+  #   command: stdbuf -o L python ros_action_recognition.py
+  #   ports:
+  #   networks:
+  #     - ros
+  #   restart: always
 
     # viz:
     #   image: osrf/ros:kinetic-desktop-full
