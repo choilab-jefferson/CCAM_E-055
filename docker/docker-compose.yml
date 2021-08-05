@@ -16,9 +16,7 @@ services:
 
   realsense:
     image: ros_realsense
-    build:
-      context: .
-      dockerfile: Dockerfile_realsense 
+    build: './realsense'
     depends_on:
       - ros-master
     environment:
@@ -38,9 +36,7 @@ services:
 
   tcp-endpoint:
     image: ros_tcp_endpoint
-    build:
-      context: .
-      dockerfile: Dockerfile_TCPEndpoint
+    build: './tcp_endpoint'
     depends_on:
        - ros-master
        - realsense
@@ -58,9 +54,7 @@ services:
 
   rosbridge:
     image: ros_rosbridge
-    build:
-      context: .
-      dockerfile: Dockerfile_rosbridge
+    build: './rosbridge'
     depends_on:
       - ros-master
     environment:
@@ -74,20 +68,32 @@ services:
     restart: always
   
 
-  # ros_mmskl:
-  #   image: ros_mmskl
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile_mmskl
+  ros_mmskl:
+    image: ros_mmskl
+    build: './model/mmskl'
+    depends_on:
+      - ros-master
+    environment:
+      - "ROS_MASTER_URI=http://ros-master:11311"
+    command: >
+      bash -c "source /opt/ros/melodic/setup.bash && stdbuf -o L python ros_action_recognition.py"
+    networks:
+      - ros
+    restart: always
+
+  # ros_mmaction2:
+  #   image: ros_mmaction2
+  #   build: './model/maction2'
   #   depends_on:
   #     - ros-master
   #   environment:
   #     - "ROS_MASTER_URI=http://ros-master:11311"
-  #   command: stdbuf -o L python ros_action_recognition.py
-  #   ports:
+  #   command: >
+  #     bash -c "source /opt/ros/melodic/setup.bash && cd mmaction2 && stdbuf -o L python ../cam_mmaction2.py"
   #   networks:
   #     - ros
   #   restart: always
+  
 
     # viz:
     #   image: osrf/ros:kinetic-desktop-full

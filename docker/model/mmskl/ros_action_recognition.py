@@ -66,7 +66,7 @@ class ActionClassification(Thread):
     def __init__(self, cam_id, cfg):
         Thread.__init__(self)
         self.cam_id = cam_id
-        self.show_images = True
+        self.show_images = False
         self.color = None
         self.depth = None
         self.pointcloud = None
@@ -138,7 +138,7 @@ if __name__ == "__main__":
         description="Human Action Recogntion pipeline")
     args = parser.parse_args()
 
-    cfg = Config.fromfile("../config/action_recognition.yaml")
+    cfg = Config.fromfile("action_recognition.yaml")
 
     rospy.init_node('Human_Action_Recogntion', anonymous=True)
     acs = [ActionClassification(cam_id, cfg.cfg) for cam_id in range(4)]
