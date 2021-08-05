@@ -34,4 +34,4 @@ RUN git clone https://github.com/taznux/mmskeleton.git && \
     python setup_linux.py develop && \
     cd ../../..
 RUN mkdir ./config
-ADD ./action_recognition.yaml ./action_recognition.py ./ros_action_recognition.py ./
+ADD ./latest.pth ./florence_ccam.json ./action_recognition.yaml ./action_recognition.py ./ros_action_recognition.py ./
