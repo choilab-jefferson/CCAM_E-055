@@ -2,14 +2,22 @@
 
 ## Containers
 1. **ros-master**
-    - run roscore
+   - run roscore
 2. **realsense**
-    - Dockerfile_realsense
-    - run-cameras.sh: initialize four realsense cameras
-3. **tcp-endpoint**
-    - Dockerfile_TCPEndpoint
-    - wait-for-cameras: waiting for the four cameras coming up and run tcp-endpoint
-4. ~~rosbridge~~
-    - ~~Dockerfile_realsense~~
+   - Dockerfile
+   - ros_publish_rgbd: initialize four realsense cameras
+3. **tcp_endpoint**
+   - Dockerfile
+   - wait-for-cameras.sh: waiting for the four cameras coming up and run tcp-endpoint
+4. **model**
+    1. **mmskl**
+        - Dockerfile
+        - ros_action_recognition.py: a ROS pipeline for action recogntion
+    2. **mmaction2**
+        - Dockerfile
+        - 
+5. ~~rosbridge~~
+    - ~~Dockerfile~~
+
 
 Wookjin Choi <wchoi@vsu.edu>

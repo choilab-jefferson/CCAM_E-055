@@ -1,0 +1,1912 @@
+{
+      "categories": [
+          "wave",
+          "drink from a bottle",
+          "answer phone",
+          "clap",
+          "tight lace",
+          "sit down",
+          "stand up",
+          "read watch",
+          "bow",
+          "coming in",
+          "going out",
+          "g230"
+      ],
+      "annotations": {
+        "GestureRecording_Id3actor9idAction3category2.avi": {
+          "category_id": 1
+        },
+        "GestureRecording_Id16actor1idAction16category5.avi": {
+          "category_id": 4
+        },
+        "GestureRecording_Id15actor2idAction15category8.avi": {
+          "category_id": 7
+        },
+        "GestureRecording_Id20actor6idAction20category9.avi": {
+          "category_id": 8
+        },
+        "GestureRecording_Id3actor10idAction3category2.avi": {
+          "category_id": 1
+        },
+        "GestureRecording_Id16actor2idAction16category8.avi": {
+          "category_id": 7
+        },
+        "GestureRecording_Id6actor10idAction6category3.avi": {
+          "category_id": 2
+        },
+        "GestureRecording_Id14actor10idAction14category6.avi": {
+          "category_id": 5
+        },
+        "GestureRecording_Id10actor5idAction10category5.avi": {
+          "category_id": 4
+        },
+        "GestureRecording_Id19actor8idAction19category8.avi": {
+          "category_id": 7
+        },
+        "GestureRecording_Id11actor7idAction11category5.avi": {
+          "category_id": 4
+        },
+        "GestureRecording_Id3actor1idAction3category1.avi": {
+          "category_id": 0
+        },
+        "GestureRecording_Id19actor9idAction19category9.avi": {
+          "category_id": 8
+        },
+        "GestureRecording_Id1actor10idAction1category1.avi": {
+          "category_id": 0
+        },
+        "GestureRecording_Id18actor1idAction18category6.avi": {
+          "category_id": 5
+        },
+        "GestureRecording_Id8actor1idAction8category3.avi": {
+          "category_id": 2
+        },
+        "GestureRecording_Id11actor8idAction11category5.avi": {
+          "category_id": 4
+        },
+        "GestureRecording_Id9actor1idAction9category3.avi": {
+          "category_id": 2
+        },
+        "GestureRecording_Id11actor10idAction11category4.avi": {
+          "category_id": 3
+        },
+        "GestureRecording_Id9actor7idAction9category5.avi": {
+          "category_id": 4
+        },
+        "GestureRecording_Id4actor2idAction4category2.avi": {
+          "category_id": 1
+        },
+        "GestureRecording_Id5actor2idAction5category3.avi": {
+          "category_id": 2
+        },
+        "GestureRecording_Id15actor6idAction15category7.avi": {
+          "category_id": 6
+        },
+        "GestureRecording_Id3actor4idAction3category1.avi": {
+          "category_id": 0
+        },
+        "GestureRecording_Id14actor5idAction14category7.avi": {
+          "category_id": 6
+        },
+        "GestureRecording_Id2actor10idAction2category1.avi": {
+          "category_id": 0
+        },
+        "GestureRecording_Id5actor1idAction5category2.avi": {
+          "category_id": 1
+        },
+        "GestureRecording_Id14actor6idAction14category6.avi": {
+          "category_id": 5
+        },
+        "GestureRecording_Id18actor7idAction18category9.avi": {
+          "category_id": 8
+        },
+        "GestureRecording_Id5actor4idAction5category2.avi": {
+          "category_id": 1
+        },
+        "GestureRecording_Id6actor4idAction6category3.avi": {
+          "category_id": 2
+        },
+        "GestureRecording_Id7actor2idAction7category4.avi": {
+          "category_id": 3
+        },
+        "GestureRecording_Id7actor7idAction7category4.avi": {
+          "category_id": 3
+        },
+        "GestureRecording_Id15actor3idAction15category7.avi": {
+          "category_id": 6
+        },
+        "GestureRecording_Id15actor4idAction15category7.avi": {
+          "category_id": 6
+        },
+        "GestureRecording_Id14actor8idAction14category5.avi": {
+          "category_id": 4
+        },
+        "GestureRecording_Id3actor8idAction3category2.avi": {
+          "category_id": 1
+        },
+        "GestureRecording_Id10actor9idAction10category4.avi": {
+          "category_id": 3
+        },
+        "GestureRecording_Id23actor10idAction23category9.avi": {
+          "category_id": 8
+        },
+        "GestureRecording_Id20actor8idAction20category8.avi": {
+          "category_id": 7
+        },
+        "GestureRecording_Id7actor4idAction7category3.avi": {
+          "category_id": 2
+        },
+        "GestureRecording_Id2actor9idAction2category1.avi": {
+          "category_id": 0
+        },
+        "GestureRecording_Id16actor6idAction16category7.avi": {
+          "category_id": 6
+        },
+        "GestureRecording_Id22actor8idAction22category9.avi": {
+          "category_id": 8
+        },
+        "GestureRecording_Id7actor8idAction7category4.avi": {
+          "category_id": 3
+        },
+        "GestureRecording_Id12actor5idAction12category6.avi": {
+          "category_id": 5
+        },
+        "GestureRecording_Id2actor3idAction2category1.avi": {
+          "category_id": 0
+        },
+        "GestureRecording_Id6actor1idAction6category2.avi": {
+          "category_id": 1
+        },
+        "GestureRecording_Id9actor2idAction9category5.avi": {
+          "category_id": 4
+        },
+        "GestureRecording_Id18actor4idAction18category9.avi": {
+          "category_id": 8
+        },
+        "GestureRecording_Id6actor6idAction6category3.avi": {
+          "category_id": 2
+        },
+        "GestureRecording_Id9actor10idAction9category4.avi": {
+          "category_id": 3
+        },
+        "GestureRecording_Id13actor9idAction13category6.avi": {
+          "category_id": 5
+        },
+        "GestureRecording_Id8actor6idAction8category4.avi": {
+          "category_id": 3
+        },
+        "GestureRecording_Id17actor3idAction17category8.avi": {
+          "category_id": 7
+        },
+        "GestureRecording_Id22actor10idAction22category9.avi": {
+          "category_id": 8
+        },
+        "GestureRecording_Id4actor7idAction4category2.avi": {
+          "category_id": 1
+        },
+        "GestureRecording_Id5actor3idAction5category2.avi": {
+          "category_id": 1
+        },
+        "GestureRecording_Id17actor7idAction17category8.avi": {
+          "category_id": 7
+        },
+        "GestureRecording_Id4actor8idAction4category2.avi": {
+          "category_id": 1
+        },
+        "GestureRecording_Id17actor9idAction17category8.avi": {
+          "category_id": 7
+        },
+        "GestureRecording_Id17actor1idAction17category5.avi": {
+          "category_id": 4
+        },
+        "GestureRecording_Id5actor6idAction5category2.avi": {
+          "category_id": 1
+        },
+        "GestureRecording_Id11actor6idAction11category5.avi": {
+          "category_id": 4
+        },
+        "GestureRecording_Id2actor7idAction2category1.avi": {
+          "category_id": 0
+        },
+        "GestureRecording_Id3actor3idAction3category1.avi": {
+          "category_id": 0
+        },
+        "GestureRecording_Id18actor10idAction18category8.avi": {
+          "category_id": 7
+        },
+        "GestureRecording_Id10actor2idAction10category5.avi": {
+          "category_id": 4
+        },
+        "GestureRecording_Id13actor2idAction13category7.avi": {
+          "category_id": 6
+        },
+        "GestureRecording_Id13actor8idAction13category5.avi": {
+          "category_id": 4
+        },
+        "GestureRecording_Id9actor5idAction9category4.avi": {
+          "category_id": 3
+        },
+        "GestureRecording_Id5actor10idAction5category3.avi": {
+          "category_id": 2
+        },
+        "GestureRecording_Id5actor7idAction5category3.avi": {
+          "category_id": 2
+        },
+        "GestureRecording_Id1actor3idAction1category1.avi": {
+          "category_id": 0
+        },
+        "GestureRecording_Id7actor3idAction7category3.avi": {
+          "category_id": 2
+        },
+        "GestureRecording_Id6actor2idAction6category3.avi": {
+          "category_id": 2
+        },
+        "GestureRecording_Id9actor4idAction9category4.avi": {
+          "category_id": 3
+        },
+        "GestureRecording_Id2actor4idAction2category1.avi": {
+          "category_id": 0
+        },
+        "GestureRecording_Id8actor8idAction8category4.avi": {
+          "category_id": 3
+        },
+        "GestureRecording_Id5actor8idAction5category3.avi": {
+          "category_id": 2
+        },
+        "GestureRecording_Id21actor6idAction21category9.avi": {
+          "category_id": 8
+        },
+        "GestureRecording_Id12actor8idAction12category5.avi": {
+          "category_id": 4
+        },
+        "GestureRecording_Id14actor2idAction14category7.avi": {
+          "category_id": 6
+        },
+        "GestureRecording_Id17actor2idAction17category9.avi": {
+          "category_id": 8
+        },
+        "GestureRecording_Id7actor6idAction7category3.avi": {
+          "category_id": 2
+        },
+        "GestureRecording_Id2actor1idAction2category1.avi": {
+          "category_id": 0
+        },
+        "GestureRecording_Id4actor5idAction4category2.avi": {
+          "category_id": 1
+        },
+        "GestureRecording_Id20actor9idAction20category9.avi": {
+          "category_id": 8
+        },
+        "GestureRecording_Id13actor10idAction13category5.avi": {
+          "category_id": 4
+        },
+        "GestureRecording_Id22actor1idAction22category8.avi": {
+          "category_id": 7
+        },
+        "GestureRecording_Id16actor8idAction16category6.avi": {
+          "category_id": 5
+        },
+        "GestureRecording_Id2actor8idAction2category1.avi": {
+          "category_id": 0
+        },
+        "GestureRecording_Id24actor1idAction24category8.avi": {
+          "category_id": 7
+        },
+        "GestureRecording_Id10actor4idAction10category5.avi": {
+          "category_id": 4
+        },
+        "GestureRecording_Id28actor1idAction28category9.avi": {
+          "category_id": 8
+        },
+        "GestureRecording_Id14actor9idAction14category6.avi": {
+          "category_id": 5
+        },
+        "GestureRecording_Id8actor7idAction8category4.avi": {
+          "category_id": 3
+        },
+        "GestureRecording_Id1actor2idAction1category1.avi": {
+          "category_id": 0
+        },
+        "GestureRecording_Id12actor2idAction12category6.avi": {
+          "category_id": 5
+        },
+        "GestureRecording_Id19actor4idAction19category9.avi": {
+          "category_id": 8
+        },
+        "GestureRecording_Id9actor6idAction9category4.avi": {
+          "category_id": 3
+        },
+        "GestureRecording_Id12actor10idAction12category5.avi": {
+          "category_id": 4
+        },
+        "GestureRecording_Id29actor1idAction29category9.avi": {
+          "category_id": 8
+        },
+        "GestureRecording_Id20actor1idAction20category7.avi": {
+          "category_id": 6
+        },
+        "GestureRecording_Id7actor1idAction7category3.avi": {
+          "category_id": 2
+        },
+        "GestureRecording_Id16actor4idAction16category8.avi": {
+          "category_id": 7
+        },
+        "GestureRecording_Id19actor5idAction19category9.avi": {
+          "category_id": 8
+        },
+        "GestureRecording_Id12actor9idAction12category5.avi": {
+          "category_id": 4
+        },
+        "GestureRecording_Id20actor3idAction20category9.avi": {
+          "category_id": 8
+        },
+        "GestureRecording_Id14actor3idAction14category7.avi": {
+          "category_id": 6
+        },
+        "GestureRecording_Id7actor5idAction7category3.avi": {
+          "category_id": 2
+        },
+        "GestureRecording_Id18actor9idAction18category8.avi": {
+          "category_id": 7
+        },
+        "GestureRecording_Id4actor1idAction4category2.avi": {
+          "category_id": 1
+        },
+        "GestureRecording_Id5actor5idAction5category3.avi": {
+          "category_id": 2
+        },
+        "GestureRecording_Id23actor1idAction23category8.avi": {
+          "category_id": 7
+        },
+        "GestureRecording_Id23actor8idAction23category9.avi": {
+          "category_id": 8
+        },
+        "GestureRecording_Id10actor7idAction10category5.avi": {
+          "category_id": 4
+        },
+        "GestureRecording_Id18actor6idAction18category8.avi": {
+          "category_id": 7
+        },
+        "GestureRecording_Id13actor4idAction13category6.avi": {
+          "category_id": 5
+        },
+        "GestureRecording_Id3actor5idAction3category2.avi": {
+          "category_id": 1
+        },
+        "GestureRecording_Id16actor7idAction16category8.avi": {
+          "category_id": 7
+        },
+        "GestureRecording_Id8actor9idAction8category4.avi": {
+          "category_id": 3
+        },
+        "GestureRecording_Id21actor10idAction21category9.avi": {
+          "category_id": 8
+        },
+        "GestureRecording_Id13actor3idAction13category6.avi": {
+          "category_id": 5
+        },
+        "GestureRecording_Id11actor3idAction11category5.avi": {
+          "category_id": 4
+        },
+        "GestureRecording_Id21actor1idAction21category7.avi": {
+          "category_id": 6
+        },
+        "GestureRecording_Id9actor9idAction9category4.avi": {
+          "category_id": 3
+        },
+        "GestureRecording_Id18actor5idAction18category9.avi": {
+          "category_id": 8
+        },
+        "GestureRecording_Id16actor10idAction16category7.avi": {
+          "category_id": 6
+        },
+        "GestureRecording_Id6actor5idAction6category3.avi": {
+          "category_id": 2
+        },
+        "GestureRecording_Id1actor4idAction1category1.avi": {
+          "category_id": 0
+        },
+        "GestureRecording_Id18actor3idAction18category8.avi": {
+          "category_id": 7
+        },
+        "GestureRecording_Id6actor3idAction6category3.avi": {
+          "category_id": 2
+        },
+        "GestureRecording_Id17actor8idAction17category7.avi": {
+          "category_id": 6
+        },
+        "GestureRecording_Id1actor8idAction1category1.avi": {
+          "category_id": 0
+        },
+        "GestureRecording_Id11actor9idAction11category5.avi": {
+          "category_id": 4
+        },
+        "GestureRecording_Id18actor2idAction18category9.avi": {
+          "category_id": 8
+        },
+        "GestureRecording_Id10actor3idAction10category5.avi": {
+          "category_id": 4
+        },
+        "GestureRecording_Id19actor1idAction19category6.avi": {
+          "category_id": 5
+        },
+        "GestureRecording_Id2actor5idAction2category1.avi": {
+          "category_id": 0
+        },
+        "GestureRecording_Id15actor7idAction15category7.avi": {
+          "category_id": 6
+        },
+        "GestureRecording_Id27actor1idAction27category9.avi": {
+          "category_id": 8
+        },
+        "GestureRecording_Id6actor9idAction6category3.avi": {
+          "category_id": 2
+        },
+        "GestureRecording_Id5actor9idAction5category3.avi": {
+          "category_id": 2
+        },
+        "GestureRecording_Id10actor8idAction10category4.avi": {
+          "category_id": 3
+        },
+        "GestureRecording_Id25actor1idAction25category8.avi": {
+          "category_id": 7
+        },
+        "GestureRecording_Id21actor3idAction21category9.avi": {
+          "category_id": 8
+        },
+        "GestureRecording_Id6actor8idAction6category3.avi": {
+          "category_id": 2
+        },
+        "GestureRecording_Id16actor9idAction16category7.avi": {
+          "category_id": 6
+        },
+        "GestureRecording_Id1actor1idAction1category1.avi": {
+          "category_id": 0
+        },
+        "GestureRecording_Id4actor3idAction4category2.avi": {
+          "category_id": 1
+        },
+        "GestureRecording_Id20actor5idAction20category9.avi": {
+          "category_id": 8
+        },
+        "GestureRecording_Id15actor9idAction15category7.avi": {
+          "category_id": 6
+        },
+        "GestureRecording_Id12actor1idAction12category4.avi": {
+          "category_id": 3
+        },
+        "GestureRecording_Id11actor4idAction11category5.avi": {
+          "category_id": 4
+        },
+        "GestureRecording_Id21actor8idAction21category9.avi": {
+          "category_id": 8
+        },
+        "GestureRecording_Id13actor7idAction13category6.avi": {
+          "category_id": 5
+        },
+        "GestureRecording_Id3actor6idAction3category1.avi": {
+          "category_id": 0
+        },
+        "GestureRecording_Id4actor4idAction4category2.avi": {
+          "category_id": 1
+        },
+        "GestureRecording_Id14actor7idAction14category7.avi": {
+          "category_id": 6
+        },
+        "GestureRecording_Id13actor1idAction13category4.avi": {
+          "category_id": 3
+        },
+        "GestureRecording_Id4actor10idAction4category2.avi": {
+          "category_id": 1
+        },
+        "GestureRecording_Id24actor8idAction24category9.avi": {
+          "category_id": 8
+        },
+        "GestureRecording_Id2actor6idAction2category1.avi": {
+          "category_id": 0
+        },
+        "GestureRecording_Id15actor10idAction15category6.avi": {
+          "category_id": 5
+        },
+        "GestureRecording_Id10actor1idAction10category4.avi": {
+          "category_id": 3
+        },
+        "GestureRecording_Id19actor3idAction19category9.avi": {
+          "category_id": 8
+        },
+        "GestureRecording_Id10actor6idAction10category5.avi": {
+          "category_id": 4
+        },
+        "GestureRecording_Id17actor5idAction17category8.avi": {
+          "category_id": 7
+        },
+        "GestureRecording_Id6actor7idAction6category3.avi": {
+          "category_id": 2
+        },
+        "GestureRecording_Id12actor7idAction12category6.avi": {
+          "category_id": 5
+        },
+        "GestureRecording_Id17actor6idAction17category8.avi": {
+          "category_id": 7
+        },
+        "GestureRecording_Id14actor4idAction14category7.avi": {
+          "category_id": 6
+        },
+        "GestureRecording_Id2actor2idAction2category1.avi": {
+          "category_id": 0
+        },
+        "GestureRecording_Id19actor6idAction19category9.avi": {
+          "category_id": 8
+        },
+        "GestureRecording_Id4actor6idAction4category2.avi": {
+          "category_id": 1
+        },
+        "GestureRecording_Id1actor6idAction1category1.avi": {
+          "category_id": 0
+        },
+        "GestureRecording_Id17actor10idAction17category7.avi": {
+          "category_id": 6
+        },
+        "GestureRecording_Id15actor5idAction15category7.avi": {
+          "category_id": 6
+        },
+        "GestureRecording_Id7actor9idAction7category4.avi": {
+          "category_id": 3
+        },
+        "GestureRecording_Id8actor5idAction8category4.avi": {
+          "category_id": 3
+        },
+        "GestureRecording_Id26actor1idAction26category9.avi": {
+          "category_id": 8
+        },
+        "GestureRecording_Id11actor5idAction11category5.avi": {
+          "category_id": 4
+        },
+        "GestureRecording_Id8actor4idAction8category4.avi": {
+          "category_id": 3
+        },
+        "GestureRecording_Id4actor9idAction4category2.avi": {
+          "category_id": 1
+        },
+        "GestureRecording_Id10actor10idAction10category4.avi": {
+          "category_id": 3
+        },
+        "GestureRecording_Id1actor7idAction1category1.avi": {
+          "category_id": 0
+        },
+        "GestureRecording_Id12actor6idAction12category5.avi": {
+          "category_id": 4
+        },
+        "GestureRecording_Id12actor4idAction12category6.avi": {
+          "category_id": 5
+        },
+        "GestureRecording_Id9actor3idAction9category4.avi": {
+          "category_id": 3
+        },
+        "GestureRecording_Id19actor10idAction19category8.avi": {
+          "category_id": 7
+        },
+        "GestureRecording_Id3actor2idAction3category2.avi": {
+          "category_id": 1
+        },
+        "GestureRecording_Id12actor3idAction12category6.avi": {
+          "category_id": 5
+        },
+        "GestureRecording_Id8actor10idAction8category4.avi": {
+          "category_id": 3
+        },
+        "GestureRecording_Id7actor10idAction7category4.avi": {
+          "category_id": 3
+        },
+        "GestureRecording_Id16actor5idAction16category8.avi": {
+          "category_id": 7
+        },
+        "GestureRecording_Id15actor8idAction15category6.avi": {
+          "category_id": 5
+        },
+        "GestureRecording_Id17actor4idAction17category8.avi": {
+          "category_id": 7
+        },
+        "GestureRecording_Id11actor2idAction11category6.avi": {
+          "category_id": 5
+        },
+        "GestureRecording_Id14actor1idAction14category5.avi": {
+          "category_id": 4
+        },
+        "GestureRecording_Id9actor8idAction9category4.avi": {
+          "category_id": 3
+        },
+        "GestureRecording_Id18actor8idAction18category7.avi": {
+          "category_id": 6
+        },
+        "GestureRecording_Id3actor7idAction3category2.avi": {
+          "category_id": 1
+        },
+        "GestureRecording_Id16actor3idAction16category8.avi": {
+          "category_id": 7
+        },
+        "GestureRecording_Id11actor1idAction11category4.avi": {
+          "category_id": 3
+        },
+        "GestureRecording_Id15actor1idAction15category5.avi": {
+          "category_id": 4
+        },
+        "GestureRecording_Id19actor7idAction19category9.avi": {
+          "category_id": 8
+        },
+        "GestureRecording_Id1actor5idAction1category1.avi": {
+          "category_id": 0
+        },
+        "GestureRecording_Id22actor6idAction22category9.avi": {
+          "category_id": 8
+        },
+        "GestureRecording_Id8actor2idAction8category4.avi": {
+          "category_id": 3
+        },
+        "GestureRecording_Id8actor3idAction8category4.avi": {
+          "category_id": 3
+        },
+        "GestureRecording_Id1actor9idAction1category1.avi": {
+          "category_id": 0
+        },
+        "GestureRecording_Id20actor10idAction20category9.avi": {
+          "category_id": 8
+        },
+        "GestureRecording_Id13actor5idAction13category6.avi": {
+          "category_id": 5
+        },
+        "GestureRecording_Id13actor6idAction13category6.avi": {
+          "category_id": 5
+        },
+        "G230_Master_cam_rosberry2_color_image_raw_steady3_636-680.mp4": {
+          "category_id": 6
+        },
+        "AnswerPhone_cam_rosberry2_color_image_raw_comingin_41-105.mp4": {
+          "category_id": 9
+        },
+        "Stationary_cam_rosberry4_color_image_raw_steady1_684-710.mp4": {
+          "category_id": 6
+        },
+        "Stationary_cam_rosberry3_color_image_raw_act_255-292.mp4": {
+          "category_id": 6
+        },
+        "TightLace_cam_rosberry2_color_image_raw_steady_365-400.mp4": {
+          "category_id": 6
+        },
+        "DrinkFromBottle_cam_rosberry1_color_image_raw_steady_300-356.mp4": {
+          "category_id": 6
+        },
+        "SitDownStandUp_cam_rosberry1_color_image_raw_act_259-298.mp4": {
+          "category_id": 5
+        },
+        "G230_Master_cam_rosberry3_color_image_raw_steady1_411-450.mp4": {
+          "category_id": 6
+        },
+        "G230_Master_cam_rosberry2_color_image_raw_start2_450-470.mp4": {
+          "category_id": 11
+        },
+        "Stationary_cam_rosberry1_color_image_raw_act_404-441.mp4": {
+          "category_id": 6
+        },
+        "Clapping_cam_rosberry2_color_image_raw_act_141-183.mp4": {
+          "category_id": 3
+        },
+        "Stationary_cam_rosberry3_color_image_raw_act_329-366.mp4": {
+          "category_id": 6
+        },
+        "TightLace_cam_rosberry1_color_image_raw_act_329-365.mp4": {
+          "category_id": 4
+        },
+        "WaveHand_cam_rosberry3_color_image_raw_act1_444-484.mp4": {
+          "category_id": 0
+        },
+        "TightLace_cam_rosberry2_color_image_raw_act_184-220.mp4": {
+          "category_id": 4
+        },
+        "G230_Master_cam_rosberry3_color_image_raw_act3_580-614.mp4": {
+          "category_id": 11
+        },
+        "ReadWatch_cam_rosberry1_color_image_raw_start1_305-320.mp4": {
+          "category_id": 7
+        },
+        "Bow_cam_rosberry3_color_image_raw_goingout_365-420.mp4": {
+          "category_id": 10
+        },
+        "Bow_cam_rosberry2_color_image_raw_start1_280-287.mp4": {
+          "category_id": 8
+        },
+        "WaveHand_cam_rosberry4_color_image_raw_steady1_623-665.mp4": {
+          "category_id": 6
+        },
+        "AnswerPhone_cam_rosberry3_color_image_raw_goingout_510-569.mp4": {
+          "category_id": 10
+        },
+        "Stationary_cam_rosberry1_color_image_raw_act_255-292.mp4": {
+          "category_id": 6
+        },
+        "Bow_cam_rosberry3_color_image_raw_start1_280-287.mp4": {
+          "category_id": 8
+        },
+        "G230_Master_cam_rosberry4_color_image_raw_comingin_120-175.mp4": {
+          "category_id": 9
+        },
+        "ReadWatch_cam_rosberry2_color_image_raw_act1_320-367.mp4": {
+          "category_id": 7
+        },
+        "G230_Master_cam_rosberry1_color_image_raw_act3_580-614.mp4": {
+          "category_id": 11
+        },
+        "Clapping_cam_rosberry3_color_image_raw_act_99-141.mp4": {
+          "category_id": 3
+        },
+        "WaveHand_cam_rosberry2_color_image_raw_steady1_623-665.mp4": {
+          "category_id": 6
+        },
+        "WaveHand_cam_rosberry2_color_image_raw_act1_524-564.mp4": {
+          "category_id": 0
+        },
+        "AnswerPhone_cam_rosberry1_color_image_raw_comingin_41-105.mp4": {
+          "category_id": 9
+        },
+        "Stationary_cam_rosberry3_color_image_raw_start1_441-460.mp4": {
+          "category_id": 6
+        },
+        "WaveHand_cam_rosberry3_color_image_raw_act1_524-564.mp4": {
+          "category_id": 0
+        },
+        "G230_Master_cam_rosberry3_color_image_raw_goingout_680-745.mp4": {
+          "category_id": 10
+        },
+        "TightLace_cam_rosberry4_color_image_raw_act_329-365.mp4": {
+          "category_id": 4
+        },
+        "Bow_cam_rosberry3_color_image_raw_comingin_72-144.mp4": {
+          "category_id": 9
+        },
+        "DrinkFromBottle_cam_rosberry1_color_image_raw_goingout_605-653.mp4": {
+          "category_id": 10
+        },
+        "ReadWatch_cam_rosberry2_color_image_raw_act_180-236.mp4": {
+          "category_id": 7
+        },
+        "WaveHand_cam_rosberry1_color_image_raw_start1_370-404.mp4": {
+          "category_id": 0
+        },
+        "G230_Master_cam_rosberry2_color_image_raw_act1_330-386.mp4": {
+          "category_id": 11
+        },
+        "WaveHand_cam_rosberry2_color_image_raw_goingout_665-714.mp4": {
+          "category_id": 10
+        },
+        "Stationary_cam_rosberry3_color_image_raw_act_218-255.mp4": {
+          "category_id": 6
+        },
+        "Stationary_cam_rosberry3_color_image_raw_act_366-404.mp4": {
+          "category_id": 6
+        },
+        "WaveHand_cam_rosberry1_color_image_raw_act1_484-524.mp4": {
+          "category_id": 0
+        },
+        "Stationary_cam_rosberry4_color_image_raw_comingin_79-139.mp4": {
+          "category_id": 9
+        },
+        "TightLace_cam_rosberry2_color_image_raw_goingout_400-444.mp4": {
+          "category_id": 10
+        },
+        "TightLace_cam_rosberry4_color_image_raw_act_256-293.mp4": {
+          "category_id": 4
+        },
+        "G230_Master_cam_rosberry3_color_image_raw_steady_298-314.mp4": {
+          "category_id": 6
+        },
+        "G230_Master_cam_rosberry2_color_image_raw_act2_470-517.mp4": {
+          "category_id": 11
+        },
+        "AnswerPhone_cam_rosberry1_color_image_raw_act1_379-431.mp4": {
+          "category_id": 2
+        },
+        "SitDownStandUp_cam_rosberry2_color_image_raw_transition1_336-364.mp4": {
+          "category_id": 6
+        },
+        "ReadWatch_cam_rosberry1_color_image_raw_steady1_375-417.mp4": {
+          "category_id": 6
+        },
+        "DrinkFromBottle_cam_rosberry4_color_image_raw_act1_392-440.mp4": {
+          "category_id": 1
+        },
+        "DrinkFromBottle_cam_rosberry4_color_image_raw_start1_356-392.mp4": {
+          "category_id": 1
+        },
+        "Clapping_cam_rosberry3_color_image_raw_comingin_27-90.mp4": {
+          "category_id": 9
+        },
+        "Stationary_cam_rosberry4_color_image_raw_act_292-329.mp4": {
+          "category_id": 6
+        },
+        "SitDownStandUp_cam_rosberry4_color_image_raw_act_298-336.mp4": {
+          "category_id": 5
+        },
+        "G230_Master_cam_rosberry3_color_image_raw_comingin_120-175.mp4": {
+          "category_id": 9
+        },
+        "ReadWatch_cam_rosberry3_color_image_raw_steady1_375-417.mp4": {
+          "category_id": 6
+        },
+        "AnswerPhone_cam_rosberry4_color_image_raw_act_190-230.mp4": {
+          "category_id": 2
+        },
+        "ReadWatch_cam_rosberry4_color_image_raw_start1_305-320.mp4": {
+          "category_id": 7
+        },
+        "G230_Master_cam_rosberry4_color_image_raw_act_220-275.mp4": {
+          "category_id": 11
+        },
+        "WaveHand_cam_rosberry4_color_image_raw_act_178-225.mp4": {
+          "category_id": 0
+        },
+        "Bow_cam_rosberry4_color_image_raw_act1_287-331.mp4": {
+          "category_id": 8
+        },
+        "Bow_cam_rosberry4_color_image_raw_steady_263-280.mp4": {
+          "category_id": 6
+        },
+        "AnswerPhone_cam_rosberry2_color_image_raw_goingout_510-569.mp4": {
+          "category_id": 10
+        },
+        "Stationary_cam_rosberry1_color_image_raw_act1_582-623.mp4": {
+          "category_id": 6
+        },
+        "TightLace_cam_rosberry4_color_image_raw_steady_365-400.mp4": {
+          "category_id": 6
+        },
+        "TightLace_cam_rosberry1_color_image_raw_act_220-256.mp4": {
+          "category_id": 4
+        },
+        "WaveHand_cam_rosberry3_color_image_raw_act1_484-524.mp4": {
+          "category_id": 0
+        },
+        "DrinkFromBottle_cam_rosberry4_color_image_raw_start_205-214.mp4": {
+          "category_id": 1
+        },
+        "AnswerPhone_cam_rosberry1_color_image_raw_goingout_510-569.mp4": {
+          "category_id": 10
+        },
+        "WaveHand_cam_rosberry3_color_image_raw_act_225-272.mp4": {
+          "category_id": 0
+        },
+        "Stationary_cam_rosberry3_color_image_raw_comingin_79-139.mp4": {
+          "category_id": 9
+        },
+        "DrinkFromBottle_cam_rosberry3_color_image_raw_act1_392-440.mp4": {
+          "category_id": 1
+        },
+        "ReadWatch_cam_rosberry2_color_image_raw_start_167-180.mp4": {
+          "category_id": 7
+        },
+        "DrinkFromBottle_cam_rosberry1_color_image_raw_act_214-287.mp4": {
+          "category_id": 1
+        },
+        "SitDownStandUp_cam_rosberry3_color_image_raw_act_259-298.mp4": {
+          "category_id": 5
+        },
+        "Stationary_cam_rosberry4_color_image_raw_goingout_710-764.mp4": {
+          "category_id": 10
+        },
+        "WaveHand_cam_rosberry1_color_image_raw_steady1_623-665.mp4": {
+          "category_id": 6
+        },
+        "Bow_cam_rosberry4_color_image_raw_goingout_365-420.mp4": {
+          "category_id": 10
+        },
+        "TightLace_cam_rosberry2_color_image_raw_start_135-184.mp4": {
+          "category_id": 4
+        },
+        "Clapping_cam_rosberry1_color_image_raw_act_183-225.mp4": {
+          "category_id": 3
+        },
+        "DrinkFromBottle_cam_rosberry3_color_image_raw_steady_300-356.mp4": {
+          "category_id": 6
+        },
+        "ReadWatch_cam_rosberry1_color_image_raw_steady_252-305.mp4": {
+          "category_id": 6
+        },
+        "Stationary_cam_rosberry3_color_image_raw_act_180-218.mp4": {
+          "category_id": 6
+        },
+        "Bow_cam_rosberry2_color_image_raw_act1_287-331.mp4": {
+          "category_id": 8
+        },
+        "Stationary_cam_rosberry4_color_image_raw_act_143-180.mp4": {
+          "category_id": 6
+        },
+        "Bow_cam_rosberry4_color_image_raw_start1_280-287.mp4": {
+          "category_id": 8
+        },
+        "ReadWatch_cam_rosberry2_color_image_raw_start1_305-320.mp4": {
+          "category_id": 7
+        },
+        "Stationary_cam_rosberry1_color_image_raw_act_292-329.mp4": {
+          "category_id": 6
+        },
+        "WaveHand_cam_rosberry2_color_image_raw_steady_337-370.mp4": {
+          "category_id": 6
+        },
+        "ReadWatch_cam_rosberry1_color_image_raw_act_180-236.mp4": {
+          "category_id": 7
+        },
+        "SitDownStandUp_cam_rosberry2_color_image_raw_act_144-182.mp4": {
+          "category_id": 5
+        },
+        "SitDownStandUp_cam_rosberry1_color_image_raw_act_221-259.mp4": {
+          "category_id": 5
+        },
+        "SitDownStandUp_cam_rosberry3_color_image_raw_act_182-221.mp4": {
+          "category_id": 5
+        },
+        "G230_Master_cam_rosberry2_color_image_raw_steady2_541-558.mp4": {
+          "category_id": 6
+        },
+        "Clapping_cam_rosberry3_color_image_raw_steady1_278-298.mp4": {
+          "category_id": 6
+        },
+        "WaveHand_cam_rosberry2_color_image_raw_act_272-319.mp4": {
+          "category_id": 0
+        },
+        "ReadWatch_cam_rosberry4_color_image_raw_comingin_78-135.mp4": {
+          "category_id": 9
+        },
+        "G230_Master_cam_rosberry1_color_image_raw_steady1_411-450.mp4": {
+          "category_id": 6
+        },
+        "Clapping_cam_rosberry1_color_image_raw_act_99-141.mp4": {
+          "category_id": 3
+        },
+        "Stationary_cam_rosberry4_color_image_raw_act1_582-623.mp4": {
+          "category_id": 6
+        },
+        "Stationary_cam_rosberry2_color_image_raw_act_404-441.mp4": {
+          "category_id": 6
+        },
+        "Bow_cam_rosberry1_color_image_raw_steady_263-280.mp4": {
+          "category_id": 6
+        },
+        "Bow_cam_rosberry2_color_image_raw_comingin_72-144.mp4": {
+          "category_id": 9
+        },
+        "G230_Master_cam_rosberry3_color_image_raw_steady3_636-680.mp4": {
+          "category_id": 6
+        },
+        "Stationary_cam_rosberry2_color_image_raw_act_218-255.mp4": {
+          "category_id": 6
+        },
+        "Stationary_cam_rosberry1_color_image_raw_act1_623-664.mp4": {
+          "category_id": 6
+        },
+        "Stationary_cam_rosberry4_color_image_raw_start1_441-460.mp4": {
+          "category_id": 6
+        },
+        "SitDownStandUp_cam_rosberry4_color_image_raw_comingin_64-100.mp4": {
+          "category_id": 9
+        },
+        "TightLace_cam_rosberry3_color_image_raw_act_293-329.mp4": {
+          "category_id": 4
+        },
+        "WaveHand_cam_rosberry2_color_image_raw_act1_444-484.mp4": {
+          "category_id": 0
+        },
+        "Clapping_cam_rosberry2_color_image_raw_act_99-141.mp4": {
+          "category_id": 3
+        },
+        "G230_Master_cam_rosberry1_color_image_raw_steady3_636-680.mp4": {
+          "category_id": 6
+        },
+        "SitDownStandUp_cam_rosberry2_color_image_raw_act_298-336.mp4": {
+          "category_id": 5
+        },
+        "Stationary_cam_rosberry2_color_image_raw_act1_542-582.mp4": {
+          "category_id": 6
+        },
+        "Clapping_cam_rosberry4_color_image_raw_act_99-141.mp4": {
+          "category_id": 3
+        },
+        "G230_Master_cam_rosberry1_color_image_raw_comingin_120-175.mp4": {
+          "category_id": 9
+        },
+        "AnswerPhone_cam_rosberry2_color_image_raw_act_190-230.mp4": {
+          "category_id": 2
+        },
+        "WaveHand_cam_rosberry4_color_image_raw_act1_404-444.mp4": {
+          "category_id": 0
+        },
+        "Stationary_cam_rosberry4_color_image_raw_act1_460-501.mp4": {
+          "category_id": 6
+        },
+        "Bow_cam_rosberry4_color_image_raw_comingin_72-144.mp4": {
+          "category_id": 9
+        },
+        "Stationary_cam_rosberry4_color_image_raw_act1_623-664.mp4": {
+          "category_id": 6
+        },
+        "Bow_cam_rosberry3_color_image_raw_act_179-212.mp4": {
+          "category_id": 8
+        },
+        "AnswerPhone_cam_rosberry4_color_image_raw_steady_283-313.mp4": {
+          "category_id": 6
+        },
+        "TightLace_cam_rosberry2_color_image_raw_act_220-256.mp4": {
+          "category_id": 4
+        },
+        "TightLace_cam_rosberry3_color_image_raw_act_329-365.mp4": {
+          "category_id": 4
+        },
+        "ReadWatch_cam_rosberry3_color_image_raw_goingout_417-454.mp4": {
+          "category_id": 10
+        },
+        "G230_Master_cam_rosberry4_color_image_raw_steady_298-314.mp4": {
+          "category_id": 6
+        },
+        "ReadWatch_cam_rosberry3_color_image_raw_act1_320-367.mp4": {
+          "category_id": 7
+        },
+        "Bow_cam_rosberry1_color_image_raw_goingout_365-420.mp4": {
+          "category_id": 10
+        },
+        "G230_Master_cam_rosberry4_color_image_raw_start2_450-470.mp4": {
+          "category_id": 11
+        },
+        "DrinkFromBottle_cam_rosberry2_color_image_raw_start_205-214.mp4": {
+          "category_id": 1
+        },
+        "ReadWatch_cam_rosberry1_color_image_raw_act1_320-367.mp4": {
+          "category_id": 7
+        },
+        "WaveHand_cam_rosberry4_color_image_raw_act1_524-564.mp4": {
+          "category_id": 0
+        },
+        "DrinkFromBottle_cam_rosberry2_color_image_raw_steady1_590-605.mp4": {
+          "category_id": 6
+        },
+        "Stationary_cam_rosberry1_color_image_raw_act1_460-501.mp4": {
+          "category_id": 6
+        },
+        "AnswerPhone_cam_rosberry2_color_image_raw_steady1_493-510.mp4": {
+          "category_id": 6
+        },
+        "Clapping_cam_rosberry2_color_image_raw_act_183-225.mp4": {
+          "category_id": 3
+        },
+        "TightLace_cam_rosberry3_color_image_raw_act_256-293.mp4": {
+          "category_id": 4
+        },
+        "G230_Master_cam_rosberry2_color_image_raw_start_200-220.mp4": {
+          "category_id": 11
+        },
+        "AnswerPhone_cam_rosberry2_color_image_raw_act_230-270.mp4": {
+          "category_id": 2
+        },
+        "WaveHand_cam_rosberry4_color_image_raw_goingout_665-714.mp4": {
+          "category_id": 10
+        },
+        "TightLace_cam_rosberry4_color_image_raw_comingin_93-133.mp4": {
+          "category_id": 9
+        },
+        "Stationary_cam_rosberry1_color_image_raw_act_180-218.mp4": {
+          "category_id": 6
+        },
+        "AnswerPhone_cam_rosberry2_color_image_raw_start_118-150.mp4": {
+          "category_id": 2
+        },
+        "SitDownStandUp_cam_rosberry1_color_image_raw_act_182-221.mp4": {
+          "category_id": 5
+        },
+        "G230_Master_cam_rosberry2_color_image_raw_act_220-275.mp4": {
+          "category_id": 11
+        },
+        "Stationary_cam_rosberry4_color_image_raw_act1_501-542.mp4": {
+          "category_id": 6
+        },
+        "Stationary_cam_rosberry3_color_image_raw_act1_501-542.mp4": {
+          "category_id": 6
+        },
+        "SitDownStandUp_cam_rosberry4_color_image_raw_act_259-298.mp4": {
+          "category_id": 5
+        },
+        "SitDownStandUp_cam_rosberry3_color_image_raw_act_144-182.mp4": {
+          "category_id": 5
+        },
+        "DrinkFromBottle_cam_rosberry2_color_image_raw_start1_356-392.mp4": {
+          "category_id": 1
+        },
+        "DrinkFromBottle_cam_rosberry1_color_image_raw_act1_440-487.mp4": {
+          "category_id": 1
+        },
+        "ReadWatch_cam_rosberry2_color_image_raw_comingin_78-135.mp4": {
+          "category_id": 9
+        },
+        "WaveHand_cam_rosberry4_color_image_raw_start_160-178.mp4": {
+          "category_id": 0
+        },
+        "Bow_cam_rosberry2_color_image_raw_steady_263-280.mp4": {
+          "category_id": 6
+        },
+        "Bow_cam_rosberry1_color_image_raw_comingin_72-144.mp4": {
+          "category_id": 9
+        },
+        "Stationary_cam_rosberry3_color_image_raw_act1_460-501.mp4": {
+          "category_id": 6
+        },
+        "Stationary_cam_rosberry4_color_image_raw_act_255-292.mp4": {
+          "category_id": 6
+        },
+        "WaveHand_cam_rosberry1_color_image_raw_act_272-319.mp4": {
+          "category_id": 0
+        },
+        "Stationary_cam_rosberry3_color_image_raw_act_143-180.mp4": {
+          "category_id": 6
+        },
+        "TightLace_cam_rosberry2_color_image_raw_act_256-293.mp4": {
+          "category_id": 4
+        },
+        "G230_Master_cam_rosberry2_color_image_raw_comingin_120-175.mp4": {
+          "category_id": 9
+        },
+        "Stationary_cam_rosberry1_color_image_raw_act_366-404.mp4": {
+          "category_id": 6
+        },
+        "SitDownStandUp_cam_rosberry2_color_image_raw_act_259-298.mp4": {
+          "category_id": 5
+        },
+        "Clapping_cam_rosberry3_color_image_raw_act_183-225.mp4": {
+          "category_id": 3
+        },
+        "Stationary_cam_rosberry1_color_image_raw_act1_542-582.mp4": {
+          "category_id": 6
+        },
+        "TightLace_cam_rosberry4_color_image_raw_act_184-220.mp4": {
+          "category_id": 4
+        },
+        "WaveHand_cam_rosberry1_color_image_raw_act1_444-484.mp4": {
+          "category_id": 0
+        },
+        "Stationary_cam_rosberry1_color_image_raw_steady1_684-710.mp4": {
+          "category_id": 6
+        },
+        "WaveHand_cam_rosberry1_color_image_raw_act1_404-444.mp4": {
+          "category_id": 0
+        },
+        "AnswerPhone_cam_rosberry3_color_image_raw_act_150-190.mp4": {
+          "category_id": 2
+        },
+        "Bow_cam_rosberry3_color_image_raw_start_156-179.mp4": {
+          "category_id": 8
+        },
+        "SitDownStandUp_cam_rosberry1_color_image_raw_transition1_336-364.mp4": {
+          "category_id": 6
+        },
+        "Stationary_cam_rosberry2_color_image_raw_act_255-292.mp4": {
+          "category_id": 6
+        },
+        "G230_Master_cam_rosberry1_color_image_raw_steady_298-314.mp4": {
+          "category_id": 6
+        },
+        "Stationary_cam_rosberry3_color_image_raw_goingout_710-764.mp4": {
+          "category_id": 10
+        },
+        "AnswerPhone_cam_rosberry2_color_image_raw_steady_283-313.mp4": {
+          "category_id": 6
+        },
+        "ReadWatch_cam_rosberry3_color_image_raw_start_167-180.mp4": {
+          "category_id": 7
+        },
+        "WaveHand_cam_rosberry2_color_image_raw_act_178-225.mp4": {
+          "category_id": 0
+        },
+        "SitDownStandUp_cam_rosberry1_color_image_raw_act_298-336.mp4": {
+          "category_id": 5
+        },
+        "Stationary_cam_rosberry4_color_image_raw_act_329-366.mp4": {
+          "category_id": 6
+        },
+        "G230_Master_cam_rosberry2_color_image_raw_start3_558-580.mp4": {
+          "category_id": 11
+        },
+        "AnswerPhone_cam_rosberry3_color_image_raw_comingin_41-105.mp4": {
+          "category_id": 9
+        },
+        "G230_Master_cam_rosberry1_color_image_raw_steady2_541-558.mp4": {
+          "category_id": 6
+        },
+        "Stationary_cam_rosberry2_color_image_raw_steady1_684-710.mp4": {
+          "category_id": 6
+        },
+        "G230_Master_cam_rosberry3_color_image_raw_steady2_541-558.mp4": {
+          "category_id": 6
+        },
+        "SitDownStandUp_cam_rosberry3_color_image_raw_act_221-259.mp4": {
+          "category_id": 5
+        },
+        "WaveHand_cam_rosberry3_color_image_raw_steady1_623-665.mp4": {
+          "category_id": 6
+        },
+        "DrinkFromBottle_cam_rosberry4_color_image_raw_goingout_605-653.mp4": {
+          "category_id": 10
+        },
+        "Stationary_cam_rosberry3_color_image_raw_act1_542-582.mp4": {
+          "category_id": 6
+        },
+        "DrinkFromBottle_cam_rosberry1_color_image_raw_comingin_65-110.mp4": {
+          "category_id": 9
+        },
+        "WaveHand_cam_rosberry4_color_image_raw_act_225-272.mp4": {
+          "category_id": 0
+        },
+        "G230_Master_cam_rosberry3_color_image_raw_act2_470-517.mp4": {
+          "category_id": 11
+        },
+        "TightLace_cam_rosberry2_color_image_raw_comingin_93-133.mp4": {
+          "category_id": 9
+        },
+        "Stationary_cam_rosberry3_color_image_raw_act1_582-623.mp4": {
+          "category_id": 6
+        },
+        "AnswerPhone_cam_rosberry1_color_image_raw_act_150-190.mp4": {
+          "category_id": 2
+        },
+        "SitDownStandUp_cam_rosberry4_color_image_raw_act_221-259.mp4": {
+          "category_id": 5
+        },
+        "WaveHand_cam_rosberry1_color_image_raw_act_178-225.mp4": {
+          "category_id": 0
+        },
+        "TightLace_cam_rosberry2_color_image_raw_act_329-365.mp4": {
+          "category_id": 4
+        },
+        "Bow_cam_rosberry1_color_image_raw_act1_287-331.mp4": {
+          "category_id": 8
+        },
+        "SitDownStandUp_cam_rosberry3_color_image_raw_act_298-336.mp4": {
+          "category_id": 5
+        },
+        "Stationary_cam_rosberry4_color_image_raw_act1_542-582.mp4": {
+          "category_id": 6
+        },
+        "AnswerPhone_cam_rosberry4_color_image_raw_steady1_493-510.mp4": {
+          "category_id": 6
+        },
+        "G230_Master_cam_rosberry4_color_image_raw_steady2_541-558.mp4": {
+          "category_id": 6
+        },
+        "Clapping_cam_rosberry1_color_image_raw_act_141-183.mp4": {
+          "category_id": 3
+        },
+        "WaveHand_cam_rosberry3_color_image_raw_start1_370-404.mp4": {
+          "category_id": 0
+        },
+        "AnswerPhone_cam_rosberry2_color_image_raw_act1_327-379.mp4": {
+          "category_id": 2
+        },
+        "DrinkFromBottle_cam_rosberry3_color_image_raw_start_205-214.mp4": {
+          "category_id": 1
+        },
+        "DrinkFromBottle_cam_rosberry3_color_image_raw_start1_356-392.mp4": {
+          "category_id": 1
+        },
+        "Clapping_cam_rosberry4_color_image_raw_act_183-225.mp4": {
+          "category_id": 3
+        },
+        "Bow_cam_rosberry2_color_image_raw_act_179-212.mp4": {
+          "category_id": 8
+        },
+        "Stationary_cam_rosberry4_color_image_raw_act_404-441.mp4": {
+          "category_id": 6
+        },
+        "AnswerPhone_cam_rosberry3_color_image_raw_act_230-270.mp4": {
+          "category_id": 2
+        },
+        "G230_Master_cam_rosberry3_color_image_raw_start2_450-470.mp4": {
+          "category_id": 11
+        },
+        "TightLace_cam_rosberry3_color_image_raw_comingin_93-133.mp4": {
+          "category_id": 9
+        },
+        "DrinkFromBottle_cam_rosberry2_color_image_raw_goingout_605-653.mp4": {
+          "category_id": 10
+        },
+        "G230_Master_cam_rosberry4_color_image_raw_start3_558-580.mp4": {
+          "category_id": 11
+        },
+        "DrinkFromBottle_cam_rosberry4_color_image_raw_steady1_590-605.mp4": {
+          "category_id": 6
+        },
+        "DrinkFromBottle_cam_rosberry2_color_image_raw_act_214-287.mp4": {
+          "category_id": 1
+        },
+        "Clapping_cam_rosberry4_color_image_raw_comingin_27-90.mp4": {
+          "category_id": 9
+        },
+        "AnswerPhone_cam_rosberry3_color_image_raw_steady1_493-510.mp4": {
+          "category_id": 6
+        },
+        "AnswerPhone_cam_rosberry2_color_image_raw_act1_379-431.mp4": {
+          "category_id": 2
+        },
+        "ReadWatch_cam_rosberry4_color_image_raw_act1_320-367.mp4": {
+          "category_id": 7
+        },
+        "DrinkFromBottle_cam_rosberry3_color_image_raw_act1_440-487.mp4": {
+          "category_id": 1
+        },
+        "G230_Master_cam_rosberry4_color_image_raw_start1_314-330.mp4": {
+          "category_id": 11
+        },
+        "WaveHand_cam_rosberry1_color_image_raw_act_225-272.mp4": {
+          "category_id": 0
+        },
+        "DrinkFromBottle_cam_rosberry3_color_image_raw_steady1_590-605.mp4": {
+          "category_id": 6
+        },
+        "G230_Master_cam_rosberry2_color_image_raw_start1_314-330.mp4": {
+          "category_id": 11
+        },
+        "WaveHand_cam_rosberry3_color_image_raw_start_160-178.mp4": {
+          "category_id": 0
+        },
+        "AnswerPhone_cam_rosberry4_color_image_raw_act1_379-431.mp4": {
+          "category_id": 2
+        },
+        "G230_Master_cam_rosberry2_color_image_raw_steady_298-314.mp4": {
+          "category_id": 6
+        },
+        "TightLace_cam_rosberry1_color_image_raw_comingin_93-133.mp4": {
+          "category_id": 9
+        },
+        "Clapping_cam_rosberry3_color_image_raw_act_141-183.mp4": {
+          "category_id": 3
+        },
+        "ReadWatch_cam_rosberry3_color_image_raw_start1_305-320.mp4": {
+          "category_id": 7
+        },
+        "DrinkFromBottle_cam_rosberry2_color_image_raw_comingin_65-110.mp4": {
+          "category_id": 9
+        },
+        "AnswerPhone_cam_rosberry4_color_image_raw_act_150-190.mp4": {
+          "category_id": 2
+        },
+        "AnswerPhone_cam_rosberry3_color_image_raw_start_118-150.mp4": {
+          "category_id": 2
+        },
+        "Bow_cam_rosberry2_color_image_raw_goingout_365-420.mp4": {
+          "category_id": 10
+        },
+        "TightLace_cam_rosberry4_color_image_raw_start_135-184.mp4": {
+          "category_id": 4
+        },
+        "G230_Master_cam_rosberry3_color_image_raw_start3_558-580.mp4": {
+          "category_id": 11
+        },
+        "G230_Master_cam_rosberry1_color_image_raw_act_220-275.mp4": {
+          "category_id": 11
+        },
+        "Clapping_cam_rosberry2_color_image_raw_steady1_278-298.mp4": {
+          "category_id": 6
+        },
+        "TightLace_cam_rosberry1_color_image_raw_goingout_400-444.mp4": {
+          "category_id": 10
+        },
+        "ReadWatch_cam_rosberry3_color_image_raw_steady_252-305.mp4": {
+          "category_id": 6
+        },
+        "WaveHand_cam_rosberry3_color_image_raw_act1_564-604.mp4": {
+          "category_id": 0
+        },
+        "Stationary_cam_rosberry2_color_image_raw_act1_623-664.mp4": {
+          "category_id": 6
+        },
+        "SitDownStandUp_cam_rosberry2_color_image_raw_goingout_364-397.mp4": {
+          "category_id": 10
+        },
+        "AnswerPhone_cam_rosberry3_color_image_raw_steady_283-313.mp4": {
+          "category_id": 6
+        },
+        "G230_Master_cam_rosberry1_color_image_raw_start1_314-330.mp4": {
+          "category_id": 11
+        },
+        "TightLace_cam_rosberry3_color_image_raw_steady_365-400.mp4": {
+          "category_id": 6
+        },
+        "G230_Master_cam_rosberry3_color_image_raw_start1_314-330.mp4": {
+          "category_id": 11
+        },
+        "G230_Master_cam_rosberry1_color_image_raw_act1_330-386.mp4": {
+          "category_id": 11
+        },
+        "Bow_cam_rosberry2_color_image_raw_start_156-179.mp4": {
+          "category_id": 8
+        },
+        "G230_Master_cam_rosberry2_color_image_raw_goingout_680-745.mp4": {
+          "category_id": 10
+        },
+        "ReadWatch_cam_rosberry4_color_image_raw_start_167-180.mp4": {
+          "category_id": 7
+        },
+        "WaveHand_cam_rosberry1_color_image_raw_goingout_665-714.mp4": {
+          "category_id": 10
+        },
+        "SitDownStandUp_cam_rosberry3_color_image_raw_goingout_364-397.mp4": {
+          "category_id": 10
+        },
+        "DrinkFromBottle_cam_rosberry4_color_image_raw_act_214-287.mp4": {
+          "category_id": 1
+        },
+        "DrinkFromBottle_cam_rosberry3_color_image_raw_comingin_65-110.mp4": {
+          "category_id": 9
+        },
+        "SitDownStandUp_cam_rosberry2_color_image_raw_act_182-221.mp4": {
+          "category_id": 5
+        },
+        "DrinkFromBottle_cam_rosberry1_color_image_raw_act1_392-440.mp4": {
+          "category_id": 1
+        },
+        "DrinkFromBottle_cam_rosberry2_color_image_raw_steady_300-356.mp4": {
+          "category_id": 6
+        },
+        "WaveHand_cam_rosberry1_color_image_raw_steady_337-370.mp4": {
+          "category_id": 6
+        },
+        "Stationary_cam_rosberry2_color_image_raw_act_329-366.mp4": {
+          "category_id": 6
+        },
+        "ReadWatch_cam_rosberry3_color_image_raw_comingin_78-135.mp4": {
+          "category_id": 9
+        },
+        "AnswerPhone_cam_rosberry4_color_image_raw_start_118-150.mp4": {
+          "category_id": 2
+        },
+        "ReadWatch_cam_rosberry4_color_image_raw_goingout_417-454.mp4": {
+          "category_id": 10
+        },
+        "WaveHand_cam_rosberry1_color_image_raw_act1_564-604.mp4": {
+          "category_id": 0
+        },
+        "Stationary_cam_rosberry2_color_image_raw_act1_582-623.mp4": {
+          "category_id": 6
+        },
+        "AnswerPhone_cam_rosberry1_color_image_raw_start_118-150.mp4": {
+          "category_id": 2
+        },
+        "ReadWatch_cam_rosberry1_color_image_raw_goingout_417-454.mp4": {
+          "category_id": 10
+        },
+        "SitDownStandUp_cam_rosberry3_color_image_raw_transition1_336-364.mp4": {
+          "category_id": 6
+        },
+        "AnswerPhone_cam_rosberry3_color_image_raw_start1_313-327.mp4": {
+          "category_id": 2
+        },
+        "ReadWatch_cam_rosberry2_color_image_raw_goingout_417-454.mp4": {
+          "category_id": 10
+        },
+        "AnswerPhone_cam_rosberry1_color_image_raw_act_190-230.mp4": {
+          "category_id": 2
+        },
+        "AnswerPhone_cam_rosberry2_color_image_raw_act_150-190.mp4": {
+          "category_id": 2
+        },
+        "ReadWatch_cam_rosberry4_color_image_raw_steady1_375-417.mp4": {
+          "category_id": 6
+        },
+        "DrinkFromBottle_cam_rosberry2_color_image_raw_act1_440-487.mp4": {
+          "category_id": 1
+        },
+        "G230_Master_cam_rosberry1_color_image_raw_start_200-220.mp4": {
+          "category_id": 11
+        },
+        "WaveHand_cam_rosberry4_color_image_raw_steady_337-370.mp4": {
+          "category_id": 6
+        },
+        "TightLace_cam_rosberry3_color_image_raw_start_135-184.mp4": {
+          "category_id": 4
+        },
+        "Stationary_cam_rosberry1_color_image_raw_start1_441-460.mp4": {
+          "category_id": 6
+        },
+        "Clapping_cam_rosberry1_color_image_raw_comingin_27-90.mp4": {
+          "category_id": 9
+        },
+        "AnswerPhone_cam_rosberry1_color_image_raw_act_230-270.mp4": {
+          "category_id": 2
+        },
+        "Bow_cam_rosberry1_color_image_raw_start1_280-287.mp4": {
+          "category_id": 8
+        },
+        "SitDownStandUp_cam_rosberry2_color_image_raw_act_221-259.mp4": {
+          "category_id": 5
+        },
+        "SitDownStandUp_cam_rosberry4_color_image_raw_transition1_336-364.mp4": {
+          "category_id": 6
+        },
+        "G230_Master_cam_rosberry3_color_image_raw_act_220-275.mp4": {
+          "category_id": 11
+        },
+        "G230_Master_cam_rosberry1_color_image_raw_start2_450-470.mp4": {
+          "category_id": 11
+        },
+        "DrinkFromBottle_cam_rosberry2_color_image_raw_act1_392-440.mp4": {
+          "category_id": 1
+        },
+        "DrinkFromBottle_cam_rosberry4_color_image_raw_steady_300-356.mp4": {
+          "category_id": 6
+        },
+        "TightLace_cam_rosberry1_color_image_raw_act_293-329.mp4": {
+          "category_id": 4
+        },
+        "Bow_cam_rosberry1_color_image_raw_act_179-212.mp4": {
+          "category_id": 8
+        },
+        "G230_Master_cam_rosberry4_color_image_raw_goingout_680-745.mp4": {
+          "category_id": 10
+        },
+        "Bow_cam_rosberry3_color_image_raw_steady_263-280.mp4": {
+          "category_id": 6
+        },
+        "Clapping_cam_rosberry3_color_image_raw_act_225-267.mp4": {
+          "category_id": 3
+        },
+        "Stationary_cam_rosberry2_color_image_raw_act1_501-542.mp4": {
+          "category_id": 6
+        },
+        "Bow_cam_rosberry3_color_image_raw_act1_287-331.mp4": {
+          "category_id": 8
+        },
+        "TightLace_cam_rosberry4_color_image_raw_act_220-256.mp4": {
+          "category_id": 4
+        },
+        "TightLace_cam_rosberry3_color_image_raw_act_184-220.mp4": {
+          "category_id": 4
+        },
+        "Stationary_cam_rosberry1_color_image_raw_act1_501-542.mp4": {
+          "category_id": 6
+        },
+        "AnswerPhone_cam_rosberry1_color_image_raw_steady1_493-510.mp4": {
+          "category_id": 6
+        },
+        "WaveHand_cam_rosberry3_color_image_raw_act_178-225.mp4": {
+          "category_id": 0
+        },
+        "G230_Master_cam_rosberry4_color_image_raw_steady3_636-680.mp4": {
+          "category_id": 6
+        },
+        "WaveHand_cam_rosberry3_color_image_raw_comingin_78-130.mp4": {
+          "category_id": 9
+        },
+        "G230_Master_cam_rosberry1_color_image_raw_act2_470-517.mp4": {
+          "category_id": 11
+        },
+        "SitDownStandUp_cam_rosberry1_color_image_raw_act_144-182.mp4": {
+          "category_id": 5
+        },
+        "AnswerPhone_cam_rosberry4_color_image_raw_start1_313-327.mp4": {
+          "category_id": 2
+        },
+        "ReadWatch_cam_rosberry2_color_image_raw_steady1_375-417.mp4": {
+          "category_id": 6
+        },
+        "DrinkFromBottle_cam_rosberry4_color_image_raw_act1_440-487.mp4": {
+          "category_id": 1
+        },
+        "Clapping_cam_rosberry3_color_image_raw_goingout_298-341.mp4": {
+          "category_id": 10
+        },
+        "ReadWatch_cam_rosberry4_color_image_raw_act_180-236.mp4": {
+          "category_id": 7
+        },
+        "G230_Master_cam_rosberry2_color_image_raw_act3_580-614.mp4": {
+          "category_id": 11
+        },
+        "AnswerPhone_cam_rosberry4_color_image_raw_comingin_41-105.mp4": {
+          "category_id": 9
+        },
+        "ReadWatch_cam_rosberry1_color_image_raw_start_167-180.mp4": {
+          "category_id": 7
+        },
+        "ReadWatch_cam_rosberry4_color_image_raw_steady_252-305.mp4": {
+          "category_id": 6
+        },
+        "Stationary_cam_rosberry1_color_image_raw_comingin_79-139.mp4": {
+          "category_id": 9
+        },
+        "Stationary_cam_rosberry2_color_image_raw_act1_460-501.mp4": {
+          "category_id": 6
+        },
+        "SitDownStandUp_cam_rosberry1_color_image_raw_comingin_64-100.mp4": {
+          "category_id": 9
+        },
+        "Stationary_cam_rosberry2_color_image_raw_act_180-218.mp4": {
+          "category_id": 6
+        },
+        "WaveHand_cam_rosberry3_color_image_raw_act_272-319.mp4": {
+          "category_id": 0
+        },
+        "WaveHand_cam_rosberry4_color_image_raw_comingin_78-130.mp4": {
+          "category_id": 9
+        },
+        "Bow_cam_rosberry4_color_image_raw_start_156-179.mp4": {
+          "category_id": 8
+        },
+        "WaveHand_cam_rosberry4_color_image_raw_act1_484-524.mp4": {
+          "category_id": 0
+        },
+        "AnswerPhone_cam_rosberry3_color_image_raw_act_190-230.mp4": {
+          "category_id": 2
+        },
+        "Stationary_cam_rosberry3_color_image_raw_act_292-329.mp4": {
+          "category_id": 6
+        },
+        "Clapping_cam_rosberry2_color_image_raw_goingout_298-341.mp4": {
+          "category_id": 10
+        },
+        "Stationary_cam_rosberry2_color_image_raw_comingin_79-139.mp4": {
+          "category_id": 9
+        },
+        "SitDownStandUp_cam_rosberry1_color_image_raw_goingout_364-397.mp4": {
+          "category_id": 10
+        },
+        "Stationary_cam_rosberry4_color_image_raw_act_218-255.mp4": {
+          "category_id": 6
+        },
+        "Stationary_cam_rosberry1_color_image_raw_act_218-255.mp4": {
+          "category_id": 6
+        },
+        "AnswerPhone_cam_rosberry2_color_image_raw_start1_313-327.mp4": {
+          "category_id": 2
+        },
+        "DrinkFromBottle_cam_rosberry1_color_image_raw_steady1_590-605.mp4": {
+          "category_id": 6
+        },
+        "G230_Master_cam_rosberry1_color_image_raw_goingout_680-745.mp4": {
+          "category_id": 10
+        },
+        "SitDownStandUp_cam_rosberry3_color_image_raw_comingin_64-100.mp4": {
+          "category_id": 9
+        },
+        "Stationary_cam_rosberry2_color_image_raw_goingout_710-764.mp4": {
+          "category_id": 10
+        },
+        "Stationary_cam_rosberry2_color_image_raw_act_143-180.mp4": {
+          "category_id": 6
+        },
+        "Stationary_cam_rosberry2_color_image_raw_start1_441-460.mp4": {
+          "category_id": 6
+        },
+        "TightLace_cam_rosberry1_color_image_raw_steady_365-400.mp4": {
+          "category_id": 6
+        },
+        "WaveHand_cam_rosberry1_color_image_raw_act1_524-564.mp4": {
+          "category_id": 0
+        },
+        "Clapping_cam_rosberry1_color_image_raw_act_225-267.mp4": {
+          "category_id": 3
+        },
+        "TightLace_cam_rosberry2_color_image_raw_act_293-329.mp4": {
+          "category_id": 4
+        },
+        "ReadWatch_cam_rosberry1_color_image_raw_comingin_78-135.mp4": {
+          "category_id": 9
+        },
+        "Clapping_cam_rosberry2_color_image_raw_comingin_27-90.mp4": {
+          "category_id": 9
+        },
+        "WaveHand_cam_rosberry2_color_image_raw_act1_404-444.mp4": {
+          "category_id": 0
+        },
+        "WaveHand_cam_rosberry4_color_image_raw_act_272-319.mp4": {
+          "category_id": 0
+        },
+        "AnswerPhone_cam_rosberry1_color_image_raw_steady_283-313.mp4": {
+          "category_id": 6
+        },
+        "Stationary_cam_rosberry1_color_image_raw_act_329-366.mp4": {
+          "category_id": 6
+        },
+        "Stationary_cam_rosberry3_color_image_raw_act_404-441.mp4": {
+          "category_id": 6
+        },
+        "DrinkFromBottle_cam_rosberry3_color_image_raw_goingout_605-653.mp4": {
+          "category_id": 10
+        },
+        "AnswerPhone_cam_rosberry1_color_image_raw_start1_313-327.mp4": {
+          "category_id": 2
+        },
+        "DrinkFromBottle_cam_rosberry1_color_image_raw_start1_356-392.mp4": {
+          "category_id": 1
+        },
+        "SitDownStandUp_cam_rosberry4_color_image_raw_goingout_364-397.mp4": {
+          "category_id": 10
+        },
+        "G230_Master_cam_rosberry4_color_image_raw_act1_330-386.mp4": {
+          "category_id": 11
+        },
+        "G230_Master_cam_rosberry1_color_image_raw_start3_558-580.mp4": {
+          "category_id": 11
+        },
+        "Bow_cam_rosberry1_color_image_raw_start_156-179.mp4": {
+          "category_id": 8
+        },
+        "WaveHand_cam_rosberry3_color_image_raw_steady_337-370.mp4": {
+          "category_id": 6
+        },
+        "G230_Master_cam_rosberry4_color_image_raw_start_200-220.mp4": {
+          "category_id": 11
+        },
+        "WaveHand_cam_rosberry3_color_image_raw_goingout_665-714.mp4": {
+          "category_id": 10
+        },
+        "Clapping_cam_rosberry4_color_image_raw_steady1_278-298.mp4": {
+          "category_id": 6
+        },
+        "G230_Master_cam_rosberry4_color_image_raw_act3_580-614.mp4": {
+          "category_id": 11
+        },
+        "Stationary_cam_rosberry1_color_image_raw_goingout_710-764.mp4": {
+          "category_id": 10
+        },
+        "WaveHand_cam_rosberry4_color_image_raw_start1_370-404.mp4": {
+          "category_id": 0
+        },
+        "ReadWatch_cam_rosberry3_color_image_raw_act_180-236.mp4": {
+          "category_id": 7
+        },
+        "DrinkFromBottle_cam_rosberry4_color_image_raw_comingin_65-110.mp4": {
+          "category_id": 9
+        },
+        "TightLace_cam_rosberry1_color_image_raw_act_184-220.mp4": {
+          "category_id": 4
+        },
+        "AnswerPhone_cam_rosberry4_color_image_raw_goingout_510-569.mp4": {
+          "category_id": 10
+        },
+        "DrinkFromBottle_cam_rosberry3_color_image_raw_act_214-287.mp4": {
+          "category_id": 1
+        },
+        "WaveHand_cam_rosberry2_color_image_raw_start_160-178.mp4": {
+          "category_id": 0
+        },
+        "ReadWatch_cam_rosberry2_color_image_raw_steady_252-305.mp4": {
+          "category_id": 6
+        },
+        "Stationary_cam_rosberry2_color_image_raw_act_292-329.mp4": {
+          "category_id": 6
+        },
+        "WaveHand_cam_rosberry2_color_image_raw_act1_484-524.mp4": {
+          "category_id": 0
+        },
+        "Clapping_cam_rosberry4_color_image_raw_goingout_298-341.mp4": {
+          "category_id": 10
+        },
+        "G230_Master_cam_rosberry3_color_image_raw_act1_330-386.mp4": {
+          "category_id": 11
+        },
+        "TightLace_cam_rosberry3_color_image_raw_act_220-256.mp4": {
+          "category_id": 4
+        },
+        "G230_Master_cam_rosberry3_color_image_raw_start_200-220.mp4": {
+          "category_id": 11
+        },
+        "DrinkFromBottle_cam_rosberry1_color_image_raw_start_205-214.mp4": {
+          "category_id": 1
+        },
+        "AnswerPhone_cam_rosberry1_color_image_raw_act1_327-379.mp4": {
+          "category_id": 2
+        },
+        "Clapping_cam_rosberry2_color_image_raw_act_225-267.mp4": {
+          "category_id": 3
+        },
+        "Clapping_cam_rosberry1_color_image_raw_goingout_298-341.mp4": {
+          "category_id": 10
+        },
+        "G230_Master_cam_rosberry2_color_image_raw_steady1_411-450.mp4": {
+          "category_id": 6
+        },
+        "Stationary_cam_rosberry3_color_image_raw_steady1_684-710.mp4": {
+          "category_id": 6
+        },
+        "AnswerPhone_cam_rosberry3_color_image_raw_act1_327-379.mp4": {
+          "category_id": 2
+        },
+        "WaveHand_cam_rosberry1_color_image_raw_start_160-178.mp4": {
+          "category_id": 0
+        },
+        "TightLace_cam_rosberry1_color_image_raw_start_135-184.mp4": {
+          "category_id": 4
+        },
+        "WaveHand_cam_rosberry2_color_image_raw_comingin_78-130.mp4": {
+          "category_id": 9
+        },
+        "Stationary_cam_rosberry1_color_image_raw_act_143-180.mp4": {
+          "category_id": 6
+        },
+        "WaveHand_cam_rosberry2_color_image_raw_act_225-272.mp4": {
+          "category_id": 0
+        },
+        "Stationary_cam_rosberry4_color_image_raw_act_180-218.mp4": {
+          "category_id": 6
+        },
+        "Clapping_cam_rosberry4_color_image_raw_act_225-267.mp4": {
+          "category_id": 3
+        },
+        "TightLace_cam_rosberry3_color_image_raw_goingout_400-444.mp4": {
+          "category_id": 10
+        },
+        "SitDownStandUp_cam_rosberry2_color_image_raw_comingin_64-100.mp4": {
+          "category_id": 9
+        },
+        "WaveHand_cam_rosberry2_color_image_raw_start1_370-404.mp4": {
+          "category_id": 0
+        },
+        "Stationary_cam_rosberry2_color_image_raw_act_366-404.mp4": {
+          "category_id": 6
+        },
+        "Bow_cam_rosberry4_color_image_raw_act_179-212.mp4": {
+          "category_id": 8
+        },
+        "WaveHand_cam_rosberry1_color_image_raw_comingin_78-130.mp4": {
+          "category_id": 9
+        },
+        "TightLace_cam_rosberry1_color_image_raw_act_256-293.mp4": {
+          "category_id": 4
+        },
+        "SitDownStandUp_cam_rosberry4_color_image_raw_act_182-221.mp4": {
+          "category_id": 5
+        },
+        "WaveHand_cam_rosberry4_color_image_raw_act1_444-484.mp4": {
+          "category_id": 0
+        },
+        "SitDownStandUp_cam_rosberry4_color_image_raw_act_144-182.mp4": {
+          "category_id": 5
+        },
+        "Clapping_cam_rosberry4_color_image_raw_act_141-183.mp4": {
+          "category_id": 3
+        },
+        "Stationary_cam_rosberry4_color_image_raw_act_366-404.mp4": {
+          "category_id": 6
+        },
+        "G230_Master_cam_rosberry4_color_image_raw_act2_470-517.mp4": {
+          "category_id": 11
+        },
+        "AnswerPhone_cam_rosberry4_color_image_raw_act1_327-379.mp4": {
+          "category_id": 2
+        },
+        "WaveHand_cam_rosberry2_color_image_raw_act1_564-604.mp4": {
+          "category_id": 0
+        },
+        "G230_Master_cam_rosberry4_color_image_raw_steady1_411-450.mp4": {
+          "category_id": 6
+        },
+        "WaveHand_cam_rosberry3_color_image_raw_act1_404-444.mp4": {
+          "category_id": 0
+        },
+        "AnswerPhone_cam_rosberry3_color_image_raw_act1_379-431.mp4": {
+          "category_id": 2
+        },
+        "Clapping_cam_rosberry1_color_image_raw_steady1_278-298.mp4": {
+          "category_id": 6
+        },
+        "AnswerPhone_cam_rosberry4_color_image_raw_act_230-270.mp4": {
+          "category_id": 2
+        },
+        "Stationary_cam_rosberry3_color_image_raw_act1_623-664.mp4": {
+          "category_id": 6
+        },
+        "TightLace_cam_rosberry4_color_image_raw_act_293-329.mp4": {
+          "category_id": 4
+        },
+        "WaveHand_cam_rosberry4_color_image_raw_act1_564-604.mp4": {
+          "category_id": 0
+        },
+        "TightLace_cam_rosberry4_color_image_raw_goingout_400-444.mp4": {
+          "category_id": 10
+        }
+
+    }
+}

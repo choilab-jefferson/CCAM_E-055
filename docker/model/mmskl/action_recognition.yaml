@@ -1,0 +1,39 @@
+cfg:
+  workers: 10
+  checkpoint: latest.pth
+  gpus: 1
+  worker_per_gpu: 1
+  category_annotation: florence_ccam.json
+
+  # recogntiion model setting
+  recognition_cfg:
+    type: "models.backbones.ST_GCN_18"
+    in_channels: 3
+    num_class: 12
+    edge_importance_weighting: True
+    graph_cfg:
+      layout: "coco"
+      strategy: "spatial"
+
+  detection_cfg:
+    model_cfg: ./mmdetection/configs/cascade_rcnn/cascade_rcnn_r50_fpn_1x_coco.py
+    checkpoint_file: http://download.openmmlab.com/mmdetection/v2.0/cascade_rcnn/cascade_rcnn_r50_fpn_1x_coco/cascade_rcnn_r50_fpn_1x_coco_20200316-3dc56deb.pth
+    bbox_thre: 0.8
+
+  estimation_cfg:
+    model_cfg: ./mmskeleton/configs/pose_estimation/hrnet/pose_hrnet_w32_256x192_test.yaml
+    checkpoint_file: https://download.openmmlab.com/mmpose/top_down/hrnet/hrnet_w32_coco_256x192-c78dce93_20200708.pth
+    data_cfg:
+      image_size:
+        - 192
+        - 256
+      pixel_std: 200
+      image_mean:
+        - 0.485
+        - 0.456
+        - 0.406
+      image_std:
+        - 0.229
+        - 0.224
+        - 0.225
+      post_process: true
