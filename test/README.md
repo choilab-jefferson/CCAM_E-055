@@ -1,4 +1,6 @@
 # Test Codes
+* Pointcloud registration and 3D scene reconstruction - open3d
+
 * Realsense Camera ROS Interface - realsense_ros.py 
     Requires realsense SDK and cv_bridge
 
