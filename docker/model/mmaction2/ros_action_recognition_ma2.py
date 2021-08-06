@@ -30,8 +30,8 @@ label_map = "demo/label_map_k400.txt"
 # config = "configs/recognition/i3d/i3d_r50_video_heavy_8x8x1_100e_kinetics400_rgb.py"
 # checkpoint = "https://download.openmmlab.com/mmaction/recognition/i3d/i3d_r50_video_32x2x1_100e_kinetics400_rgb/i3d_r50_video_32x2x1_100e_kinetics400_rgb_20200826-e31c6f52.pth"
 
-# config = "configs/recognition/tsn/tsn_r50_video_inference_1x1x3_100e_kinetics400_rgb.py"
-# checkpoint = "https://download.openmmlab.com/mmaction/recognition/tsn/tsn_r50_1x1x3_100e_kinetics400_rgb/tsn_r50_1x1x3_100e_kinetics400_rgb_20200614-e508be42.pth"
+config = "configs/recognition/tsn/tsn_r50_video_inference_1x1x3_100e_kinetics400_rgb.py"
+checkpoint = "https://download.openmmlab.com/mmaction/recognition/tsn/tsn_r50_1x1x3_100e_kinetics400_rgb/tsn_r50_1x1x3_100e_kinetics400_rgb_20200614-e508be42.pth"
 
 # publishing topics
 action_pub = rospy.Publisher(
