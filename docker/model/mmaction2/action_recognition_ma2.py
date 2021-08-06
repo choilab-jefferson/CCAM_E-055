@@ -5,8 +5,10 @@
 # 08/06/2021
 import time
 import torch
+import urllib
 import torch.multiprocessing as mp
 from mmcv.parallel import collate, scatter
+from mmcv.runner.checkpoint import _load_checkpoint
 from mmaction.apis import init_recognizer
 from mmaction.datasets.pipelines import Compose
 from multiprocessing import current_process, Process, Manager
@@ -21,7 +23,6 @@ EXCLUED_STEPS = [
     'OpenCVInit', 'OpenCVDecode', 'DecordInit', 'DecordDecode', 'PyAVInit',
     'PyAVDecode', 'RawFrameDecode'
 ]
-
 
 def time_synchronized():
     # pytorch-accurate time
@@ -47,8 +48,7 @@ def action_worker(inputs, results, gpus, cfg):
     worker_id = current_process()._identity[0] - 1
     global action_recognizers
     if worker_id not in action_recognizers:
-        print(cfg.checkpoint)
-        model = init_recognizer(cfg.model_cfg, cfg.checkpoint, device=device)
+        model = init_recognizer(cfg.model_cfg, device=device)
         action_recognizers[worker_id] = (model, cfg.model_cfg)
 
     data = dict(img_shape=None, modality='RGB', label=-1)
@@ -137,6 +137,8 @@ class ActionRecognitionPipeline():
                  video_max_length=100):
 
         # initialization
+        _load_checkpoint(cfg.checkpoint_file)
+
         self.cfg = cfg
 
         self.is_run = True

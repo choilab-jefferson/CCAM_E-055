@@ -60,15 +60,14 @@ def process_rgbd(pipeline, color_, depth_, cam_id, threshold):
     if cam_id == 0:
         pipeline.put_frame((color, depth))
         res = pipeline.get_result()
-        msg = String()
         if res is not None:
+            msg = String()
             for i, result in enumerate(res):
                 selected_label, score = result
                 if score < threshold:
                     break
                 text = selected_label + ': ' + str(round(score, 2))
                 msg.data += text + ", "
-                print(text)
             action_pub.publish(msg)
 
     return color, depth, cam_id
@@ -136,7 +135,7 @@ class ActionClassification(Thread):
                         images[cam_id] = np.vstack(
                             (cv2.resize(color, (320, 240)), depth_colormap))
 
-                if rospy.get_time() - t1 > 1:
+                if rospy.get_time() - t1 > 5:
                     print(
                         f"cam{cam_id} FPS: {n_frame/(rospy.get_time() - t1):0.2f}")
                     n_frame = 0
@@ -161,7 +160,7 @@ if __name__ == "__main__":
     model_cfg = Config.fromfile(config)
     cfg = Config(dict(model_cfg=model_cfg, label_map=label_map, label=label,
                  threshold=0.01, inference_fps = 4, drawing_fps = 20,
-                 checkpoint=checkpoint, device='cuda:0', average_size=1, gpus=1, worker_per_gpu=1))
+                 checkpoint_file=checkpoint, device='cuda:0', average_size=1, gpus=1, worker_per_gpu=1))
     rospy.init_node('Human_Action_Recogntion', anonymous=True)
     acs = [ActionClassification(cam_id, cfg) for cam_id in range(4)]
 

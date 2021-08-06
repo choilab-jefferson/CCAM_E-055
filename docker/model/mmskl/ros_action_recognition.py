@@ -50,15 +50,14 @@ def process_rgbd(pipeline, color_, depth_, cam_id, threshold):
     if cam_id == 0:
         pipeline.put_frame((color, depth))
         res = pipeline.get_result()
-        msg = String()
         if res is not None:
+            msg = String()
             for i, result in enumerate(res):
                 selected_label, score = result
                 if score < threshold:
                     break
                 text = selected_label + ': ' + str(round(score, 2))
                 msg.data += text + ", "
-                print(text)
             action_pub.publish(msg)
 
 
@@ -144,7 +143,7 @@ if __name__ == "__main__":
     cfg = Config.fromfile("action_recognition.yaml")
     cfg = cfg.cfg
 
-    rospy.init_node('Human_Action_Recogntion', anonymous=True)
+    rospy.init_node('Human_Action_Recogntion', anonymous=True, xmlrpc_port=46100, tcpros_port=46101)
     acs = [ActionClassification(cam_id, cfg) for cam_id in range(4)]
 
     try:
