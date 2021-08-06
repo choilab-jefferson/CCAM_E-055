@@ -114,7 +114,7 @@ def action_worker(inputs, results, gpus, cfg):
                     n_frame += 1
                     scores_sum -= score_cache.popleft()
 
-            if time_synchronized() - t1 > 1 and n_frame > 0:
+            if n_frame > 0 and time_synchronized() - t1 > 0:
                 print(f"-- Action FPS: {n_frame/(time_synchronized() - t1):0.2f}")
                 n_frame = 0
                 t1 = time_synchronized()

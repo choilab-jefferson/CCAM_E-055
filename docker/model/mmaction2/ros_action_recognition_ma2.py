@@ -30,8 +30,8 @@ label_map = "demo/label_map_k400.txt"
 # config = "configs/recognition/i3d/i3d_r50_video_heavy_8x8x1_100e_kinetics400_rgb.py"
 # checkpoint = "https://download.openmmlab.com/mmaction/recognition/i3d/i3d_r50_video_32x2x1_100e_kinetics400_rgb/i3d_r50_video_32x2x1_100e_kinetics400_rgb_20200826-e31c6f52.pth"
 
-config = "configs/recognition/tsn/tsn_r50_video_inference_1x1x3_100e_kinetics400_rgb.py"
-checkpoint = "https://download.openmmlab.com/mmaction/recognition/tsn/tsn_r50_1x1x3_100e_kinetics400_rgb/tsn_r50_1x1x3_100e_kinetics400_rgb_20200614-e508be42.pth"
+# config = "configs/recognition/tsn/tsn_r50_video_inference_1x1x3_100e_kinetics400_rgb.py"
+# checkpoint = "https://download.openmmlab.com/mmaction/recognition/tsn/tsn_r50_1x1x3_100e_kinetics400_rgb/tsn_r50_1x1x3_100e_kinetics400_rgb_20200614-e508be42.pth"
 
 # publishing topics
 action_pub = rospy.Publisher(
@@ -58,7 +58,7 @@ def process_rgbd(pipeline, color_, depth_, cam_id, threshold):
     depth = cv2.imdecode(depth_, cv2.IMREAD_UNCHANGED)
 
     if cam_id == 0:
-        pipeline.put_frame((color, depth))
+        pipeline.put_frame((np.array(color[:, :, ::-1]), depth)) # bgr to rgb
         res = pipeline.get_result()
         if res is not None:
             msg = String()
@@ -135,7 +135,7 @@ class ActionClassification(Thread):
                         images[cam_id] = np.vstack(
                             (cv2.resize(color, (320, 240)), depth_colormap))
 
-                if rospy.get_time() - t1 > 5:
+                if n_frame > 0 and rospy.get_time() - t1 > 5:
                     print(
                         f"cam{cam_id} FPS: {n_frame/(rospy.get_time() - t1):0.2f}")
                     n_frame = 0
@@ -159,7 +159,7 @@ if __name__ == "__main__":
 
     model_cfg = Config.fromfile(config)
     cfg = Config(dict(model_cfg=model_cfg, label_map=label_map, label=label,
-                 threshold=0.01, inference_fps = 4, drawing_fps = 20,
+                 threshold=0.01, inference_fps=4, drawing_fps=20,
                  checkpoint_file=checkpoint, device='cuda:0', average_size=1, gpus=1, worker_per_gpu=1))
     rospy.init_node('Human_Action_Recogntion', anonymous=True)
     acs = [ActionClassification(cam_id, cfg) for cam_id in range(4)]

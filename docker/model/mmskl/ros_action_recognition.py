@@ -48,7 +48,7 @@ def process_rgbd(pipeline, color_, depth_, cam_id, threshold):
     depth = cv2.imdecode(depth_, cv2.IMREAD_UNCHANGED)
 
     if cam_id == 0:
-        pipeline.put_frame((color, depth))
+        pipeline.put_frame((np.array(color[:, :, ::-1]), depth)) # bgr to rgb
         res = pipeline.get_result()
         if res is not None:
             msg = String()
@@ -123,7 +123,7 @@ class ActionClassification(Thread):
                         cv2.convertScaleAbs(cv2.resize(depth, (320,240)), alpha=0.09), cv2.COLORMAP_JET)
                         images[cam_id] = np.vstack((cv2.resize(color, (320,240)), depth_colormap))
 
-                if rospy.get_time() - t1 > 5:
+                if n_frame > 0 and rospy.get_time() - t1 > 5:
                     print(f"cam{cam_id} FPS: {n_frame/(rospy.get_time() - t1):0.2f}")
                     n_frame = 0
                     t1 = rospy.get_time()
