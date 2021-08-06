@@ -13,6 +13,7 @@ from mmskeleton.utils import call_obj, load_checkpoint, cache_checkpoint
 from mmskeleton.apis.estimation import init_pose_estimator, inference_pose_estimator
 from multiprocessing import current_process, Process, Manager
 from collections import deque
+from operator import itemgetter
 
 if mp.get_start_method(allow_none=True) is None:
     mp.set_start_method('spawn')
@@ -120,13 +121,13 @@ def inference_action_recognizer(action_recognizer, poses):
 
 
 def pose_worker(inputs, poses, gpu, cfg):
+    worker_id = current_process()._identity[0] - 1
+    global pose_estimators
+    if worker_id not in pose_estimators:
+        pose_estimators[worker_id] = init_pose_estimator(
+            cfg.detection_cfg, cfg.estimation_cfg, device=gpu)
+    print("pose worker is on")
     try:
-        worker_id = current_process()._identity[0] - 1
-        global pose_estimators
-        if worker_id not in pose_estimators:
-            pose_estimators[worker_id] = init_pose_estimator(
-                cfg.detection_cfg, cfg.estimation_cfg, device=gpu)
-        print("pose worker is on")
         t1 = time_synchronized()
         n_frame = 0    
         while True:
@@ -142,8 +143,8 @@ def pose_worker(inputs, poses, gpu, cfg):
 
             poses.put(res_pose)
             n_frame += 1
-            
-            if(time_synchronized() - t1 > 1 and n_frame > 0):
+
+            if n_frame > 0 and time_synchronized() - t1 > 0:
                 print(f"-- Pose FPS: {n_frame/(time_synchronized() - t1):0.2f}")
                 n_frame = 0
                 t1 = time_synchronized()
@@ -154,14 +155,17 @@ def pose_worker(inputs, poses, gpu, cfg):
 
 
 def action_worker(poses, results, gpu, cfg):
+    worker_id = current_process()._identity[0] - 1
+    global action_recognizers
+    if worker_id not in action_recognizers:
+        action_recognizers[worker_id] = init_action_recognizer(cfg, device=gpu)
+    print("action worker is on")
     try:
-        worker_id = current_process()._identity[0] - 1
-        global action_recognizers
-        if worker_id not in action_recognizers:
-            action_recognizers[worker_id] = init_action_recognizer(cfg, device=gpu)
-        print("action worker is on")
         t1 = time_synchronized()
+        t2 = time_synchronized()
         pose_queue = deque(maxlen=17)
+        score_cache = deque()
+        scores_sum = 0
         n_frame = 0
         while True:
             pose = poses.get()
@@ -172,20 +176,35 @@ def action_worker(poses, results, gpu, cfg):
             cur_windows = []
             if len(pose_queue) ==  17:
                 cur_windows = list(pose_queue)
-                pose_queue.popleft()
-                try:
-                    res_action = inference_action_recognizer(
-                        action_recognizers[worker_id], cur_windows)
-                    if res_action is not None:
-                        results.put(res_action)
-                        n_frame += 1
-                except KeyboardInterrupt:
-                    return
+
+                scores = inference_action_recognizer(action_recognizers[worker_id], cur_windows)
+                
+                score_cache.append(scores[0])
+                scores_sum += scores[0]
+
+                if len(score_cache) == cfg.average_size:
+                    scores_avg = scores_sum / cfg.average_size
+                    num_selected_labels = min(len(cfg.label), 5)
+
+                    scores_tuples = tuple(zip(cfg.label, scores_avg))
+                    scores_sorted = sorted(
+                        scores_tuples, key=itemgetter(1), reverse=True)
+                    result = scores_sorted[:num_selected_labels]
+
+                    results.put(result)
+                    n_frame += 1
+                    scores_sum -= score_cache.popleft()
             
-            if time_synchronized() - t1 > 1 and n_frame > 0:
+            if n_frame > 0 and time_synchronized() - t1 > 0:
                 print(f"-- Action FPS: {n_frame/(time_synchronized() - t1):0.2f}")
                 n_frame = 0
                 t1 = time_synchronized()
+            if cfg.inference_fps > 0:
+                # add a limiter for actual inference fps <= inference_fps
+                sleep_time = 1 / cfg.inference_fps - (time_synchronized() - t2)
+                if sleep_time > 0:
+                    time.sleep(sleep_time)
+                t2 = time_synchronized()
     except KeyboardInterrupt:
         print("Shutting down action worker")
     finally:
@@ -202,11 +221,7 @@ class ActionRecognitionPipeline():
         cache_checkpoint(cfg.detection_cfg.checkpoint_file)
         cache_checkpoint(cfg.estimation_cfg.checkpoint_file)
 
-        if cfg.category_annotation is None:
-            video_categories = dict()
-        else:
-            with open(cfg.category_annotation) as f:
-                video_categories = json.load(f)['annotations']
+        cfg.label = categories
 
         self.is_run = True
         self.frame_index = 0
@@ -214,7 +229,7 @@ class ActionRecognitionPipeline():
         self.detection_cfg = cfg.detection_cfg
         self.estimation_cfg = cfg.estimation_cfg
         self.recognition_cfg = cfg.recognition_cfg
-        self.video_categories = video_categories
+        self.video_categories = categories
         self.inputs = Manager().Queue(video_max_length)
         self.poses = Manager().Queue(video_max_length/4)
         self.results = Manager().Queue(video_max_length)
@@ -236,14 +251,8 @@ class ActionRecognitionPipeline():
         except:
             pass
         if t is not None:
-            cat = np.array(categories)
-            idx = np.flip(np.argsort(t))[0][0:4]
-            print(t)
-            print(cat[idx])
-            print(t[0,idx])
             self.frame_index = 0
-
-        return 0
+        return t
 
     def stop(self):
         # send end signals

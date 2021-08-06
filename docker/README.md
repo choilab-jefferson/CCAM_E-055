@@ -15,7 +15,7 @@
         - ros_action_recognition.py: a ROS pipeline for action recogntion
     2. **mmaction2**
         - Dockerfile
-        - 
+        - ros_action_recognition_ma2.py: a ROS pipeline for action recogntion
 5. ~~rosbridge~~
     - ~~Dockerfile~~
 

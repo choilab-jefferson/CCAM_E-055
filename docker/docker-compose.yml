@@ -75,8 +75,12 @@ services:
       - ros-master
     environment:
       - "ROS_MASTER_URI=http://ros-master:11311"
+      - "ROS_IP=172.17.0.1"
     command: >
       bash -c "source /opt/ros/melodic/setup.bash && stdbuf -o L python ros_action_recognition.py"
+    ports:
+      - "46100:46100"
+      - "46101:46101"
     networks:
       - ros
     restart: always
