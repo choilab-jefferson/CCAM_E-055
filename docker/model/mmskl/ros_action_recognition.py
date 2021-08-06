@@ -1,30 +1,21 @@
 #!/usr/bin/env python3
-# Human Action Classification Pipeline on ROS
+# Human Action Recognition Pipeline on ROS
 #
 # Wookjin Choi <wchoi@vsu.edu>
 # 07/26/2021
 
 # Python libs
 import argparse
-import sys
-import time
-import random
 
-from numpy.lib import financial
 from mmcv import Config
-
-from collections import deque
-from multiprocessing.pool import Pool, ThreadPool
 
 # numpy and scipy
 import numpy as np
-from scipy.ndimage import filters
 
 # OpenCV
 import cv2
 
 # Ros libraries
-import roslib
 import rospy
 
 # Ros Messages
@@ -52,13 +43,24 @@ def callback_imshow(event):
     finally:
         cv2.waitKey(1)
 
-def process_rgbd(pipeline, color_, depth_, cam_id):
+def process_rgbd(pipeline, color_, depth_, cam_id, threshold):
     color = cv2.imdecode(color_, cv2.IMREAD_COLOR)
     depth = cv2.imdecode(depth_, cv2.IMREAD_UNCHANGED)
 
     if cam_id == 0:
         pipeline.put_frame((color, depth))
-        pipeline.get_result() # TODO: need an interface to send it to ROS
+        res = pipeline.get_result()
+        msg = String()
+        if res is not None:
+            for i, result in enumerate(res):
+                selected_label, score = result
+                if score < threshold:
+                    break
+                text = selected_label + ': ' + str(round(score, 2))
+                msg.data += text + ", "
+                print(text)
+            action_pub.publish(msg)
+
 
     return color, depth, cam_id
 
@@ -70,6 +72,7 @@ class ActionClassification(Thread):
         self.color = None
         self.depth = None
         self.pointcloud = None
+        self.threshold = 0.01
         self.n_colorframe = 0
         self.n_depthframe = 0
         self.n_pointcloud = 0
@@ -113,7 +116,7 @@ class ActionClassification(Thread):
                 else:
                     color_, depth_ = self.color, self.depth
                     self.color, self.depth = None, None
-                    color, depth, _ = process_rgbd(self.pipeline, color_, depth_, cam_id)
+                    color, depth, _ = process_rgbd(self.pipeline, color_, depth_, cam_id, self.threshold)
                     n_frame += 1
 
                     if self.show_images:
@@ -121,7 +124,7 @@ class ActionClassification(Thread):
                         cv2.convertScaleAbs(cv2.resize(depth, (320,240)), alpha=0.09), cv2.COLORMAP_JET)
                         images[cam_id] = np.vstack((cv2.resize(color, (320,240)), depth_colormap))
 
-                if rospy.get_time() - t1 > 1:
+                if rospy.get_time() - t1 > 5:
                     print(f"cam{cam_id} FPS: {n_frame/(rospy.get_time() - t1):0.2f}")
                     n_frame = 0
                     t1 = rospy.get_time()
@@ -139,15 +142,16 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     cfg = Config.fromfile("action_recognition.yaml")
+    cfg = cfg.cfg
 
     rospy.init_node('Human_Action_Recogntion', anonymous=True)
-    acs = [ActionClassification(cam_id, cfg.cfg) for cam_id in range(4)]
+    acs = [ActionClassification(cam_id, cfg) for cam_id in range(4)]
 
     try:
         images = [None for _ in range(4)]
         for ac in acs:
             ac.start()
-        rospy.Timer(rospy.Duration(0.066), callback_imshow)
+        rospy.Timer(rospy.Duration(1./cfg.drawing_fps), callback_imshow)
         rospy.spin()
     finally:
         for ac in acs:

@@ -1,10 +1,13 @@
 cfg:
   workers: 10
+  average_size: 1
+  inference_fps: 4
+  drawing_fps: 20
+  threhold: 0.01
   checkpoint: latest.pth
   gpus: 1
   worker_per_gpu: 1
-  category_annotation: florence_ccam.json
-
+  
   # recogntiion model setting
   recognition_cfg:
     type: "models.backbones.ST_GCN_18"
