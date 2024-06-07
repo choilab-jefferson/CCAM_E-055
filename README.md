@@ -1,4 +1,4 @@
-# Multi-view Human Action Recognition
+# [Multi-view Human Action Recognition](https://choiw.notion.site/CCAM_E-55-073a40821796438086330fc5c7d96f1e)
 
 ## [Docker](docker)
 **Docker Compose for multi-view video streaming in ROS**
